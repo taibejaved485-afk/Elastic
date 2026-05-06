@@ -52,7 +52,24 @@ export default function Hero() {
               
               <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter mb-8 max-w-4xl">
                 ENGINEERED <br />
-                <span className="text-stroke neon-glow italic">STRETCH</span>
+                <motion.span 
+                  animate={{ 
+                    scale: [1, 1.02, 1],
+                    textShadow: [
+                      "0 0 10px rgba(37, 99, 235, 0.2)",
+                      "0 0 30px rgba(37, 99, 235, 0.5)",
+                      "0 0 10px rgba(37, 99, 235, 0.2)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 4, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                  className="text-stroke neon-glow italic inline-block"
+                >
+                  STRETCH
+                </motion.span>
               </h1>
               
               <p className="max-w-xl text-xl md:text-2xl text-slate-400 mb-12 leading-relaxed font-light">
@@ -61,11 +78,26 @@ export default function Hero() {
               
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 <motion.button 
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn-primary w-full sm:w-auto px-12 py-6 text-sm uppercase tracking-[0.2em] flex items-center justify-center group"
+                  className="btn-primary w-full sm:w-auto px-12 py-6 text-sm uppercase tracking-[0.2em] flex items-center justify-center group relative overflow-hidden"
                 >
-                  Explore Products <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                  <motion.div 
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileHover={{ 
+                      scale: [1, 2],
+                      opacity: [0.4, 0],
+                    }}
+                    transition={{ 
+                      duration: 1.2, 
+                      repeat: Infinity,
+                      ease: "easeOut"
+                    }}
+                    className="absolute inset-0 bg-white/30 rounded-full"
+                  />
+                  <span className="relative z-10 flex items-center">
+                    Explore Products <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                  </span>
                 </motion.button>
                 <div className="flex items-center gap-4 text-white/40 text-xs font-bold uppercase tracking-widest pl-2">
                   <div className="flex -space-x-2">
