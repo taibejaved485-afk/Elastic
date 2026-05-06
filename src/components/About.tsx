@@ -1,4 +1,24 @@
-import { motion } from "motion/react";
+import { motion, useInView, animate } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+
+function Counter({ value, duration = 2, suffix = "" }: { value: number; duration?: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, value, {
+        duration,
+        onUpdate: (latest) => setCount(Math.floor(latest)),
+        ease: "easeOut",
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, value, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 export default function About() {
   return (
@@ -25,12 +45,16 @@ export default function About() {
           
           <div className="grid grid-cols-2 gap-8 py-6 border-y border-slate-100">
             <div>
-              <p className="text-3xl font-display font-bold text-brand-blue">50M+</p>
-              <p className="text-sm text-brand-slate">Meters Shipped</p>
+              <p className="text-4xl font-display font-bold text-brand-blue">
+                <Counter value={50} suffix="M+" />
+              </p>
+              <p className="text-sm text-brand-slate font-medium">Meters Shipped</p>
             </div>
             <div>
-              <p className="text-3xl font-display font-bold text-brand-blue">150+</p>
-              <p className="text-sm text-brand-slate">Custom Blends</p>
+              <p className="text-4xl font-display font-bold text-brand-blue">
+                <Counter value={150} suffix="+" />
+              </p>
+              <p className="text-sm text-brand-slate font-medium">Custom Blends</p>
             </div>
           </div>
         </motion.div>
