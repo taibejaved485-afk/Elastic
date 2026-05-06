@@ -1,0 +1,60 @@
+import { motion } from "motion/react";
+
+export default function About() {
+  return (
+    <section className="section-padding bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-brand-accent font-semibold tracking-widest uppercase text-sm mb-4 block">
+            Our Story
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-8 leading-tight">
+            Mastering the science of stretch and recovery.
+          </h2>
+          <p className="text-lg text-brand-slate mb-6 leading-relaxed">
+            Founded with a vision to provide the global manufacturing industry with high-quality, resilient elastic, our company has become a leader in stretch technology. We combine specialized weaving techniques with modern polymer science. 
+          </p>
+          <p className="text-lg text-brand-slate mb-8 leading-relaxed">
+            Whether it's for high-end fashion, critical medical equipment, or heavy-duty industrial use, our elastic products are designed to perform. We focus on durability and precision across every inch of material.
+          </p>
+          
+          <div className="grid grid-cols-2 gap-8 py-6 border-y border-slate-100">
+            <div>
+              <p className="text-3xl font-display font-bold text-brand-blue">50M+</p>
+              <p className="text-sm text-brand-slate">Meters Shipped</p>
+            </div>
+            <div>
+              <p className="text-3xl font-display font-bold text-brand-blue">150+</p>
+              <p className="text-sm text-brand-slate">Custom Blends</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative"
+        >
+          <div className="aspect-square rounded-3xl overflow-hidden relative z-10 shadow-2xl">
+            <img
+              src="https://i.pinimg.com/736x/3c/f2/ad/3cf2ad6c9aaf09cdfed2fa72a2acebf4.jpg"
+              alt="Professional team collaborating"
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+          {/* Decorative elements */}
+          <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-accent/20 rounded-full blur-2xl z-0" />
+          <div className="absolute -top-6 -left-6 w-48 h-48 bg-blue-100 rounded-full blur-3xl z-0" />
+        </motion.div>
+      </div>
+    </section>
+  );
+}
