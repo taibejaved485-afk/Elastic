@@ -48,14 +48,17 @@ export default function Mission() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
-              className="bg-slate-900/50 p-8 rounded-[2rem] border border-slate-800 hover:border-brand-blue/30 transition-all duration-300 group cursor-default"
+              whileHover={{ y: -8 }}
+              className="bg-slate-900/50 p-8 rounded-[2rem] border border-slate-800 hover:border-brand-blue/30 transition-all duration-500 group cursor-default"
             >
-              <div className="mb-6 p-4 bg-brand-blue/10 w-fit rounded-2xl group-hover:bg-brand-blue transition-colors">
+              <motion.div 
+                whileHover={{ rotate: 12, scale: 1.1 }}
+                className="mb-6 p-4 bg-brand-blue/10 w-fit rounded-2xl group-hover:bg-brand-blue transition-colors duration-300"
+              >
                 <div className="group-hover:text-white transition-colors text-brand-blue">
                   {item.icon}
                 </div>
-              </div>
+              </motion.div>
               <h3 className="text-xl font-bold mb-4">{item.title}</h3>
               <p className="text-slate-400 text-sm leading-relaxed">
                 {item.description}

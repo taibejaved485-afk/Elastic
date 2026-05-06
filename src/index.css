@@ -26,6 +26,13 @@
     100% { transform: translateX(-50%); }
   }
   --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes focus-wave {
+    0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+  }
+  --animate-focus-wave: focus-wave 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @layer utilities {
@@ -113,15 +120,16 @@
 }
 
 .form-input {
-  @apply w-full bg-transparent border-b-2 border-slate-200 py-4 outline-none transition-all duration-300 text-brand-dark font-medium;
+  @apply w-full bg-transparent border-b-2 border-slate-200 py-4 outline-none transition-all duration-300 text-brand-dark font-medium px-4;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .form-input:focus {
-  @apply border-brand-blue;
+  @apply border-brand-blue bg-blue-50/30 animate-focus-wave;
 }
 
 .form-label {
-  @apply absolute left-0 top-4 text-slate-400 transition-all duration-300 pointer-events-none;
+  @apply absolute left-4 top-4 text-slate-400 transition-all duration-300 pointer-events-none;
 }
 
 .form-input:focus ~ .form-label,
