@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Factory, Shirt, HeartPulse, Zap, Scissors, Dumbbell, ArrowRight } from "lucide-react";
+import { Factory, Shirt, HeartPulse, Zap, Scissors, Dumbbell } from "lucide-react";
 
 const services = [
   {
@@ -56,18 +56,27 @@ export default function Services() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="card-hover hover-lift flex flex-col items-start gap-6 group"
             >
-              <div className="p-4 bg-blue-50 text-brand-blue rounded-2xl group-hover:bg-brand-blue group-hover:text-white group-hover:animate-bounce-subtle transition-all duration-300">
+              <motion.div 
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  delay: index * 0.1 + 0.3 
+                }}
+                className="p-4 bg-blue-50 text-brand-blue rounded-2xl group-hover:bg-brand-blue group-hover:text-white group-hover:animate-bounce-subtle transition-all duration-300"
+              >
                 {service.icon}
-              </div>
+              </motion.div>
               <div>
                 <h3 className="text-xl font-bold text-brand-dark mb-3">{service.title}</h3>
                 <p className="text-brand-slate text-sm leading-relaxed">
                   {service.description}
                 </p>
               </div>
-              <a href="#" className="text-brand-blue text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto">
-                Discover More <ArrowRight size={14} />
-              </a>
+
             </motion.div>
           ))}
         </div>

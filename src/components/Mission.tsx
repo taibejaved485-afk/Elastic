@@ -52,8 +52,12 @@ export default function Mission() {
               className="bg-slate-900/50 p-8 rounded-[2rem] border border-slate-800 hover:border-brand-blue/30 transition-all duration-500 group cursor-default"
             >
               <motion.div 
-                whileHover={{ rotate: 12, scale: 1.1 }}
-                className="mb-6 p-4 bg-brand-blue/10 w-fit rounded-2xl group-hover:bg-brand-blue transition-colors duration-300"
+                whileHover={{ 
+                  rotate: 12, 
+                  scale: 1.15,
+                  boxShadow: "0 0 30px rgba(37, 99, 235, 0.5)",
+                }}
+                className="mb-6 p-4 bg-brand-blue/10 w-fit rounded-2xl group-hover:bg-brand-blue transition-all duration-300 shadow-transparent"
               >
                 <div className="group-hover:text-white transition-colors text-brand-blue">
                   {item.icon}

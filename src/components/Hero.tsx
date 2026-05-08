@@ -1,3 +1,4 @@
+import React from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "motion/react";
 import { ArrowRight, Sparkles, Zap, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
