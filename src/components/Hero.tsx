@@ -104,6 +104,7 @@ export default function Hero() {
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                   className="btn-primary w-full sm:w-auto px-12 py-6 text-sm uppercase tracking-[0.2em] flex items-center justify-center group relative overflow-hidden"
                 >
                   <motion.div 
@@ -160,15 +161,6 @@ export default function Hero() {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Floating "Data Node" Overlay */}
-                <motion.div 
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute bottom-10 left-10 bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/20"
-                >
-                  <Zap size={20} className="text-white animate-pulse" />
-                </motion.div>
               </div>
 
               {/* Decorative rings around the visual */}

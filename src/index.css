@@ -48,15 +48,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    cursor: none;
   }
   
   body {
-    @apply font-sans text-brand-dark bg-white antialiased cursor-none;
-  }
-
-  a, button, [role="button"], input, textarea, select {
-    cursor: none !important;
+    @apply font-sans text-brand-dark bg-white antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {

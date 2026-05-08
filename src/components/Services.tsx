@@ -36,7 +36,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="section-padding bg-slate-50">
+    <section id="services" className="section-padding bg-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4 block">
