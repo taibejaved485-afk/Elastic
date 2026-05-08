@@ -36,14 +36,14 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="section-padding bg-slate-50">
+    <section id="services" className="section-padding bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4 block">
             Product Line
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-6">Premium Elastic Solutions</h2>
-          <p className="text-brand-slate max-w-2xl mx-auto">Engineered for superior stretch, recovery, and long-term durability in every application.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark dark:text-white mb-6">Premium Elastic Solutions</h2>
+          <p className="text-brand-slate dark:text-slate-400 max-w-2xl mx-auto">Engineered for superior stretch, recovery, and long-term durability in every application.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -61,18 +61,18 @@ export default function Services() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ 
-                  type: "spring",
+                   type: "spring",
                   stiffness: 260,
                   damping: 20,
                   delay: index * 0.1 + 0.3 
                 }}
-                className="p-4 bg-blue-50 text-brand-blue rounded-2xl group-hover:bg-brand-blue group-hover:text-white group-hover:animate-bounce-subtle transition-all duration-300"
+                className="p-4 bg-blue-50 dark:bg-blue-900/20 text-brand-blue rounded-2xl group-hover:bg-brand-blue group-hover:text-white group-hover:animate-bounce-subtle transition-all duration-300"
               >
                 {service.icon}
               </motion.div>
               <div>
-                <h3 className="text-xl font-bold text-brand-dark mb-3">{service.title}</h3>
-                <p className="text-brand-slate text-sm leading-relaxed">
+                <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">{service.title}</h3>
+                <p className="text-brand-slate dark:text-slate-400 text-sm leading-relaxed">
                   {service.description}
                 </p>
               </div>

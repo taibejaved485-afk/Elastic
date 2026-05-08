@@ -22,7 +22,7 @@ function Counter({ value, duration = 2, suffix = "" }: { value: number; duration
 
 export default function About() {
   return (
-    <section className="section-padding bg-white overflow-hidden">
+    <section className="section-padding bg-white dark:bg-slate-950 overflow-hidden">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -36,25 +36,25 @@ export default function About() {
           <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-8 leading-tight">
             Mastering the science of stretch and recovery.
           </h2>
-          <p className="text-lg text-brand-slate mb-6 leading-relaxed">
+          <p className="text-lg text-brand-slate dark:text-slate-400 mb-6 leading-relaxed">
             Founded with a vision to provide the global manufacturing industry with high-quality, resilient elastic, our company has become a leader in stretch technology. We combine specialized weaving techniques with modern polymer science. 
           </p>
-          <p className="text-lg text-brand-slate mb-8 leading-relaxed">
+          <p className="text-lg text-brand-slate dark:text-slate-400 mb-8 leading-relaxed">
             Whether it's for high-end fashion, critical medical equipment, or heavy-duty industrial use, our elastic products are designed to perform. We focus on durability and precision across every inch of material.
           </p>
           
-          <div className="grid grid-cols-2 gap-8 py-6 border-y border-slate-100">
+          <div className="grid grid-cols-2 gap-8 py-6 border-y border-slate-100 dark:border-slate-800">
             <div>
               <p className="text-4xl font-display font-bold text-brand-blue">
                 <Counter value={50} suffix="M+" />
               </p>
-              <p className="text-sm text-brand-slate font-medium">Meters Shipped</p>
+              <p className="text-sm text-brand-slate dark:text-slate-500 font-medium">Meters Shipped</p>
             </div>
             <div>
               <p className="text-4xl font-display font-bold text-brand-blue">
                 <Counter value={150} suffix="+" />
               </p>
-              <p className="text-sm text-brand-slate font-medium">Custom Blends</p>
+              <p className="text-sm text-brand-slate dark:text-slate-500 font-medium">Custom Blends</p>
             </div>
           </div>
         </motion.div>

@@ -1,13 +1,95 @@
-import React, { useState } from "react";
-import { motion } from "motion/react";
-import { Mail, Phone, Twitter, Linkedin, Github, Instagram, ArrowRight, Loader2, MapPin } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Mail, Phone, Twitter, Linkedin, Github, Instagram, ArrowRight, Loader2, MapPin, AlertCircle } from "lucide-react";
+
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+}
 
 export default function Contact() {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case "name":
+        if (!value.trim()) return "Full name is required";
+        if (value.trim().length < 2) return "Name must be at least 2 characters";
+        return "";
+      case "email":
+        if (!value.trim()) return "Email address is required";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) return "Please enter a valid email address";
+        return "";
+      case "subject":
+        if (!value.trim()) return "Subject is required";
+        return "";
+      case "message":
+        if (!value.trim()) return "Message cannot be empty";
+        if (value.trim().length < 10) return "Message must be at least 10 characters long";
+        return "";
+      default:
+        return "";
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id } = e.target;
+    setTouched(prev => ({ ...prev, [id]: true }));
+    const error = validateField(id, formData[id as keyof FormData]);
+    setErrors(prev => ({ ...prev, [id]: error }));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+    
+    // Validate in real-time if the field has been touched
+    if (touched[id]) {
+      const error = validateField(id, value);
+      setErrors(prev => ({ ...prev, [id]: error }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields
+    const newErrors: FormErrors = {};
+    let hasErrors = false;
+    
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, formData[key as keyof FormData]);
+      if (error) {
+        newErrors[key as keyof FormErrors] = error;
+        hasErrors = true;
+      }
+    });
+
+    setErrors(newErrors);
+    setTouched({ name: true, email: true, subject: true, message: true });
+
+    if (hasErrors) return;
+
     setIsSubmitting(true);
     
     // Simulate API call
@@ -15,27 +97,46 @@ export default function Contact() {
     
     setIsSubmitting(false);
     setIsSubmitted(true);
+    setFormData({ name: "", email: "", subject: "", message: "" });
+    setTouched({});
+    setErrors({});
     
     // Reset after a few seconds
-    setTimeout(() => setIsSubmitted(false), 3000);
+    setTimeout(() => setIsSubmitted(false), 5000);
   };
 
+  const ErrorMessage = ({ error, field }: { error?: string; field: string }) => (
+    <AnimatePresence>
+      {error && touched[field] && (
+        <motion.div
+          initial={{ opacity: 0, height: 0, y: -5 }}
+          animate={{ opacity: 1, height: "auto", y: 0 }}
+          exit={{ opacity: 0, height: 0, y: -5 }}
+          className="flex items-center gap-1.5 mt-2 text-red-500 overflow-hidden"
+        >
+          <AlertCircle size={14} className="flex-shrink-0" />
+          <span className="text-[11px] font-bold uppercase tracking-wider">{error}</span>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
   return (
-    <section id="contact" className="section-padding bg-slate-50 relative overflow-hidden">
+    <section id="contact" className="section-padding bg-slate-50 dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-brand-blue/5 rounded-full blur-[100px] -z-10" />
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="glass rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50"
+          className="glass rounded-3xl lg:rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-none"
         >
           <div className="grid lg:grid-cols-2">
             {/* Left Column: Get in Touch */}
-            <div className="bg-brand-dark p-12 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden">
+            <div className="bg-brand-dark dark:bg-[#020617] p-8 sm:p-12 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden transition-colors duration-300">
               {/* Background gradient for left side */}
               <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-blue/20 to-transparent pointer-events-none" />
               
@@ -48,38 +149,38 @@ export default function Contact() {
                 >
                   Contact Us
                 </motion.span>
-                <h2 className="text-5xl lg:text-6xl font-black mb-8 leading-[1.1] tracking-tighter">
-                  GET IN <br />
-                  <span className="text-brand-blue italic">TOUCH.</span>
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-[1.1] tracking-tighter">
+                  GET IN <br className="hidden sm:block" />
+                  <span className="text-brand-blue italic ml-2 sm:ml-0">TOUCH.</span>
                 </h2>
-                <p className="text-slate-400 text-lg mb-12 max-w-md font-light leading-relaxed">
+                <p className="text-slate-400 text-base sm:text-lg mb-10 sm:mb-12 max-w-md font-light leading-relaxed">
                   Have a custom project or need technical specifications? Our team of material engineers is ready to help you stretch the possibilities.
                 </p>
                 
-                <div className="space-y-10">
+                <div className="space-y-6 sm:space-y-10">
                   <motion.div 
                     whileHover={{ x: 10 }}
-                    className="flex items-center gap-6 group cursor-pointer"
+                    className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
                   >
-                    <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
                       <Mail size={24} className="text-brand-blue group-hover:text-white" />
                     </div>
                     <div>
                       <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">Send an Email</p>
-                      <p className="text-xl font-medium group-hover:text-brand-blue transition-colors">inquiry@elastic.tech</p>
+                      <p className="text-xl font-medium group-hover:text-brand-blue transition-colors text-base sm:text-xl">inquiry@elastic.tech</p>
                     </div>
                   </motion.div>
 
                   <motion.div 
                     whileHover={{ x: 10 }}
-                    className="flex items-center gap-6 group cursor-pointer"
+                    className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
                   >
-                    <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
                       <MapPin size={24} className="text-brand-blue group-hover:text-white" />
                     </div>
                     <div>
                       <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">Our Headquarters</p>
-                      <p className="text-xl font-medium group-hover:text-brand-blue transition-colors">Industrial Zone 7, Tech Park</p>
+                      <p className="text-xl font-medium group-hover:text-brand-blue transition-colors text-base sm:text-xl">Industrial Zone 7, Tech Park</p>
                     </div>
                   </motion.div>
                 </div>
@@ -104,30 +205,38 @@ export default function Contact() {
             </div>
 
             {/* Right Column: Form */}
-            <div className="p-12 lg:p-20 bg-white/50 backdrop-blur-md">
-              <form className="space-y-10" onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-10">
+            <div className="p-8 sm:p-12 lg:p-20 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md transition-colors duration-300 border-t lg:border-t-0 lg:border-l border-white/10">
+              <form className="space-y-8 sm:space-y-10" onSubmit={handleSubmit} noValidate>
+                <div className="grid md:grid-cols-2 gap-8 sm:gap-10">
                   <div className="form-group mb-0">
                     <input
                       type="text"
                       id="name"
-                      className="form-input !px-0"
+                      value={formData.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`form-input !px-2 ${errors.name && touched.name ? '!border-red-500' : ''}`}
                       placeholder=" "
                       required
                       disabled={isSubmitting}
                     />
-                    <label htmlFor="name" className="form-label !left-0">What's your name?</label>
+                    <label htmlFor="name" className={`form-label !left-2 ${errors.name && touched.name ? '!text-red-500' : ''}`}>What's your name?</label>
+                    <ErrorMessage error={errors.name} field="name" />
                   </div>
                   <div className="form-group mb-0">
                     <input
                       type="email"
                       id="email"
-                      className="form-input !px-0"
+                      value={formData.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`form-input !px-2 ${errors.email && touched.email ? '!border-red-500' : ''}`}
                       placeholder=" "
                       required
                       disabled={isSubmitting}
                     />
-                    <label htmlFor="email" className="form-label !left-0">Email address</label>
+                    <label htmlFor="email" className={`form-label !left-2 ${errors.email && touched.email ? '!text-red-500' : ''}`}>Email address</label>
+                    <ErrorMessage error={errors.email} field="email" />
                   </div>
                 </div>
 
@@ -135,24 +244,32 @@ export default function Contact() {
                   <input
                     type="text"
                     id="subject"
-                    className="form-input !px-0"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`form-input !px-2 ${errors.subject && touched.subject ? '!border-red-500' : ''}`}
                     placeholder=" "
                     required
                     disabled={isSubmitting}
                   />
-                  <label htmlFor="subject" className="form-label !left-0">Subject of inquiry</label>
+                  <label htmlFor="subject" className={`form-label !left-2 ${errors.subject && touched.subject ? '!text-red-500' : ''}`}>Subject of inquiry</label>
+                  <ErrorMessage error={errors.subject} field="subject" />
                 </div>
 
                 <div className="form-group mb-0">
                   <textarea
                     id="message"
                     rows={4}
-                    className="form-input !px-0 resize-none"
+                    value={formData.message}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`form-input !px-2 resize-none ${errors.message && touched.message ? '!border-red-500' : ''}`}
                     placeholder=" "
                     required
                     disabled={isSubmitting}
                   ></textarea>
-                  <label htmlFor="message" className="form-label !left-0">Tell us about your project...</label>
+                  <label htmlFor="message" className={`form-label !left-2 ${errors.message && touched.message ? '!text-red-500' : ''}`}>Tell us about your project...</label>
+                  <ErrorMessage error={errors.message} field="message" />
                 </div>
 
                 <motion.button 
