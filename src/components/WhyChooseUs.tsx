@@ -39,7 +39,7 @@ const benefits = [
 
 export default function WhyChooseUs() {
   return (
-    <section id="why-us" className="py-24 sm:py-40 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 relative overflow-hidden">
+    <section id="why-us" className="py-20 sm:py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 relative overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-20 dark:opacity-40">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-blue/30 rounded-full blur-[120px] animate-pulse" />
@@ -47,7 +47,7 @@ export default function WhyChooseUs() {
       </div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-24">
+        <div className="text-center mb-16">
           <motion.span 
             initial={{ opacity: 0, letterSpacing: "0.5em" }}
             whileInView={{ opacity: 1, letterSpacing: "0.2em" }}
@@ -125,7 +125,7 @@ export default function WhyChooseUs() {
         </div>
         
         {/* Enhanced Trusted By Banner */}
-        <div className="mt-32 pt-16 border-t border-slate-200 dark:border-white/5 relative">
+        <div className="mt-20 pt-12 border-t border-slate-200 dark:border-white/5 relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 bg-slate-50 dark:bg-[#020617] transition-colors duration-500">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/20">Strategic Partners</span>
           </div>

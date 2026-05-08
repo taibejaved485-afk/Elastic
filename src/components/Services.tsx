@@ -38,7 +38,7 @@ export default function Services() {
   return (
     <section id="services" className="section-padding bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4 block">
             Product Line
           </span>

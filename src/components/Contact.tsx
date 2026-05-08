@@ -123,7 +123,7 @@ export default function Contact() {
   );
 
   return (
-    <section id="contact" className="py-24 sm:py-40 px-4 sm:px-12 lg:px-24 bg-white dark:bg-[#020617] relative overflow-hidden transition-colors duration-500">
+    <section id="contact" className="py-20 px-4 sm:px-12 lg:px-24 bg-white dark:bg-[#020617] relative overflow-hidden transition-colors duration-500">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[120px]" />

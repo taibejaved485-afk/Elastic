@@ -23,7 +23,7 @@ function Counter({ value, duration = 2, suffix = "" }: { value: number; duration
 export default function About() {
   return (
     <section className="section-padding bg-white dark:bg-slate-950 overflow-hidden">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
