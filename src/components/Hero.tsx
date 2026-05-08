@@ -125,13 +125,29 @@ export default function Hero() {
                     Explore Products <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform" />
                   </span>
                 </motion.button>
-                <div className="flex items-center gap-4 text-white/40 text-[10px] sm:text-xs font-bold uppercase tracking-widest pl-2">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full border-2 border-[#020617] bg-slate-800" />
+                <div className="flex items-center gap-4 text-white/50 text-[10px] sm:text-xs font-bold uppercase tracking-widest pl-2 group/teams cursor-default">
+                  <div className="flex -space-x-3">
+                    {[
+                      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=120&h=120&auto=format&fit=crop",
+                      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=120&h=120&auto=format&fit=crop",
+                      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=120&h=120&auto=format&fit=crop"
+                    ].map((url, i) => (
+                      <motion.div 
+                        key={i} 
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.5 + i * 0.1 }}
+                        whileHover={{ scale: 1.2, zIndex: 10, y: -5 }}
+                        className="w-10 h-10 rounded-full border-2 border-[#020617] bg-slate-800 overflow-hidden shadow-lg shadow-black/50 transition-all duration-300"
+                      >
+                        <img src={url} alt="Team Member" className="w-full h-full object-cover grayscale group-hover/teams:grayscale-0 transition-all duration-500" />
+                      </motion.div>
                     ))}
                   </div>
-                  <span>Trusted by 2k+ Teams</span>
+                  <div className="flex flex-col">
+                    <span className="text-white font-black group-hover/teams:text-brand-blue transition-colors">2K+ TEAMS</span>
+                    <span className="text-[8px] opacity-60">TRUST OUR SCIENCE</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
