@@ -42,7 +42,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div 
           className="absolute inset-0 bg-cover bg-center opacity-[0.07] mix-blend-overlay grayscale scale-110"
-          style={{ backgroundImage: `url('https://i.pinimg.com/736x/2e/a2/70/2ea270d4f6899783b9ebe70d5ca4c9dd.jpg')`, x: springBgX, y: springBgY }}
+          style={{ backgroundImage: `url('https://i.pinimg.com/1200x/71/86/d1/7186d1f0cb6f698ccc68de66f96455f6.jpg')`, x: springBgX, y: springBgY }}
         />
         <motion.div 
           style={{ x: springFloatX, y: springFloatY }}
@@ -178,7 +178,7 @@ export default function Hero() {
                   />
                 </div>
                 <img 
-                  src="https://i.pinimg.com/736x/2e/a2/70/2ea270d4f6899783b9ebe70d5ca4c9dd.jpg"
+                  src="https://i.pinimg.com/1200x/71/86/d1/7186d1f0cb6f698ccc68de66f96455f6.jpg"
                   alt="ELΛSTIC high-performance industrial textile weave"
                   className="w-full h-full object-cover opacity-60 group-hover/img:scale-110 group-hover/img:opacity-80 transition-all duration-700"
                   referrerPolicy="no-referrer"
