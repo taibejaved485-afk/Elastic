@@ -1,182 +1,121 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { gsap } from "gsap";
-import { Loader2, RefreshCw } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion, useMotionValue, useTransform, animate, useMotionTemplate } from "motion/react";
+import { RefreshCw } from "lucide-react";
 
 export default function PullToRefresh() {
-  const [pullDistance, setPullDistance] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isPulling, setIsPulling] = useState(false);
-  
-  const startY = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const displacementRef = useRef<SVGFEPointLightElement>(null);
-  const filterMapRef = useRef<SVGFEDisplacementMapElement>(null);
-  const turbRef = useRef<SVGFETurbulenceElement>(null);
-  
+  const y = useMotionValue(0);
   const THRESHOLD = 160;
-  const DAMPING = 0.35;
 
-  const handleTouchStart = (e: TouchEvent) => {
-    if (window.scrollY > 5 || isRefreshing) return;
-    startY.current = e.touches[0].pageY;
-    setIsPulling(true);
-    
-    // Reset filter state
-    if (filterMapRef.current) {
-      gsap.to(filterMapRef.current, { attr: { scale: 0 }, duration: 0 });
-    }
-  };
+  // Transform y distance into SVG path control point
+  // We want the curve to stretch down as the user pulls
+  const curveY = useTransform(y, [0, THRESHOLD * 2], [0, THRESHOLD * 1.5]);
+  const path = useMotionTemplate`M 0 0 Q 500 ${curveY} 1000 0 V 0 H 0 Z`;
 
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (!isPulling || isRefreshing) return;
-    
-    const currentY = e.touches[0].pageY;
-    const diff = (currentY - startY.current) * DAMPING;
-    
-    if (diff > 0) {
-      if (e.cancelable) e.preventDefault();
-      setPullDistance(diff);
-      
-      // Apply "Cloth Pinch" Distortion
-      // The scale determines the magnitude of the displacement
-      if (filterMapRef.current) {
-        gsap.to(filterMapRef.current, {
-          attr: { scale: Math.min(diff * 1.5, 200) },
-          duration: 0.1,
-          overwrite: true
-        });
-      }
+  // Scale and rotation for the icon
+  const iconScale = useTransform(y, [0, THRESHOLD], [0.5, 1.2]);
+  const iconRotate = useTransform(y, [0, THRESHOLD], [0, 360]);
+  const iconOpacity = useTransform(y, [0, 40], [0, 1]);
 
-      // Slightly shift the main content down
-      const mainContent = document.getElementById("main-content");
-      if (mainContent) {
-        gsap.to(mainContent, {
-          y: diff * 0.4,
-          duration: 0.1,
-          overwrite: true
-        });
-      }
-    }
-  }, [isPulling, isRefreshing]);
-
-  const handleTouchEnd = useCallback(() => {
-    if (!isPulling) return;
-    setIsPulling(false);
-
-    if (pullDistance >= THRESHOLD) {
+  const handleDragEnd = () => {
+    const currentY = y.get();
+    if (currentY >= THRESHOLD) {
       triggerRefresh();
     } else {
       snapBack();
     }
-  }, [pullDistance, isPulling]);
+  };
 
   const snapBack = () => {
-    // Snap content back with vibration
-    const mainContent = document.getElementById("main-content");
-    if (mainContent) {
-      gsap.to(mainContent, {
-        y: 0,
-        duration: 1.2,
-        ease: "elastic.out(1, 0.3)"
-      });
-    }
-
-    // Vibrate and eliminate the displacement scale
-    if (filterMapRef.current) {
-      gsap.to(filterMapRef.current, {
-        attr: { scale: 0 },
-        duration: 1.5,
-        ease: "elastic.out(1.2, 0.2)"
-      });
-    }
-
-    setPullDistance(0);
+    animate(y, 0, {
+      type: "spring",
+      stiffness: 400,
+      damping: 15,
+      mass: 1
+    });
   };
 
   const triggerRefresh = () => {
     setIsRefreshing(true);
     
-    // Hold state
-    gsap.to(filterMapRef.current, {
-      attr: { scale: 40 },
-      duration: 0.8,
-      ease: "power2.out"
+    // Settle to a "loading" position
+    animate(y, 80, {
+      type: "spring",
+      stiffness: 300,
+      damping: 20
     });
 
+    // Simulate work
     setTimeout(() => {
-      completeRefresh();
+      setIsRefreshing(false);
+      snapBack();
     }, 2000);
   };
 
-  const completeRefresh = () => {
-    setIsRefreshing(false);
-    snapBack();
-  };
-
+  // Sync main content y with pull distance
   useEffect(() => {
-    const el = document.body;
-    el.addEventListener("touchstart", handleTouchStart, { passive: false });
-    el.addEventListener("touchmove", handleTouchMove, { passive: false });
-    el.addEventListener("touchend", handleTouchEnd);
-
-    // Apply the filter to main content
     const mainContent = document.getElementById("main-content");
-    if (mainContent) {
-      mainContent.style.filter = "url(#cloth-filter)";
-      mainContent.style.transformOrigin = "top center";
-    }
-
-    return () => {
-      el.removeEventListener("touchstart", handleTouchStart);
-      el.removeEventListener("touchmove", handleTouchMove);
-      el.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [handleTouchMove, handleTouchEnd]);
+    const unsubscribe = y.on("change", (latest) => {
+      if (mainContent) {
+        // Content moves slightly less than the drag for a "heavy" feel
+        mainContent.style.transform = `translateY(${latest * 0.4}px)`;
+      }
+    });
+    return () => unsubscribe();
+  }, [y]);
 
   return (
     <>
-      {/* Hidden SVG Filter Definition */}
-      <svg className="fixed pointer-events-none opacity-0">
-        <defs>
-          <filter id="cloth-filter" x="-20%" y="-20%" width="140%" height="140%">
-            <feTurbulence 
-              ref={turbRef}
-              type="fractalNoise" 
-              baseFrequency="0.01 0.001" 
-              numOctaves="2" 
-              result="noise" 
-            />
-            <feDisplacementMap 
-              ref={filterMapRef}
-              in="SourceGraphic" 
-              in2="noise" 
-              scale="0" 
-              xChannelSelector="R" 
-              yChannelSelector="G" 
-            />
-          </filter>
-        </defs>
-      </svg>
+      {/* Interaction Surface */}
+      <motion.div
+        drag="y"
+        dragConstraints={{ top: 0, bottom: THRESHOLD * 2 }}
+        dragElastic={0.5}
+        style={{ y }}
+        onDragEnd={handleDragEnd}
+        className="fixed top-0 left-0 w-full h-8 z-[10001] cursor-grab active:cursor-grabbing pointer-events-auto"
+      />
 
-      <div 
-        className="fixed top-0 left-0 w-full pointer-events-none z-[10000]"
-        ref={containerRef}
-      >
-        {/* Visual feedback icon */}
-        <div 
-          className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          style={{ 
-            top: `${Math.min(pullDistance - 60, 100)}px`,
-            opacity: pullDistance > 20 ? 1 : 0
-          }}
+      {/* Visual Canvas */}
+      <div className="fixed top-0 left-0 w-full pointer-events-none z-[10000] overflow-visible">
+        {/* Soft Pastel Background Area */}
+        <motion.div 
+          style={{ height: y, opacity: iconOpacity }}
+          className="absolute top-0 left-0 w-full bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-white/5"
+        />
+
+        {/* The Elastic Fabric Stretch */}
+        <svg 
+          viewBox="0 0 1000 100" 
+          preserveAspectRatio="none" 
+          className="w-full h-[150px] absolute top-0"
         >
-          <div className={`w-12 h-12 rounded-full glass border border-white/20 flex items-center justify-center shadow-2xl transition-all duration-300 ${isRefreshing ? 'rotate-180 scale-110' : ''}`}>
-             <RefreshCw className={`w-6 h-6 text-brand-blue ${isRefreshing ? 'animate-spin' : ''}`} />
+          <motion.path 
+            d={path} 
+            fill="currentColor"
+            className="text-slate-50 dark:text-slate-900 drop-shadow-2xl"
+          />
+        </svg>
+
+        {/* Premium Icon Reveal */}
+        <motion.div 
+          style={{ 
+            y: useTransform(y, (v) => v * 0.5),
+            scale: iconScale,
+            rotate: iconRotate,
+            opacity: iconOpacity
+          }}
+          className="absolute left-1/2 -translate-x-1/2 top-10 flex flex-col items-center gap-3"
+        >
+          <div className="p-4 rounded-3xl bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-white/10">
+            <RefreshCw 
+              className={`w-6 h-6 text-brand-blue ${isRefreshing ? 'animate-spin' : ''}`} 
+            />
           </div>
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue drop-shadow-md">
-            {isRefreshing ? "Synchronizing" : pullDistance >= THRESHOLD ? "Release" : "Stretch"}
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue bg-white/80 dark:bg-slate-800/80 px-3 py-1 rounded-full backdrop-blur-sm">
+            {isRefreshing ? "Syncing" : y.get() >= THRESHOLD ? "Release" : "Elastic"}
           </span>
-        </div>
+        </motion.div>
       </div>
     </>
   );
