@@ -6,7 +6,6 @@
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import ScrollProgressBar from "./components/ScrollProgressBar";
-import PullToRefresh from "./components/PullToRefresh";
 import Hero from "./components/Hero";
 import ShapeMorphDivider from "./components/ShapeMorphDivider";
 import About from "./components/About";
@@ -43,10 +42,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <PullToRefresh />
       <ScrollProgressBar />
       <Navbar />
-      <main id="main-content">
+      <main>
         <Hero />
         <ShapeMorphDivider fill="fill-white dark:fill-slate-950" className="-mt-1 relative z-20" />
         <div id="about" className="reveal">
