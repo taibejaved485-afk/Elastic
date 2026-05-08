@@ -46,7 +46,7 @@ export default function App() {
       <PullToRefresh />
       <ScrollProgressBar />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <ShapeMorphDivider fill="fill-white dark:fill-slate-950" className="-mt-1 relative z-20" />
         <div id="about" className="reveal">
