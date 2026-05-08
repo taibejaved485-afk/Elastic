@@ -7,98 +7,199 @@ const benefits = [
     title: "Unrivaled Elasticity",
     description: "Our proprietary polymers achieve up to 800% elongation with 99.9% recovery memory, setting a new industry benchmark.",
     icon: <Zap className="w-6 h-6" />,
-    color: "from-blue-500 to-cyan-400"
+    color: "from-blue-500 to-cyan-400",
+    metric: "800%",
+    label: "Tensile Range"
   },
   {
     title: "Clinical Grade Safety",
     description: "Certified hypoallergenic and OEKO-TEX® Standard 100 compliant, making our fibers safe for direct prolonged skin contact.",
     icon: <ShieldCheck className="w-6 h-6" />,
-    color: "from-emerald-500 to-teal-400"
+    color: "from-emerald-500 to-teal-400",
+    metric: "100%",
+    label: "Hypoallergenic"
   },
   {
     title: "Precision Engineering",
     description: "Every micron is scanned using AI-driven optical sensors to ensure uniform thickness and tension across thousands of meters.",
     icon: <Microscope className="w-6 h-6" />,
-    color: "from-purple-500 to-indigo-400"
+    color: "from-purple-500 to-indigo-400",
+    metric: "0.01μm",
+    label: "Tolerance"
   },
   {
     title: "Infinite Life Cycle",
     description: "Engineered to withstand 5,000+ high-intensity wash cycles without losing tensile strength or structural integrity.",
     icon: <Earth className="w-6 h-6" />,
-    color: "from-orange-500 to-red-400"
+    color: "from-orange-500 to-red-400",
+    metric: "5,000+",
+    label: "Cycle Count"
   }
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section id="why-us" className="py-24 sm:py-32 bg-white dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50/50 dark:bg-white/[0.02] -skew-x-12 translate-x-20 z-0" />
+    <section id="why-us" className="py-24 sm:py-40 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 relative overflow-hidden">
+      {/* Dynamic Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-20 dark:opacity-40">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-blue/30 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px] animate-pulse delay-700" />
+      </div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-20">
-          <div className="max-w-2xl">
-            <motion.span 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="text-brand-blue font-bold tracking-[0.2em] text-sm uppercase mb-4 block"
-            >
-              The Science of Strength
-            </motion.span>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl sm:text-6xl font-black text-brand-dark dark:text-white leading-tight tracking-tighter"
-            >
-              WHY THE WORLD'S BEST <br />
-              <span className="text-stroke-dark dark:text-stroke">CHOOSE ELΛSTIC.</span>
-            </motion.h2>
-          </div>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-brand-slate dark:text-slate-400 max-w-sm mb-4 lg:text-right"
+        <div className="text-center mb-24">
+          <motion.span 
+            initial={{ opacity: 0, letterSpacing: "0.5em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.2em" }}
+            className="text-brand-blue font-black text-sm uppercase mb-6 block"
           >
-            We don't just manufacture textiles; we engineer solutions that stretch the boundaries of what is possible in textile science.
-          </motion.p>
+            Engineering Excellence
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl sm:text-7xl font-black text-brand-dark dark:text-white leading-[0.9] tracking-tighter mb-8"
+          >
+            THE SCIENCE OF <br />
+            <span className="text-stroke-dark dark:text-stroke opacity-30">ELΛSTICITY.</span>
+          </motion.h2>
+          <motion.div 
+            initial={{ width: 0 }}
+            whileInView={{ width: "100px" }}
+            className="h-1.5 bg-brand-blue mx-auto rounded-full"
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={benefit.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="group p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:border-brand-blue/30 transition-all duration-500 overflow-hidden relative"
-            >
-              {/* Highlight effect */}
-              <div className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${benefit.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
-              
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${benefit.color} p-0.5 mb-8 transform group-hover:rotate-6 transition-transform duration-500`}>
-                <div className="w-full h-full rounded-[14px] bg-white dark:bg-slate-900 flex items-center justify-center text-brand-dark dark:text-white group-hover:bg-transparent group-hover:text-white transition-colors">
-                  {benefit.icon}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Column */}
+          <div className="lg:col-span-4 space-y-6">
+            {benefits.slice(0, 2).map((benefit, index) => (
+              <BenefitCard key={benefit.title} benefit={benefit} index={index} />
+            ))}
+          </div>
+
+          {/* Center Column - Visual Hub */}
+          <div className="lg:col-span-4 flex justify-center py-12 lg:py-0">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80">
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border-[1px] border-dashed border-brand-blue/30 rounded-full"
+              />
+              <motion.div 
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-4 border-[1px] border-brand-blue/20 rounded-full"
+              />
+              <div className="absolute inset-6 rounded-full glass border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl">
+                <div className="text-center">
+                  <div className="text-4xl font-black text-brand-blue mb-1">CORE</div>
+                  <div className="text-[10px] font-bold tracking-[0.3em] uppercase opacity-50 dark:text-white">Technology</div>
                 </div>
+                {/* Floating particles or inner decorative svgs could go here */}
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 to-transparent pointer-events-none" />
               </div>
-
-              <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-4 tracking-tight">
-                {benefit.title}
-              </h3>
-              <p className="text-brand-slate dark:text-slate-400 text-sm leading-relaxed">
-                {benefit.description}
-              </p>
               
-              <div className="mt-8 pt-8 border-t border-slate-200 dark:border-white/5 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-blue flex items-center gap-2">
-                  Technical Spec <Zap size={12} />
-                </span>
-              </div>
-            </motion.div>
-          ))}
+              {/* Orbitting nodes */}
+              {[0, 90, 180, 270].map((angle, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ 
+                    rotate: [0, 360]
+                  }}
+                  transition={{ duration: 10 + i, repeat: Infinity, ease: "linear" }}
+                  className="absolute top-1/2 left-1/2 w-full h-full -ml-[50%] -mt-[50%]"
+                >
+                  <div className="absolute top-0 left-1/2 -ml-2 w-4 h-4 rounded-full bg-brand-blue shadow-[0_0_10px_#007bff]" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="lg:col-span-4 space-y-6">
+            {benefits.slice(2, 4).map((benefit, index) => (
+              <BenefitCard key={benefit.title} benefit={benefit} index={index + 2} />
+            ))}
+          </div>
         </div>
+        
+        {/* Trusted By Banner Integration */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-32 pt-12 border-t border-slate-200 dark:border-white/5 flex flex-wrap justify-center items-center gap-12 sm:gap-20 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+        >
+          {['NIKE', 'ADIDAS', 'NASA', 'SPACEX', 'TESLA'].map((brand) => (
+            <span key={brand} className="text-2xl font-black tracking-tighter text-slate-400 dark:text-slate-600 cursor-default">{brand}</span>
+          ))}
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+function BenefitCard({ benefit, index }: { 
+  key?: string | number;
+  benefit: {
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    color: string;
+    metric: string;
+    label: string;
+  }; 
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: index < 2 ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="group relative p-8 rounded-[2rem] bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 hover:border-brand-blue/40 transition-all duration-500 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden"
+    >
+      <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${benefit.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
+      
+      <div className="flex items-start gap-6">
+        <div className={`shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${benefit.color} flex items-center justify-center text-white shadow-lg`}>
+          {benefit.icon}
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-brand-dark dark:text-white mb-2 tracking-tight">
+            {benefit.title}
+          </h3>
+          <p className="text-brand-slate dark:text-slate-400 text-sm leading-relaxed mb-6 group-hover:text-brand-dark dark:group-hover:text-white transition-colors">
+            {benefit.description}
+          </p>
+          
+          <div className="flex items-center gap-4">
+            <div className="flex flex-col">
+              <span className={`text-xl font-black bg-gradient-to-r ${benefit.color} bg-clip-text text-transparent`}>
+                {benefit.metric}
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-widest opacity-40 dark:text-white">
+                {benefit.label}
+              </span>
+            </div>
+            
+            <div className="h-4 w-[1px] bg-slate-200 dark:bg-white/10" />
+            
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              className="flex-1 h-1 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden"
+            >
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: "70%" }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className={`h-full bg-gradient-to-r ${benefit.color}`}
+              />
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 }

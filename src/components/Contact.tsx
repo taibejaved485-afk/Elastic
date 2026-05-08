@@ -157,8 +157,8 @@ export default function Contact() {
                 
                 <div className="w-24 h-24 mb-8 glass rounded-2xl flex items-center justify-center overflow-hidden border border-white/10">
                   <LottieAnimation 
-                    animationUrl="https://lottie.host/9f50682a-2895-467a-9730-a924403a557b/pY8mC8Xo9z.json"
-                    className="w-full h-full scale-150"
+                    animationUrl="https://lottie.host/8e2b86e8-3a81-432d-9486-d2ca019a776a/yH09m8dI9G.json"
+                    className="w-full h-full scale-125"
                   />
                 </div>
                 
