@@ -108,7 +108,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#020617] text-white pt-32 pb-12 px-6 overflow-hidden relative">
+    <footer className="bg-[#020617] text-white pt-16 sm:pt-32 pb-12 px-4 sm:px-6 overflow-hidden relative">
       <AnimatePresence>
         {activeModal && (
           <motion.div 
@@ -156,7 +156,7 @@ export default function Footer() {
       </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-16 mb-12 sm:mb-24">
           {/* Brand Column */}
           <div className="lg:col-span-4">
             <motion.a 
@@ -256,7 +256,7 @@ export default function Footer() {
         </div>
 
         {/* Info Bars */}
-        <div className="grid md:grid-cols-3 gap-12 py-12 border-y border-white/5 mb-12 text-slate-400 text-sm font-medium">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 py-8 sm:py-12 border-y border-white/5 mb-8 sm:mb-12 text-slate-400 text-sm font-medium">
           <motion.div whileHover={{ x: 5 }} className="flex items-center gap-4 group cursor-default">
             <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-blue/10 transition-colors">
               <MapPin size={18} className="text-brand-blue" />

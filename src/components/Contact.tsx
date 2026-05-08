@@ -122,11 +122,11 @@ export default function Contact() {
   );
 
   return (
-    <section id="contact" className="section-padding bg-slate-50 dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
+    <section id="contact" className="py-12 sm:py-24 px-4 sm:px-12 lg:px-24 bg-slate-50 dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-brand-blue/5 rounded-full blur-[100px] -z-10" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -136,7 +136,7 @@ export default function Contact() {
         >
           <div className="grid lg:grid-cols-2">
             {/* Left Column: Get in Touch */}
-            <div className="bg-brand-dark dark:bg-[#020617] p-8 sm:p-12 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden transition-colors duration-300">
+            <div className="bg-brand-dark dark:bg-[#020617] p-6 sm:p-12 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden transition-colors duration-300">
               {/* Background gradient for left side */}
               <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-blue/20 to-transparent pointer-events-none" />
               
@@ -205,7 +205,7 @@ export default function Contact() {
             </div>
 
             {/* Right Column: Form */}
-            <div className="p-8 sm:p-12 lg:p-20 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md transition-colors duration-300 border-t lg:border-t-0 lg:border-l border-white/10">
+            <div className="p-6 sm:p-12 lg:p-20 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md transition-colors duration-300 border-t lg:border-t-0 lg:border-l border-white/10">
               <form className="space-y-8 sm:space-y-10" onSubmit={handleSubmit} noValidate>
                 <div className="grid md:grid-cols-2 gap-8 sm:gap-10">
                   <div className="form-group mb-0">
