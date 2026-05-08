@@ -183,11 +183,23 @@ export default function Contact() {
                     <span className="text-brand-blue">BIG LEAP?</span>
                   </h3>
                   
-                  <div className="w-24 h-24 mb-10 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden group/lottie">
-                    <LottieAnimation 
-                      animationUrl="https://lottie.host/8e2b86e8-3a81-432d-9486-d2ca019a776a/yH09m8dI9G.json"
-                      className="w-full h-full scale-110 group-hover/lottie:scale-125 transition-transform duration-500"
+                  <div className="relative w-20 h-20 mb-10 group/icon">
+                    <motion.div 
+                      animate={{ 
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 5, -5, 0]
+                      }}
+                      transition={{ 
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="absolute inset-0 bg-brand-blue/20 blur-2xl rounded-full"
                     />
+                    <div className="relative w-full h-full rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden backdrop-blur-sm group-hover/icon:border-brand-blue/50 transition-colors duration-500">
+                      <Zap className="w-8 h-8 text-brand-blue group-hover/icon:scale-125 transition-transform duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/10 to-transparent" />
+                    </div>
                   </div>
                   
                   <p className="text-slate-400 text-lg mb-12 max-w-sm font-light leading-relaxed">
