@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Phone, Twitter, Linkedin, Github, Instagram, ArrowRight, Loader2, MapPin, AlertCircle } from "lucide-react";
+import { Mail, Phone, Twitter, Linkedin, Github, Instagram, ArrowRight, Loader2, MapPin, AlertCircle, ShieldCheck, Zap } from "lucide-react";
 import LottieAnimation from "./LottieAnimation";
 
 interface FormData {
@@ -123,207 +123,292 @@ export default function Contact() {
   );
 
   return (
-    <section id="contact" className="py-12 sm:py-24 px-4 sm:px-12 lg:px-24 bg-slate-50 dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
+    <section id="contact" className="py-24 sm:py-40 px-4 sm:px-12 lg:px-24 bg-white dark:bg-[#020617] relative overflow-hidden transition-colors duration-500">
       {/* Background decoration */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-brand-blue/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px]" />
+        
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" 
+             style={{ 
+               backgroundImage: `radial-gradient(circle, currentColor 1px, transparent 1px)`, 
+               backgroundSize: '40px 40px' 
+             }} 
+        />
+      </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-20">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-brand-blue font-black tracking-[.3em] text-xs uppercase mb-4 block"
+          >
+            Stay Flexible
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl sm:text-7xl font-black text-brand-dark dark:text-white tracking-tighter"
+          >
+            LET'S <span className="text-stroke-dark dark:text-stroke opacity-30 italic">STRETCH</span> IDEAS.
+          </motion.h2>
+        </div>
+
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="glass rounded-3xl lg:rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-none"
+          className="relative group h-full"
         >
-          <div className="grid lg:grid-cols-2">
-            {/* Left Column: Get in Touch */}
-            <div className="bg-brand-dark dark:bg-[#020617] p-6 sm:p-12 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden transition-colors duration-300">
-              {/* Background gradient for left side */}
-              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-blue/20 to-transparent pointer-events-none" />
-              
-              <div className="relative z-10">
-                <motion.span 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="text-brand-blue font-bold tracking-widest uppercase text-xs mb-6 block"
-                >
-                  Contact Us
-                </motion.span>
-                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-[1.1] tracking-tighter">
-                  GET IN <br className="hidden sm:block" />
-                  <span className="text-brand-blue italic ml-2 sm:ml-0">TOUCH.</span>
-                </h2>
-                
-                <div className="w-24 h-24 mb-8 glass rounded-2xl flex items-center justify-center overflow-hidden border border-white/10">
-                  <LottieAnimation 
-                    animationUrl="https://lottie.host/8e2b86e8-3a81-432d-9486-d2ca019a776a/yH09m8dI9G.json"
-                    className="w-full h-full scale-125"
-                  />
+          {/* Glowing border effect */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue to-cyan-500 rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+          
+          <div className="relative glass rounded-[3rem] overflow-hidden shadow-2xl dark:shadow-none border border-white/20 dark:border-white/5">
+            <div className="grid lg:grid-cols-12 min-h-[700px]">
+              {/* Left Column: Get in Touch */}
+              <div className="lg:col-span-5 bg-brand-dark dark:bg-[#050b1a] p-8 sm:p-14 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-blue/30 to-transparent" />
+                  <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl" />
                 </div>
                 
-                <p className="text-slate-400 text-base sm:text-lg mb-10 sm:mb-12 max-w-md font-light leading-relaxed">
-                  Have a custom project or need technical specifications? Our team of material engineers is ready to help you stretch the possibilities.
-                </p>
-                
-                <div className="space-y-6 sm:space-y-10">
-                  <motion.div 
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
-                  >
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
-                      <Mail size={24} className="text-brand-blue group-hover:text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">Send an Email</p>
-                      <p className="text-xl font-medium group-hover:text-brand-blue transition-colors text-base sm:text-xl">inquiry@elastic.tech</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div 
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
-                  >
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
-                      <MapPin size={24} className="text-brand-blue group-hover:text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">Our Headquarters</p>
-                      <p className="text-xl font-medium group-hover:text-brand-blue transition-colors text-base sm:text-xl">Industrial Zone 7, Tech Park</p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-
-              <div className="mt-16 flex items-center gap-8 text-white/30 relative z-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em]">Follow Us</p>
-                <div className="h-[1px] flex-grow bg-white/10" />
-                <div className="flex gap-4">
-                  {[Twitter, Linkedin, Github, Instagram].map((Icon, i) => (
-                    <motion.a 
-                      key={i} 
-                      href="#" 
-                      whileHover={{ y: -3, color: "#2563eb" }}
-                      className="transition-colors"
-                    >
-                      <Icon size={18} />
-                    </motion.a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Form */}
-            <div className="p-6 sm:p-12 lg:p-20 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md transition-colors duration-300 border-t lg:border-t-0 lg:border-l border-white/10">
-              <form className="space-y-8 sm:space-y-10" onSubmit={handleSubmit} noValidate>
-                <div className="grid md:grid-cols-2 gap-8 sm:gap-10">
-                  <div className="form-group mb-0">
-                    <input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`form-input !px-2 ${errors.name && touched.name ? '!border-red-500' : ''}`}
-                      placeholder=" "
-                      required
-                      disabled={isSubmitting}
-                    />
-                    <label htmlFor="name" className={`form-label !left-2 ${errors.name && touched.name ? '!text-red-500' : ''}`}>What's your name?</label>
-                    <ErrorMessage error={errors.name} field="name" />
-                  </div>
-                  <div className="form-group mb-0">
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`form-input !px-2 ${errors.email && touched.email ? '!border-red-500' : ''}`}
-                      placeholder=" "
-                      required
-                      disabled={isSubmitting}
-                    />
-                    <label htmlFor="email" className={`form-label !left-2 ${errors.email && touched.email ? '!text-red-500' : ''}`}>Email address</label>
-                    <ErrorMessage error={errors.email} field="email" />
-                  </div>
-                </div>
-
-                <div className="form-group mb-0">
-                  <input
-                    type="text"
-                    id="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={`form-input !px-2 ${errors.subject && touched.subject ? '!border-red-500' : ''}`}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                  />
-                  <label htmlFor="subject" className={`form-label !left-2 ${errors.subject && touched.subject ? '!text-red-500' : ''}`}>Subject of inquiry</label>
-                  <ErrorMessage error={errors.subject} field="subject" />
-                </div>
-
-                <div className="form-group mb-0">
-                  <textarea
-                    id="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={`form-input !px-2 resize-none ${errors.message && touched.message ? '!border-red-500' : ''}`}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                  ></textarea>
-                  <label htmlFor="message" className={`form-label !left-2 ${errors.message && touched.message ? '!text-red-500' : ''}`}>Tell us about your project...</label>
-                  <ErrorMessage error={errors.message} field="message" />
-                </div>
-
-                <motion.button 
-                  type="submit" 
-                  disabled={isSubmitting || isSubmitted}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`relative w-full py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-sm flex items-center justify-center transition-all duration-500 overflow-hidden group
-                    ${isSubmitted ? 'bg-green-500 text-white shadow-green-200 shadow-xl' : 'bg-gradient-to-r from-brand-blue to-blue-700 text-white shadow-xl shadow-brand-blue/30'}
-                    ${isSubmitting ? 'opacity-80' : ''}
-                  `}
-                >
-                  {/* Subtle Ripple/Glow Effect */}
-                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                <div className="relative z-10">
+                  <div className="w-16 h-1 w-brand-blue bg-brand-blue mb-10 rounded-full" />
                   
-                  <span className="relative z-10 flex items-center gap-3">
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 size={18} className="animate-spin text-white" />
-                        Processing
-                      </>
-                    ) : isSubmitted ? (
-                      <>
-                        <div className="w-8 h-8 relative">
-                          <LottieAnimation 
-                            animationUrl="https://lottie.host/c94695eb-3950-48b0-a35f-3011a68aa806/yH09m8dI9G.json"
-                            loop={false}
-                            className="absolute inset-0 scale-[2.5]"
-                          />
+                  <h3 className="text-4xl sm:text-5xl font-black mb-8 leading-tight tracking-tighter">
+                    READY FOR THE <br />
+                    <span className="text-brand-blue">BIG LEAP?</span>
+                  </h3>
+                  
+                  <div className="w-24 h-24 mb-10 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden group/lottie">
+                    <LottieAnimation 
+                      animationUrl="https://lottie.host/8e2b86e8-3a81-432d-9486-d2ca019a776a/yH09m8dI9G.json"
+                      className="w-full h-full scale-110 group-hover/lottie:scale-125 transition-transform duration-500"
+                    />
+                  </div>
+                  
+                  <p className="text-slate-400 text-lg mb-12 max-w-sm font-light leading-relaxed">
+                    Our team of material scientists and engineers is standing by to help you integrate ELΛSTIC fibers into your next generation of products.
+                  </p>
+                  
+                  <div className="space-y-8">
+                    <ContactItem 
+                      Icon={Mail} 
+                      label="Inquiries" 
+                      value="hello@elastic.tech" 
+                    />
+                    <ContactItem 
+                      Icon={MapPin} 
+                      label="Studio" 
+                      value="Innovation Hub, Silicon Valley" 
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-20 pt-10 border-t border-white/5 flex items-center justify-between relative z-10">
+                  <div className="flex gap-4">
+                    {[Twitter, Linkedin, Github].map((Icon, i) => (
+                      <motion.a 
+                        key={i} 
+                        href="#" 
+                        whileHover={{ y: -5, color: "#007bff" }}
+                        className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/50 hover:bg-white/10 transition-all border border-white/5"
+                      >
+                        <Icon size={18} />
+                      </motion.a>
+                    ))}
+                  </div>
+                  <div className="text-[10px] font-black uppercase tracking-[0.4em] opacity-20">EST. 2024</div>
+                </div>
+              </div>
+
+              {/* Right Column: Form */}
+              <div className="lg:col-span-7 p-8 sm:p-12 lg:p-16 bg-white/80 dark:bg-slate-900/40 backdrop-blur-3xl relative">
+                {/* Subtle Technical Pattern */}
+                <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] pointer-events-none" 
+                     style={{ 
+                       backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 30H15L30 0zM0 30l15 30h30L30 30 0 30z' fill='%23007bff' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`, 
+                       backgroundSize: '120px 120px' 
+                     }} 
+                />
+
+                <form className="space-y-8 sm:space-y-10 relative z-10" onSubmit={handleSubmit} noValidate>
+                  <div className="grid md:grid-cols-2 gap-8 sm:gap-10">
+                    <InputField 
+                      id="name"
+                      label="Your Name"
+                      value={formData.name}
+                      error={errors.name}
+                      touched={touched.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={isSubmitting}
+                    />
+                    <InputField 
+                      id="email"
+                      type="email"
+                      label="Email Address"
+                      value={formData.email}
+                      error={errors.email}
+                      touched={touched.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+
+                  <InputField 
+                    id="subject"
+                    label="How can we help?"
+                    value={formData.subject}
+                    error={errors.subject}
+                    touched={touched.subject}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    disabled={isSubmitting}
+                  />
+
+                  <div className="relative group/field">
+                    <textarea
+                      id="message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`w-full bg-transparent border-b-2 py-4 px-1 focus:outline-none transition-all duration-500 resize-none
+                        ${errors.message && touched.message 
+                          ? 'border-red-500/50' 
+                          : 'border-slate-200 dark:border-white/10 focus:border-brand-blue'}
+                      `}
+                      placeholder="Your message..."
+                      required
+                      disabled={isSubmitting}
+                    />
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-blue group-focus-within/field:w-full transition-all duration-700" />
+                    <ErrorMessage error={errors.message} field="message" />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center gap-6">
+                    <motion.button 
+                      type="submit" 
+                      disabled={isSubmitting || isSubmitted}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`relative flex-1 py-5 rounded-2xl font-black uppercase tracking-[0.4em] text-[10px] sm:text-xs flex items-center justify-center transition-all duration-700 overflow-hidden
+                        ${isSubmitted ? 'bg-emerald-500' : 'bg-brand-dark dark:bg-brand-blue'}
+                        text-white shadow-xl shadow-brand-blue/20
+                      `}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-transparent opacity-0 group-hover:opacity-20 transition-opacity" />
+                      
+                      <span className="relative z-10 flex items-center gap-3">
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 size={16} className="animate-spin" />
+                            PROCESSING
+                          </>
+                        ) : isSubmitted ? (
+                          <>SUCCESSFUL</>
+                        ) : (
+                          <>
+                            SEND MESSAGE
+                            <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+                          </>
+                        )}
+                      </span>
+                    </motion.button>
+                    
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                          <img src={`https://i.pravatar.cc/100?u=${i+10}`} alt="user" />
                         </div>
-                        Message Sent
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
-                      </>
-                    )}
-                  </span>
-                </motion.button>
-              </form>
+                      ))}
+                      <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center text-[8px] text-white font-bold border-2 border-white dark:border-slate-800">
+                        +4
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Anti-Empty Space Trust Section */}
+                  <div className="pt-8 mt-4 border-t border-slate-100 dark:border-white/5 grid grid-cols-2 gap-4">
+                    <div className="flex items-center gap-3 opacity-40 dark:opacity-20">
+                      <ShieldCheck size={16} className="text-brand-blue" />
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-brand-dark dark:text-white">Encrypted Connection</span>
+                    </div>
+                    <div className="flex items-center gap-3 opacity-40 dark:opacity-20">
+                      <Zap size={16} className="text-brand-blue" />
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-brand-dark dark:text-white">Instant Routing</span>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function ContactItem({ Icon, label, value }: { Icon: any; label: string; value: string }) {
+  return (
+    <motion.div 
+      whileHover={{ x: 10 }}
+      className="flex items-center gap-6 group cursor-pointer"
+    >
+      <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(0,123,255,0.4)] transition-all duration-500 border border-white/5 group-hover:border-transparent">
+        <Icon size={24} className="text-brand-blue group-hover:text-white transition-colors" />
+      </div>
+      <div>
+        <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest mb-1">{label}</p>
+        <p className="text-xl font-medium group-hover:text-brand-blue transition-colors duration-300 tracking-tight">{value}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+function InputField({ id, label, value, error, touched, onChange, onBlur, disabled, type = "text" }: any) {
+  return (
+    <div className="relative group/field">
+      <input
+        type={type}
+        id={id}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        className={`w-full bg-transparent border-b-2 py-4 px-1 focus:outline-none transition-all duration-500 peer
+          ${error && touched ? 'border-red-500/50' : 'border-slate-200 dark:border-white/10 focus:border-brand-blue'}
+        `}
+        placeholder=" "
+        required
+        disabled={disabled}
+      />
+      <label 
+        htmlFor={id} 
+        className={`absolute left-1 top-4 text-slate-400 text-sm transition-all duration-500 pointer-events-none 
+                   peer-focus:-top-6 peer-focus:text-[10px] peer-focus:font-black peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-brand-blue
+                   ${value ? '-top-6 text-[10px] font-black uppercase tracking-widest' : ''}
+                   ${error && touched ? 'text-red-500' : ''}
+        `}
+      >
+        {label}
+      </label>
+      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-blue group-focus-within/field:w-full transition-all duration-700" />
+      <AnimatePresence>
+        {error && touched && (
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="absolute top-4 right-0"
+          >
+            <AlertCircle size={14} className="text-red-500" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

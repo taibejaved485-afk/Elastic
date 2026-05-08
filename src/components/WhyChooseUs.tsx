@@ -21,7 +21,7 @@ const benefits = [
   },
   {
     title: "Precision Engineering",
-    description: "Every micron is scanned using AI-driven optical sensors to ensure uniform thickness and tension across thousands of meters.",
+    description: "Every micron is scanned using advanced optical sensors to ensure uniform thickness and tension across thousands of meters.",
     icon: <Microscope className="w-6 h-6" />,
     color: "from-purple-500 to-indigo-400",
     metric: "0.01μm",
