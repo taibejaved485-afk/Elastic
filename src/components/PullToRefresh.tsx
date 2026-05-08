@@ -7,15 +7,20 @@ export default function PullToRefresh() {
   const y = useMotionValue(0);
   const THRESHOLD = 160;
 
-  // Transform y distance into SVG path control point
-  // We want the curve to stretch down as the user pulls
-  const curveY = useTransform(y, [0, THRESHOLD * 2], [0, THRESHOLD * 1.5]);
-  const path = useMotionTemplate`M 0 0 Q 500 ${curveY} 1000 0 V 0 H 0 Z`;
+  // The "Pinch" Magic:
+  // We want the midpoint of the cloth to stretch faster than the drag distance.
+  // This creates the illusion of tension and elastic "thinning".
+  const pinchY = useTransform(y, [0, 500], [0, 700]);
+  const path = useMotionTemplate`M 0 0 Q 500 ${pinchY} 1000 0 V 0 H 0 Z`;
 
-  // Scale and rotation for the icon
+  // Scale and rotation for the loading indicator
   const iconScale = useTransform(y, [0, THRESHOLD], [0.5, 1.2]);
   const iconRotate = useTransform(y, [0, THRESHOLD], [0, 360]);
-  const iconOpacity = useTransform(y, [0, 40], [0, 1]);
+  const iconOpacity = useTransform(y, [0, 60], [0, 1]);
+
+  // Shadow intensity increases as we pinch
+  const shadowOpacity = useTransform(y, [0, THRESHOLD], [0, 0.3]);
+  const shadowBlur = useTransform(y, [0, THRESHOLD], [0, 30]);
 
   const handleDragEnd = () => {
     const currentY = y.get();
@@ -27,77 +32,89 @@ export default function PullToRefresh() {
   };
 
   const snapBack = () => {
+    // Snap with high frequency vibration for "Cloth Snap" feel
     animate(y, 0, {
       type: "spring",
-      stiffness: 400,
-      damping: 15,
-      mass: 1
+      stiffness: 800,
+      damping: 10,
+      mass: 0.5
     });
   };
 
   const triggerRefresh = () => {
     setIsRefreshing(true);
     
-    // Settle to a "loading" position
-    animate(y, 80, {
+    // Bounce to a "Work state" holding position
+    animate(y, 110, {
       type: "spring",
-      stiffness: 300,
-      damping: 20
+      stiffness: 400,
+      damping: 15
     });
 
-    // Simulate work
+    // Simulate network delay
     setTimeout(() => {
       setIsRefreshing(false);
       snapBack();
     }, 2000);
   };
 
-  // Sync main content y with pull distance
+  // Move the entire page content with the drag
   useEffect(() => {
     const mainContent = document.getElementById("main-content");
-    const unsubscribe = y.on("change", (latest) => {
+    const unsub = y.on("change", (latest) => {
       if (mainContent) {
-        // Content moves slightly less than the drag for a "heavy" feel
-        mainContent.style.transform = `translateY(${latest * 0.4}px)`;
+        // Content resists more than the fabric (paralax effect)
+        mainContent.style.transform = `translateY(${latest * 0.35}px)`;
       }
     });
-    return () => unsubscribe();
+    return () => unsub();
   }, [y]);
 
   return (
     <>
-      {/* Interaction Surface */}
+      {/* Invisible Drag Handle */}
       <motion.div
         drag="y"
-        dragConstraints={{ top: 0, bottom: THRESHOLD * 2 }}
-        dragElastic={0.5}
+        dragConstraints={{ top: 0, bottom: 400 }}
+        dragElastic={0.6}
         style={{ y }}
         onDragEnd={handleDragEnd}
-        className="fixed top-0 left-0 w-full h-8 z-[10001] cursor-grab active:cursor-grabbing pointer-events-auto"
+        className="fixed top-0 left-0 w-full h-16 z-[10001] cursor-grab active:cursor-grabbing pointer-events-auto"
       />
 
-      {/* Visual Canvas */}
+      {/* Visual Component */}
       <div className="fixed top-0 left-0 w-full pointer-events-none z-[10000] overflow-visible">
-        {/* Soft Pastel Background Area */}
+        
+        {/* Shadow layer for depth */}
         <motion.div 
-          style={{ height: y, opacity: iconOpacity }}
-          className="absolute top-0 left-0 w-full bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-white/5"
+          style={{ 
+            opacity: shadowOpacity,
+            filter: useMotionTemplate`blur(${shadowBlur}px)`,
+            y: useTransform(y, (v) => v * 0.1)
+          }}
+          className="absolute left-1/2 -translate-x-1/2 top-0 w-full h-4 bg-black/50 rounded-[100%]"
         />
 
-        {/* The Elastic Fabric Stretch */}
+        {/* The Elastic Cloth Layer */}
         <svg 
           viewBox="0 0 1000 100" 
           preserveAspectRatio="none" 
-          className="w-full h-[150px] absolute top-0"
+          className="w-full h-[600px] absolute top-0"
         >
+          <defs>
+            <linearGradient id="cloth-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.7" />
+            </linearGradient>
+          </defs>
           <motion.path 
             d={path} 
-            fill="currentColor"
-            className="text-slate-50 dark:text-slate-900 drop-shadow-2xl"
+            fill="url(#cloth-fade)"
+            className="text-slate-50 dark:text-slate-900 transition-colors duration-500"
           />
         </svg>
 
-        {/* Premium Icon Reveal */}
+        {/* Centered Refresh UI */}
         <motion.div 
           style={{ 
             y: useTransform(y, (v) => v * 0.5),
@@ -105,16 +122,21 @@ export default function PullToRefresh() {
             rotate: iconRotate,
             opacity: iconOpacity
           }}
-          className="absolute left-1/2 -translate-x-1/2 top-10 flex flex-col items-center gap-3"
+          className="absolute left-1/2 -translate-x-1/2 top-14 flex flex-col items-center gap-3"
         >
-          <div className="p-4 rounded-3xl bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-white/10">
+          <div className="p-5 rounded-[2rem] bg-white dark:bg-slate-800 shadow-2xl border border-slate-100 dark:border-white/10 ring-4 ring-black/5">
             <RefreshCw 
               className={`w-6 h-6 text-brand-blue ${isRefreshing ? 'animate-spin' : ''}`} 
             />
           </div>
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue bg-white/80 dark:bg-slate-800/80 px-3 py-1 rounded-full backdrop-blur-sm">
-            {isRefreshing ? "Syncing" : y.get() >= THRESHOLD ? "Release" : "Elastic"}
-          </span>
+          
+          <motion.div 
+            className="px-4 py-1.5 rounded-full bg-brand-blue shadow-lg border border-white/20"
+          >
+            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-white">
+              {isRefreshing ? "Testing Recovery" : y.get() >= THRESHOLD ? "Let Go" : "Stretch"}
+            </span>
+          </motion.div>
         </motion.div>
       </div>
     </>
