@@ -5,7 +5,9 @@
 
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
+import ScrollProgressBar from "./components/ScrollProgressBar";
 import Hero from "./components/Hero";
+import ShapeMorphDivider from "./components/ShapeMorphDivider";
 import About from "./components/About";
 import Mission from "./components/Mission";
 import Services from "./components/Services";
@@ -39,9 +41,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <ScrollProgressBar />
       <Navbar />
       <main>
         <Hero />
+        <ShapeMorphDivider fill="fill-white dark:fill-slate-950" className="-mt-1 relative z-20" />
         <div id="about" className="reveal">
           <About />
         </div>

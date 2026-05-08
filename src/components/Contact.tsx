@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Phone, Twitter, Linkedin, Github, Instagram, ArrowRight, Loader2, MapPin, AlertCircle } from "lucide-react";
+import LottieAnimation from "./LottieAnimation";
 
 interface FormData {
   name: string;
@@ -153,6 +154,14 @@ export default function Contact() {
                   GET IN <br className="hidden sm:block" />
                   <span className="text-brand-blue italic ml-2 sm:ml-0">TOUCH.</span>
                 </h2>
+                
+                <div className="w-24 h-24 mb-8 glass rounded-2xl flex items-center justify-center overflow-hidden border border-white/10">
+                  <LottieAnimation 
+                    animationUrl="https://assets10.lottiefiles.com/packages/lf20_96bovdur.json"
+                    className="w-full h-full scale-150"
+                  />
+                </div>
+                
                 <p className="text-slate-400 text-base sm:text-lg mb-10 sm:mb-12 max-w-md font-light leading-relaxed">
                   Have a custom project or need technical specifications? Our team of material engineers is ready to help you stretch the possibilities.
                 </p>
@@ -293,15 +302,13 @@ export default function Contact() {
                       </>
                     ) : isSubmitted ? (
                       <>
-                        <motion.div 
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="w-6 h-6 border-2 border-white rounded-full flex items-center justify-center"
-                        >
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M2 6L5 9L10 3" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        </motion.div>
+                        <div className="w-8 h-8 relative">
+                          <LottieAnimation 
+                            animationUrl="https://assets2.lottiefiles.com/packages/lf20_7W9r9X.json"
+                            loop={false}
+                            className="absolute inset-0 scale-[2.5]"
+                          />
+                        </div>
                         Message Sent
                       </>
                     ) : (

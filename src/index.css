@@ -43,6 +43,11 @@
 @variant dark (&:where(.dark, .dark *));
 
 @layer utilities {
+  .stop-white { stop-color: #ffffff; }
+  .stop-slate-50 { stop-color: #f8fafc; }
+  .stop-slate-900 { stop-color: #0f172a; }
+  .stop-slate-950 { stop-color: #020617; }
+
   .text-stroke {
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
     color: transparent;

@@ -2,6 +2,7 @@ import React from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "motion/react";
 import { ArrowRight, Sparkles, Zap, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
+import LottieAnimation from "./LottieAnimation";
 
 export default function Hero() {
   const mouseX = useMotionValue(0);
@@ -154,6 +155,12 @@ export default function Hero() {
                 className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl rounded-[4rem] border border-white/20 shadow-2xl overflow-hidden group/img"
                 style={{ transform: "translateZ(50px)" }}
               >
+                <div className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none">
+                  <LottieAnimation 
+                    animationUrl="https://assets3.lottiefiles.com/packages/lf20_m6cu96.json"
+                    className="w-full h-full"
+                  />
+                </div>
                 <img 
                   src="https://i.pinimg.com/736x/2e/a2/70/2ea270d4f6899783b9ebe70d5ca4c9dd.jpg"
                   alt="ELΛSTIC high-performance industrial textile weave"
