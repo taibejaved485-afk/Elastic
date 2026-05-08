@@ -32,6 +32,37 @@ export default function Hero() {
     mouseY.set(y);
   };
 
+  const [displayText, setDisplayText] = useState("");
+  const [wordIdx, setWordIdx] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const words = ["high-performance", "medical precision", "industrial strength", "tactical gear"];
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const currentWord = words[wordIdx];
+      const shouldDelete = isDeleting;
+      
+      setDisplayText(prev => 
+        shouldDelete 
+          ? currentWord.substring(0, prev.length - 1)
+          : currentWord.substring(0, prev.length + 1)
+      );
+
+      setTypingSpeed(shouldDelete ? 50 : 150);
+
+      if (!shouldDelete && displayText === currentWord) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (shouldDelete && displayText === "") {
+        setIsDeleting(false);
+        setWordIdx((prev) => (prev + 1) % words.length);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, wordIdx, typingSpeed]);
+
   return (
     <section
       id="home"
@@ -97,8 +128,17 @@ export default function Hero() {
                 </motion.span>
               </h1>
               
-              <p className="max-w-xl text-xl md:text-2xl text-slate-400 mb-12 leading-relaxed font-light">
-                The world's most resilient elastic materials. Designed for <span className="text-white font-semibold">high-performance</span> textiles, medical precision, and industrial durability.
+              <p className="max-w-xl text-xl md:text-2xl text-slate-400 mb-12 leading-relaxed font-light min-h-[4rem]">
+                The world's most resilient elastic materials. Designed for <br className="sm:hidden" />
+                <span className="text-white font-bold inline-flex items-center gap-1">
+                  <span className="min-w-[1ch]">{displayText}</span>
+                  <motion.span 
+                    animate={{ opacity: [1, 0, 1] }} 
+                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                    className="w-1 h-6 bg-brand-blue rounded-full"
+                  />
+                </span> 
+                {" "}textiles and industrial engineering.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-8 md:gap-6 mt-4 sm:mt-0">
