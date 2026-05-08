@@ -24,10 +24,35 @@ export default function LottieAnimation({
 
   React.useEffect(() => {
     if (animationUrl && !animationData) {
-      fetch(animationUrl)
-        .then(res => res.json())
-        .then(json => setData(json))
-        .catch(err => console.error("Error loading lottie:", err));
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+      fetch(animationUrl, { signal: controller.signal })
+        .then(res => {
+          if (!res.ok) {
+            if (res.status === 403) throw new Error("403 Forbidden: CORS or Permission issue");
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          const contentType = res.headers.get("content-type");
+          if (!contentType || !contentType.includes("application/json")) {
+            throw new TypeError("Oops, we haven't got JSON!");
+          }
+          return res.json();
+        })
+        .then(json => {
+          setData(json);
+          clearTimeout(timeoutId);
+        })
+        .catch(err => {
+          console.warn(`Lottie failed to load [${animationUrl}]:`, err.message);
+          setData(null);
+          clearTimeout(timeoutId);
+        });
+
+      return () => {
+        controller.abort();
+        clearTimeout(timeoutId);
+      };
     }
   }, [animationUrl, animationData]);
 

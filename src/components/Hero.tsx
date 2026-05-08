@@ -171,9 +171,9 @@ export default function Hero() {
                 className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl rounded-[4rem] border border-white/20 shadow-2xl overflow-hidden group/img"
                 style={{ transform: "translateZ(50px)" }}
               >
-                <div className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none">
+                <div className="absolute inset-0 opacity-20 dark:opacity-30 mix-blend-screen pointer-events-none">
                   <LottieAnimation 
-                    animationUrl="https://assets3.lottiefiles.com/packages/lf20_m6cu96.json"
+                    animationUrl="https://lottie.host/81f8f74a-2544-482a-a92c-623b092fd6b2/v8G97uMOnJ.json"
                     className="w-full h-full"
                   />
                 </div>

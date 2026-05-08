@@ -6,10 +6,12 @@
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import ScrollProgressBar from "./components/ScrollProgressBar";
+import PullToRefresh from "./components/PullToRefresh";
 import Hero from "./components/Hero";
 import ShapeMorphDivider from "./components/ShapeMorphDivider";
 import About from "./components/About";
 import Mission from "./components/Mission";
+import WhyChooseUs from "./components/WhyChooseUs";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -41,6 +43,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <PullToRefresh />
       <ScrollProgressBar />
       <Navbar />
       <main>
@@ -51,6 +54,9 @@ export default function App() {
         </div>
         <div id="mission" className="reveal">
           <Mission />
+        </div>
+        <div id="why-us" className="reveal">
+          <WhyChooseUs />
         </div>
         <div id="services" className="reveal">
           <Services />
