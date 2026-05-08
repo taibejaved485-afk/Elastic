@@ -124,18 +124,54 @@ export default function WhyChooseUs() {
           </div>
         </div>
         
-        {/* Trusted By Banner Integration */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="mt-32 pt-12 border-t border-slate-200 dark:border-white/5 flex flex-wrap justify-center items-center gap-12 sm:gap-20 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
-        >
-          {['NIKE', 'ADIDAS', 'NASA', 'SPACEX', 'TESLA'].map((brand) => (
-            <span key={brand} className="text-2xl font-black tracking-tighter text-slate-400 dark:text-slate-600 cursor-default">{brand}</span>
-          ))}
-        </motion.div>
+        {/* Enhanced Trusted By Banner */}
+        <div className="mt-32 pt-16 border-t border-slate-200 dark:border-white/5 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 bg-slate-50 dark:bg-[#020617] transition-colors duration-500">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/20">Strategic Partners</span>
+          </div>
+
+          <div className="relative overflow-hidden group">
+            {/* Gradient Mask for fading out edges */}
+            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-slate-50 via-transparent to-slate-50 dark:from-[#020617] dark:to-[#020617]" />
+            
+            <div className="flex w-fit animate-marquee hover:[animation-play-state:paused]">
+              <div className="flex items-center gap-12 sm:gap-24 px-12">
+                <BrandLogo brand="NIKE" type="Sport Performance" />
+                <BrandLogo brand="ADIDAS" type="Material Lab" />
+                <BrandLogo brand="NASA" type="Aerospace Grade" />
+                <BrandLogo brand="SPACEX" type="Tactical Systems" />
+                <BrandLogo brand="TESLA" type="Energy Fibers" />
+              </div>
+              <div className="flex items-center gap-12 sm:gap-24 px-12">
+                <BrandLogo brand="NIKE" type="Sport Performance" />
+                <BrandLogo brand="ADIDAS" type="Material Lab" />
+                <BrandLogo brand="NASA" type="Aerospace Grade" />
+                <BrandLogo brand="SPACEX" type="Tactical Systems" />
+                <BrandLogo brand="TESLA" type="Energy Fibers" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function BrandLogo({ brand, type }: { brand: string, type: string }) {
+  return (
+    <div className="group/brand relative py-4">
+      <div className="flex flex-col items-center">
+        <span className="text-3xl sm:text-4xl font-black tracking-tighter text-slate-300 dark:text-slate-800 group-hover/brand:text-brand-blue transition-all duration-500 cursor-default">
+          {brand}
+        </span>
+        <span className="text-[8px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600 opacity-0 group-hover/brand:opacity-100 transition-all duration-500 translate-y-2 group-hover/brand:translate-y-0">
+          {type}
+        </span>
+      </div>
+      
+      {/* Decorative scanline effect on hover */}
+      <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-brand-blue group-hover/brand:w-full transition-all duration-700" />
+    </div>
   );
 }
 
