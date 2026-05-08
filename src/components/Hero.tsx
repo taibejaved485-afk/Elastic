@@ -35,7 +35,7 @@ export default function Hero() {
     <section
       id="home"
       onMouseMove={handleMouseMove}
-      className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-20"
+      className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-24 pb-32 lg:pb-0"
     >
       {/* Mesh Gradient Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -100,7 +100,7 @@ export default function Hero() {
                 The world's most resilient elastic materials. Designed for <span className="text-white font-semibold">high-performance</span> textiles, medical precision, and industrial durability.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-8 md:gap-6 mt-4 sm:mt-0">
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
@@ -124,7 +124,7 @@ export default function Hero() {
                     Explore Products <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform" />
                   </span>
                 </motion.button>
-                <div className="flex items-center gap-4 text-white/40 text-xs font-bold uppercase tracking-widest pl-2">
+                <div className="flex items-center gap-4 text-white/40 text-[10px] sm:text-xs font-bold uppercase tracking-widest pl-2">
                   <div className="flex -space-x-2">
                     {[1, 2, 3].map((i) => (
                       <div key={i} className="w-8 h-8 rounded-full border-2 border-[#020617] bg-slate-800" />
@@ -172,17 +172,17 @@ export default function Hero() {
       </div>
 
       {/* Ticker for "High End" feel */}
-      <div className="absolute bottom-0 left-0 w-full bg-white/5 backdrop-blur-md border-t border-white/10 py-6 overflow-hidden">
+      <div className="absolute bottom-0 left-0 w-full bg-white/5 backdrop-blur-md border-t border-white/10 py-4 sm:py-6 overflow-hidden">
         <div className="flex animate-marquee space-x-12 whitespace-nowrap px-12">
           {[1,2,3,4,5].map((i) => (
             <div key={i} className="flex items-center gap-12">
-              <span className="text-white/20 font-black text-2xl uppercase tracking-tighter">PREMIUM WEBBING</span>
+              <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">PREMIUM WEBBING</span>
               <span className="text-brand-blue">/</span>
-              <span className="text-white/20 font-black text-2xl uppercase tracking-tighter">50M+ METERS SHIPPED</span>
+              <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">50M+ METERS SHIPPED</span>
               <span className="text-brand-blue">/</span>
-              <span className="text-white/20 font-black text-2xl uppercase tracking-tighter">TEXTILE GRADE</span>
+              <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">TEXTILE GRADE</span>
               <span className="text-brand-blue">/</span>
-              <span className="text-white/20 font-black text-2xl uppercase tracking-tighter">INDUSTRIAL STRENGTH</span>
+              <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">INDUSTRIAL STRENGTH</span>
               <span className="text-brand-blue">/</span>
             </div>
           ))}

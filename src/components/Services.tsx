@@ -46,7 +46,8 @@ export default function Services() {
           <p className="text-brand-slate dark:text-slate-400 max-w-2xl mx-auto">Engineered for superior stretch, recovery, and long-term durability in every application.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Desktop Grid View */}
+        <div className="hidden lg:grid grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -76,9 +77,47 @@ export default function Services() {
                   {service.description}
                 </p>
               </div>
-
             </motion.div>
           ))}
+        </div>
+
+        {/* Mobile Auto-Rotating Slider */}
+        <div className="lg:hidden relative overflow-hidden -mx-4 sm:-mx-12">
+          <motion.div
+            animate={{
+              x: [0, "-50%"],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 25,
+                ease: "linear",
+              },
+            }}
+            className="flex gap-6 px-4 w-max"
+          >
+            {[...services, ...services].map((service, index) => (
+              <div
+                key={`${service.title}-${index}`}
+                className="w-[280px] sm:w-[320px] glass p-8 rounded-3xl flex flex-col items-start gap-6 bg-white/50 dark:bg-slate-800/50 border border-white/20 dark:border-slate-700/50"
+              >
+                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 text-brand-blue rounded-2xl group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                  {service.icon}
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-brand-dark dark:text-white mb-2">{service.title}</h3>
+                  <p className="text-brand-slate dark:text-slate-400 text-xs leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+          
+          {/* Gradient Shadows for smooth transition */}
+          <div className="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent z-10 pointer-events-none" />
         </div>
       </div>
     </section>
