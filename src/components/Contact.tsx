@@ -334,12 +334,21 @@ export default function Contact() {
                     </motion.button>
                     
                     <div className="flex -space-x-2">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 overflow-hidden">
-                          <img src={`https://i.pravatar.cc/100?u=${i+10}`} alt="user" />
+                      {[
+                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&h=100&auto=format&fit=crop",
+                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&auto=format&fit=crop",
+                        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&h=100&auto=format&fit=crop"
+                      ].map((url, i) => (
+                        <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 overflow-hidden relative group/avatar">
+                          <img 
+                            src={url} 
+                            alt="User Profile" 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover/avatar:scale-125"
+                            referrerPolicy="no-referrer"
+                          />
                         </div>
                       ))}
-                      <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center text-[8px] text-white font-bold border-2 border-white dark:border-slate-800">
+                      <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center text-[8px] text-white font-bold border-2 border-white dark:border-slate-800 relative z-10">
                         +4
                       </div>
                     </div>
