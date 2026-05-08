@@ -132,7 +132,7 @@ export default function Hero() {
               >
                 <img 
                   src="https://i.pinimg.com/736x/2e/a2/70/2ea270d4f6899783b9ebe70d5ca4c9dd.jpg"
-                  alt="Elastic Visual"
+                  alt="ELΛSTIC high-performance industrial textile weave"
                   className="w-full h-full object-cover opacity-60 group-hover/img:scale-110 group-hover/img:opacity-80 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
