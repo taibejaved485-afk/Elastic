@@ -159,18 +159,27 @@ export default function WhyChooseUs() {
 
 function BrandLogo({ brand, type }: { brand: string, type: string }) {
   return (
-    <div className="group/brand relative py-4">
-      <div className="flex flex-col items-center">
-        <span className="text-3xl sm:text-4xl font-black tracking-tighter text-slate-300 dark:text-slate-800 group-hover/brand:text-brand-blue transition-all duration-500 cursor-default">
+    <div className="group/brand relative py-6 px-4 cursor-pointer transition-all duration-500 hover:scale-105">
+      <div className="flex flex-col items-center relative z-10">
+        <span className="text-3xl sm:text-5xl font-black tracking-tighter text-slate-300 dark:text-slate-800 group-hover/brand:text-brand-blue group-hover/brand:drop-shadow-[0_0_15px_rgba(0,123,255,0.5)] transition-all duration-500 uppercase">
           {brand}
         </span>
-        <span className="text-[8px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600 opacity-0 group-hover/brand:opacity-100 transition-all duration-500 translate-y-2 group-hover/brand:translate-y-0">
+        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600 opacity-0 group-hover/brand:opacity-100 transition-all duration-500 translate-y-2 group-hover/brand:translate-y-0 mt-1">
           {type}
         </span>
       </div>
       
-      {/* Decorative scanline effect on hover */}
-      <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-brand-blue group-hover/brand:w-full transition-all duration-700" />
+      {/* Decorative scanline pulse effect */}
+      <div className="absolute inset-0 overflow-hidden rounded-xl opacity-0 group-hover/brand:opacity-100 transition-opacity duration-300">
+        <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-brand-blue/10 to-transparent group-hover/brand:animate-[scan_2s_ease-in-out_infinite]" />
+      </div>
+
+      {/* Underline scanline */}
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-brand-blue group-hover/brand:w-full transition-all duration-700 shadow-[0_0_10px_#007bff]" />
+      
+      {/* Corner accents */}
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-blue opacity-0 group-hover/brand:opacity-100 transition-opacity duration-300" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-brand-blue opacity-0 group-hover/brand:opacity-100 transition-opacity duration-300" />
     </div>
   );
 }

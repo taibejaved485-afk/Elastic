@@ -14,6 +14,12 @@
   --color-surface: #f8fafc;
   --color-border: #e2e8f0;
 
+  @keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  --animate-scan: scan 2s ease-in-out infinite;
+
   @keyframes bounce-subtle {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
