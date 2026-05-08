@@ -10,8 +10,18 @@ export default function Hero() {
   const rotateX = useTransform(mouseY, [-300, 300], [10, -10]);
   const rotateY = useTransform(mouseX, [-300, 300], [-10, 10]);
 
+  const bgX = useTransform(mouseX, [-500, 500], [30, -30]);
+  const bgY = useTransform(mouseY, [-500, 500], [30, -30]);
+  
+  const floatX = useTransform(mouseX, [-500, 500], [-50, 50]);
+  const floatY = useTransform(mouseY, [-500, 500], [-50, 50]);
+
   const springRotateX = useSpring(rotateX, { stiffness: 100, damping: 30 });
   const springRotateY = useSpring(rotateY, { stiffness: 100, damping: 30 });
+  const springBgX = useSpring(bgX, { stiffness: 50, damping: 20 });
+  const springBgY = useSpring(bgY, { stiffness: 50, damping: 20 });
+  const springFloatX = useSpring(floatX, { stiffness: 50, damping: 20 });
+  const springFloatY = useSpring(floatY, { stiffness: 50, damping: 20 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -28,13 +38,26 @@ export default function Hero() {
       className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-20"
     >
       {/* Mesh Gradient Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-[0.07] mix-blend-overlay grayscale"
-          style={{ backgroundImage: `url('https://i.pinimg.com/736x/2e/a2/70/2ea270d4f6899783b9ebe70d5ca4c9dd.jpg')` }}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          className="absolute inset-0 bg-cover bg-center opacity-[0.07] mix-blend-overlay grayscale scale-110"
+          style={{ backgroundImage: `url('https://i.pinimg.com/736x/2e/a2/70/2ea270d4f6899783b9ebe70d5ca4c9dd.jpg')`, x: springBgX, y: springBgY }}
         />
-        <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue/20 via-transparent to-transparent blur-3xl animate-pulse" />
+        <motion.div 
+          style={{ x: springFloatX, y: springFloatY }}
+          className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue/20 via-transparent to-transparent blur-3xl animate-pulse" 
+        />
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
+        
+        {/* Floating Decorative Elements */}
+        <motion.div 
+          style={{ x: springFloatX, y: springFloatY, rotate: 15 }}
+          className="absolute top-1/4 left-1/4 w-64 h-64 border border-white/5 rounded-full blur-[2px]"
+        />
+        <motion.div 
+          style={{ x: springBgX, y: springBgY, rotate: -15 }}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 border border-brand-blue/10 rounded-full blur-[1px]"
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10">

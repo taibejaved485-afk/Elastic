@@ -12,6 +12,7 @@ import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
+import CustomCursor from "./components/CustomCursor";
 
 export default function App() {
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
