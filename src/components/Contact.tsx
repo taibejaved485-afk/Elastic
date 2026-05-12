@@ -209,7 +209,7 @@ export default function Contact() {
                     <ContactItem 
                       Icon={Mail} 
                       label="Inquiries" 
-                      value="hello@elastic.tech" 
+                      value="hello@elastic-premium.com" 
                     />
                     <ContactItem 
                       Icon={MapPin} 
@@ -217,6 +217,17 @@ export default function Contact() {
                       value="Innovation Hub, Silicon Valley" 
                     />
                   </div>
+
+                  <motion.a 
+                    href="mailto:hello@elastic-premium.com?subject=Inquiry from ELΛSTIC Website"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-10 sm:mt-12 inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] border border-white/5 transition-all group/direct w-full sm:w-fit justify-center"
+                  >
+                    <Mail size={16} className="text-brand-blue" />
+                    <span>Direct Outreach</span>
+                    <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover/direct:opacity-100 group-hover/direct:translate-x-0 transition-all" />
+                  </motion.a>
                 </div>
 
                 <div className="mt-12 sm:mt-20 pt-8 sm:pt-10 border-t border-white/5 flex items-center justify-between relative z-10">
