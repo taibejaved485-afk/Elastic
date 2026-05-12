@@ -58,7 +58,7 @@ export default function Navbar() {
           <div className="w-9 h-9 bg-brand-blue rounded-xl flex items-center justify-center transform -skew-x-12 shadow-lg shadow-brand-blue/20">
             <div className="w-3.5 h-3.5 bg-white rounded-full animate-pulse" />
           </div>
-          <span className="font-display uppercase tracking-widest text-xl">ELΛSTIC</span>
+          <span className="font-display uppercase tracking-widest text-lg sm:text-xl">ELΛSTIC</span>
         </a>
 
         {/* Desktop Links */}

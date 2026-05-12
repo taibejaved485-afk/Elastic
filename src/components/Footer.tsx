@@ -122,16 +122,16 @@ export default function Footer() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-slate-900 border border-white/10 p-10 rounded-3xl max-w-2xl w-full relative shadow-2xl"
+              className="bg-slate-900 border border-white/10 p-6 sm:p-10 rounded-3xl max-w-2xl w-full relative shadow-2xl max-h-[85vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
                 onClick={() => setActiveModal(null)}
-                className="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 text-slate-400 hover:text-white transition-colors p-2"
               >
                 <X size={24} />
               </button>
-              <h3 className="text-2xl font-black italic tracking-tighter uppercase mb-6 text-brand-blue">
+              <h3 className="text-xl sm:text-2xl font-black italic tracking-tighter uppercase mb-6 text-brand-blue pr-8">
                 {modalContent[activeModal].title}
               </h3>
               <div className="text-slate-400 leading-relaxed space-y-4 font-light whitespace-pre-line">

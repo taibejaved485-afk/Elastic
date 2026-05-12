@@ -36,7 +36,15 @@
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
   --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-slow: marquee 45s linear infinite;
+  --animate-marquee-fast: marquee 20s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 30s linear infinite;
+  --animate-marquee-reverse-fast: marquee-reverse 20s linear infinite;
 
   @keyframes focus-wave {
     0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
@@ -65,12 +73,13 @@
 
 @layer base {
   html {
+    @apply overflow-x-hidden;
     scroll-behavior: smooth;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   body {
-    @apply font-sans antialiased bg-white text-slate-900;
+    @apply font-sans antialiased bg-white text-slate-900 overflow-x-hidden;
   }
 
   .dark body {

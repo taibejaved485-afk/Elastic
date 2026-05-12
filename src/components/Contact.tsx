@@ -123,7 +123,7 @@ export default function Contact() {
   );
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-12 lg:px-24 bg-white dark:bg-[#020617] relative overflow-hidden transition-colors duration-500">
+    <section id="contact" className="py-12 sm:py-20 px-4 sm:px-12 lg:px-24 bg-white dark:bg-[#020617] relative overflow-hidden transition-colors duration-500">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[120px]" />
@@ -139,7 +139,7 @@ export default function Contact() {
       </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 sm:mb-20">
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +151,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl sm:text-7xl font-black text-brand-dark dark:text-white tracking-tighter"
+            className="text-4xl sm:text-6xl md:text-7xl font-black text-brand-dark dark:text-white tracking-tighter"
           >
             LET'S <span className="text-stroke-dark dark:text-stroke opacity-30 italic">STRETCH</span> IDEAS.
           </motion.h2>
@@ -164,26 +164,25 @@ export default function Contact() {
           className="relative group h-full"
         >
           {/* Glowing border effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue to-cyan-500 rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue to-cyan-500 rounded-[2.5rem] sm:rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
           
-          <div className="relative glass rounded-[3rem] overflow-hidden shadow-2xl dark:shadow-none border border-white/20 dark:border-white/5">
-            <div className="grid lg:grid-cols-12 min-h-[700px]">
+          <div className="glass rounded-[2.5rem] sm:rounded-[3rem] overflow-hidden shadow-2xl dark:shadow-none border border-white/20 dark:border-white/5">
+            <div className="grid lg:grid-cols-12">
               {/* Left Column: Get in Touch */}
-              <div className="lg:col-span-5 bg-brand-dark dark:bg-[#050b1a] p-8 sm:p-14 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden">
+              <div className="lg:col-span-5 bg-brand-dark dark:bg-[#050b1a] p-8 sm:p-14 lg:p-20 text-white flex flex-col relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                  <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-blue/30 to-transparent" />
-                  <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl" />
+                  <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-blue/20 to-transparent" />
                 </div>
                 
-                <div className="relative z-10">
-                  <div className="w-16 h-1 w-brand-blue bg-brand-blue mb-10 rounded-full" />
+                <div className="relative z-10 flex-1">
+                  <div className="w-12 h-1 bg-brand-blue mb-8 rounded-full" />
                   
-                  <h3 className="text-4xl sm:text-5xl font-black mb-8 leading-tight tracking-tighter">
+                  <h3 className="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 leading-tight tracking-tighter uppercase">
                     READY FOR THE <br />
                     <span className="text-brand-blue">BIG LEAP?</span>
                   </h3>
                   
-                  <div className="relative w-20 h-20 mb-10 group/icon">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-8 sm:mb-10 group/icon">
                     <motion.div 
                       animate={{ 
                         scale: [1, 1.2, 1],
@@ -197,16 +196,16 @@ export default function Contact() {
                       className="absolute inset-0 bg-brand-blue/20 blur-2xl rounded-full"
                     />
                     <div className="relative w-full h-full rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden backdrop-blur-sm group-hover/icon:border-brand-blue/50 transition-colors duration-500">
-                      <Zap className="w-8 h-8 text-brand-blue group-hover/icon:scale-125 transition-transform duration-500" />
+                      <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-brand-blue group-hover/icon:scale-125 transition-transform duration-500" />
                       <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/10 to-transparent" />
                     </div>
                   </div>
                   
-                  <p className="text-slate-400 text-lg mb-12 max-w-sm font-light leading-relaxed">
+                  <p className="text-slate-400 text-base sm:text-lg mb-8 sm:mb-12 max-w-sm font-light leading-relaxed">
                     Our team of material scientists and engineers is standing by to help you integrate ELΛSTIC fibers into your next generation of products.
                   </p>
                   
-                  <div className="space-y-8">
+                  <div className="space-y-6 sm:space-y-8">
                     <ContactItem 
                       Icon={Mail} 
                       label="Inquiries" 
@@ -220,7 +219,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="mt-20 pt-10 border-t border-white/5 flex items-center justify-between relative z-10">
+                <div className="mt-12 sm:mt-20 pt-8 sm:pt-10 border-t border-white/5 flex items-center justify-between relative z-10">
                   <div className="flex gap-4">
                     {[Twitter, Linkedin, Github].map((Icon, i) => (
                       <motion.a 
@@ -238,7 +237,7 @@ export default function Contact() {
               </div>
 
               {/* Right Column: Form */}
-              <div className="lg:col-span-7 p-8 sm:p-12 lg:p-16 bg-white/80 dark:bg-slate-900/40 backdrop-blur-3xl relative">
+              <div className="lg:col-span-7 p-6 sm:p-12 lg:p-16 bg-white/80 dark:bg-slate-900/40 backdrop-blur-3xl relative flex flex-col justify-center">
                 {/* Subtle Technical Pattern */}
                 <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] pointer-events-none" 
                      style={{ 
@@ -247,8 +246,8 @@ export default function Contact() {
                      }} 
                 />
 
-                <form className="space-y-8 sm:space-y-10 relative z-10" onSubmit={handleSubmit} noValidate>
-                  <div className="grid md:grid-cols-2 gap-8 sm:gap-10">
+                <form className="space-y-6 sm:space-y-10 relative z-10" onSubmit={handleSubmit} noValidate>
+                  <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
                     <InputField 
                       id="name"
                       label="Your Name"
@@ -309,7 +308,7 @@ export default function Contact() {
                       disabled={isSubmitting || isSubmitted}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className={`relative flex-1 py-5 rounded-2xl font-black uppercase tracking-[0.4em] text-[10px] sm:text-xs flex items-center justify-center transition-all duration-700 overflow-hidden
+                      className={`relative w-full sm:flex-1 py-5 rounded-2xl font-black uppercase tracking-[0.4em] text-[10px] sm:text-xs flex items-center justify-center transition-all duration-700 overflow-hidden
                         ${isSubmitted ? 'bg-emerald-500' : 'bg-brand-dark dark:bg-brand-blue'}
                         text-white shadow-xl shadow-brand-blue/20
                       `}
@@ -379,14 +378,15 @@ function ContactItem({ Icon, label, value }: { Icon: any; label: string; value: 
   return (
     <motion.div 
       whileHover={{ x: 10 }}
-      className="flex items-center gap-6 group cursor-pointer"
+      className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
     >
-      <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(0,123,255,0.4)] transition-all duration-500 border border-white/5 group-hover:border-transparent">
-        <Icon size={24} className="text-brand-blue group-hover:text-white transition-colors" />
+      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(0,123,255,0.4)] transition-all duration-500 border border-white/5 group-hover:border-transparent shrink-0">
+        <Icon size={20} className="text-brand-blue group-hover:text-white transition-colors sm:hidden" />
+        <Icon size={24} className="text-brand-blue group-hover:text-white transition-colors hidden sm:block" />
       </div>
       <div>
-        <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest mb-1">{label}</p>
-        <p className="text-xl font-medium group-hover:text-brand-blue transition-colors duration-300 tracking-tight">{value}</p>
+        <p className="text-white/30 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1">{label}</p>
+        <p className="text-lg sm:text-xl font-medium group-hover:text-brand-blue transition-colors duration-300 tracking-tight">{value}</p>
       </div>
     </motion.div>
   );

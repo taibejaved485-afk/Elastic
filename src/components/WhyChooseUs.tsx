@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-7xl font-black text-brand-dark dark:text-white leading-[0.9] tracking-tighter mb-8"
+            className="text-4xl sm:text-6xl md:text-7xl font-black text-brand-dark dark:text-white leading-[0.9] tracking-tighter mb-8"
           >
             THE SCIENCE OF <br />
             <span className="text-stroke-dark dark:text-stroke opacity-30">ELΛSTICITY.</span>
@@ -79,8 +79,8 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Center Column - Visual Hub */}
-          <div className="lg:col-span-4 flex justify-center py-12 lg:py-0">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80">
+          <div className="lg:col-span-4 flex justify-center py-4 lg:py-0">
+            <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80">
               <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -134,7 +134,7 @@ export default function WhyChooseUs() {
             {/* Gradient Mask for fading out edges */}
             <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-slate-50 via-transparent to-slate-50 dark:from-[#020617] dark:to-[#020617]" />
             
-            <div className="flex w-fit animate-marquee hover:[animation-play-state:paused]">
+            <div className="flex w-fit animate-marquee-fast sm:animate-marquee hover:[animation-play-state:paused]">
               <div className="flex items-center gap-12 sm:gap-24 px-12">
                 <BrandLogo brand="NIKE" type="Sport Performance" />
                 <BrandLogo brand="ADIDAS" type="Material Lab" />
@@ -159,12 +159,12 @@ export default function WhyChooseUs() {
 
 function BrandLogo({ brand, type }: { brand: string, type: string }) {
   return (
-    <div className="group/brand relative py-6 px-4 cursor-pointer transition-all duration-500 hover:scale-105">
+    <div className="group/brand relative py-4 px-2 sm:py-6 sm:px-4 cursor-pointer transition-all duration-500 hover:scale-105">
       <div className="flex flex-col items-center relative z-10">
-        <span className="text-3xl sm:text-5xl font-black tracking-tighter text-slate-300 dark:text-slate-800 group-hover/brand:text-brand-blue group-hover/brand:drop-shadow-[0_0_15px_rgba(0,123,255,0.5)] transition-all duration-500 uppercase">
+        <span className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tighter text-slate-300 dark:text-slate-800 group-hover/brand:text-brand-blue group-hover/brand:drop-shadow-[0_0_15px_rgba(0,123,255,0.5)] transition-all duration-500 uppercase">
           {brand}
         </span>
-        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600 opacity-0 group-hover/brand:opacity-100 transition-all duration-500 translate-y-2 group-hover/brand:translate-y-0 mt-1">
+        <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600 opacity-0 group-hover/brand:opacity-100 transition-all duration-500 translate-y-2 group-hover/brand:translate-y-0 mt-1 whitespace-nowrap">
           {type}
         </span>
       </div>

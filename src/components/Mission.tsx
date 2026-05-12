@@ -40,35 +40,38 @@ export default function Mission() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {missions.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="bg-slate-900/50 p-8 rounded-[2rem] border border-slate-800 hover:border-brand-blue/30 transition-all duration-500 group cursor-default"
-            >
-              <motion.div 
-                whileHover={{ 
-                  rotate: 12, 
-                  scale: 1.15,
-                  boxShadow: "0 0 30px rgba(37, 99, 235, 0.5)",
-                }}
-                className="mb-6 p-4 bg-brand-blue/10 w-fit rounded-2xl group-hover:bg-brand-blue transition-all duration-300 shadow-transparent"
-              >
-                <div className="group-hover:text-white transition-colors text-brand-blue">
-                  {item.icon}
+        <div className="relative -mx-6 md:-mx-12 lg:-mx-24 overflow-hidden">
+          {/* Gradient Mask for fading out edges */}
+          <div className="absolute inset-y-0 left-0 w-24 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-brand-dark to-transparent" />
+          <div className="absolute inset-y-0 right-0 w-24 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-brand-dark to-transparent" />
+
+          <div className="flex w-fit animate-marquee-reverse-fast sm:animate-marquee-reverse hover:[animation-play-state:paused]">
+            <div className="flex gap-6 px-12">
+              {[...missions, ...missions].map((item, index) => (
+                <div
+                  key={`${item.title}-${index}`}
+                  className="bg-slate-900/50 p-6 sm:p-8 rounded-[2rem] border border-slate-800 hover:border-brand-blue/30 transition-all duration-500 group cursor-default w-[300px] sm:w-[350px] shrink-0"
+                >
+                  <motion.div 
+                    whileHover={{ 
+                      rotate: 12, 
+                      scale: 1.15,
+                      boxShadow: "0 0 30px rgba(37, 99, 235, 0.5)",
+                    }}
+                    className="mb-6 p-4 bg-brand-blue/10 w-fit rounded-2xl group-hover:bg-brand-blue transition-all duration-300 shadow-transparent"
+                  >
+                    <div className="group-hover:text-white transition-colors text-brand-blue">
+                      {item.icon}
+                    </div>
+                  </motion.div>
+                  <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-              </motion.div>
-              <h3 className="text-xl font-bold mb-4">{item.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                {item.description}
-              </p>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
