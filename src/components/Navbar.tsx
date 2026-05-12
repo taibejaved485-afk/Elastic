@@ -88,16 +88,6 @@ export default function Navbar() {
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-
-          <button 
-            className={`px-7 py-3 rounded-xl text-[11px] font-bold tracking-widest uppercase transition-all shadow-lg ${
-              scrolled 
-                ? "bg-brand-dark text-white hover:bg-brand-blue shadow-brand-blue/10 dark:bg-brand-blue dark:hover:bg-blue-700" 
-                : "bg-white text-brand-dark hover:bg-brand-blue hover:text-white shadow-white/10"
-            }`}
-          >
-            Client Portal
-          </button>
         </div>
 
         {/* Mobile Menu Toggle & Theme Toggle */}
