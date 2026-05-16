@@ -12,6 +12,7 @@ import About from "./components/About";
 import Mission from "./components/Mission";
 import WhyChooseUs from "./components/WhyChooseUs";
 import Services from "./components/Services";
+import ProductSpecs from "./components/ProductSpecs";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
@@ -58,6 +59,9 @@ export default function App() {
         </div>
         <div id="services" className="reveal">
           <Services />
+        </div>
+        <div id="specs" className="reveal">
+          <ProductSpecs />
         </div>
         <div id="contact" className="reveal">
           <Contact />

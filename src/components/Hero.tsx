@@ -1,8 +1,54 @@
-import React from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "motion/react";
+import React, { useMemo } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, MotionValue } from "motion/react";
 import { ArrowRight, Sparkles, Zap, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
 import LottieAnimation from "./LottieAnimation";
+
+function Particle({ p, mouseX, mouseY }: any) {
+  const moveX = useTransform(mouseX, [-500, 500], [-p.drift, p.drift]);
+  const moveY = useTransform(mouseY, [-500, 500], [-p.drift, p.drift]);
+  const springX = useSpring(moveX, { stiffness: 40, damping: 25 });
+  const springY = useSpring(moveY, { stiffness: 40, damping: 25 });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: p.opacity, scale: 1 }}
+      transition={{ duration: 2, delay: p.delay }}
+      style={{
+        left: `${p.x}%`,
+        top: `${p.y}%`,
+        width: p.size,
+        height: p.size,
+        x: springX,
+        y: springY,
+      }}
+      className="absolute rounded-full bg-brand-blue/40 blur-[1px]"
+    />
+  );
+}
+
+function ParticleBackground({ mouseX, mouseY }: { mouseX: MotionValue<number>, mouseY: MotionValue<number> }) {
+  const particles = useMemo(() => {
+    return Array.from({ length: 30 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 1,
+      opacity: Math.random() * 0.4 + 0.1,
+      drift: Math.random() * 40 + 20,
+      delay: Math.random() * 2,
+    }));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      {particles.map((p) => (
+        <Particle key={p.id} p={p} mouseX={mouseX} mouseY={mouseY} />
+      ))}
+    </div>
+  );
+}
 
 export default function Hero() {
   const mouseX = useMotionValue(0);
@@ -71,6 +117,7 @@ export default function Hero() {
     >
       {/* Mesh Gradient Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <ParticleBackground mouseX={mouseX} mouseY={mouseY} />
         <motion.div 
           className="absolute inset-0 bg-cover bg-center opacity-[0.07] mix-blend-overlay grayscale scale-110"
           style={{ backgroundImage: `url('https://i.pinimg.com/1200x/71/86/d1/7186d1f0cb6f698ccc68de66f96455f6.jpg')`, x: springBgX, y: springBgY }}
