@@ -39,6 +39,7 @@ export default function ProductSpecs() {
   const [activeTab, setActiveTab] = useState("dimensions");
   const [selectedWidth, setSelectedWidth] = useState(SIZES[3]);
   const [selectedColor, setSelectedColor] = useState(COLORS[0]);
+  const [hoveredColor, setHoveredColor] = useState<string | null>(null);
 
   return (
     <section id="specifications" className="py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 overflow-hidden">
@@ -146,8 +147,28 @@ export default function ProductSpecs() {
                             <button 
                               key={color.name} 
                               onClick={() => setSelectedColor(color)}
+                              onMouseEnter={() => setHoveredColor(color.name)}
+                              onMouseLeave={() => setHoveredColor(null)}
                               className="group relative flex flex-col items-center"
                             >
+                              {/* Tooltip */}
+                              <AnimatePresence>
+                                {hoveredColor === color.name && (
+                                  <motion.div
+                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    className="absolute -top-14 left-1/2 -translate-x-1/2 px-4 py-2 bg-slate-900 dark:bg-brand-blue text-white rounded-xl shadow-2xl pointer-events-none z-50 whitespace-nowrap"
+                                  >
+                                    <div className="flex flex-col items-center">
+                                      <span className="text-[10px] font-black uppercase tracking-widest">{color.name}</span>
+                                      <span className="text-[12px] font-medium font-urdu leading-none mt-1">{color.urdu}</span>
+                                    </div>
+                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 dark:bg-brand-blue rotate-45" />
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+
                               <div className={`
                                 w-20 h-20 rounded-3xl border-4 transition-all duration-500 flex items-center justify-center relative overflow-hidden
                                 ${color.class} 
