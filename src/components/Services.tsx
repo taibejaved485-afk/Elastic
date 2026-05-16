@@ -57,14 +57,19 @@ export default function Services() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="relative p-[1px] overflow-hidden rounded-3xl group"
             >
-              {/* Rotating Border Glow */}
+              {/* Rotating Border Glow - Enhanced Laser Sweep */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-[-150%] bg-[conic-gradient(from_0deg,transparent_40%,#2563eb_45%,#60a5fa_50%,#2563eb_55%,transparent_60%)] opacity-30 transition-opacity duration-500 blur-xl"
+                transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_35%,#3b82f6_45%,#ffffff_50%,#3b82f6_55%,transparent_65%)] opacity-60 blur-[30px]"
+              />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_45%,#2563eb_50%,transparent_55%)] opacity-100"
               />
 
-              <div className="relative h-full bg-white dark:bg-slate-900 p-8 rounded-[calc(1.5rem-1px)] flex flex-col items-start gap-6 border border-slate-100 dark:border-slate-800 shadow-sm group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-1">
+              <div className="relative h-full bg-white dark:bg-slate-900 p-8 rounded-[calc(1.5rem-1px)] flex flex-col items-start gap-6 border border-slate-100 dark:border-slate-800 shadow-[0_0_40px_rgba(37,99,235,0.1)] group-hover:shadow-[0_0_50px_rgba(37,99,235,0.25)] transition-all duration-500 group-hover:-translate-y-1">
                 <motion.div 
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
@@ -111,14 +116,19 @@ export default function Services() {
                 key={`${service.title}-${index}`}
                 className="relative p-[1px] overflow-hidden rounded-3xl group"
               >
-                {/* Rotating Border Glow */}
+                {/* Rotating Border Glow - Enhanced Laser Sweep */}
                 <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-[-150%] bg-[conic-gradient(from_0deg,transparent_40%,#2563eb_45%,#60a5fa_50%,#2563eb_55%,transparent_60%)] opacity-30 blur-xl"
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_35%,#3b82f6_45%,#ffffff_50%,#3b82f6_55%,transparent_65%)] opacity-60 blur-[30px]"
+                />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_45%,#2563eb_50%,transparent_55%)] opacity-100"
                 />
 
-                <div className="relative w-[280px] sm:w-[320px] h-full p-8 rounded-[calc(1.5rem-1px)] flex flex-col items-start gap-6 bg-white/90 dark:bg-slate-900/90 border border-white/20 dark:border-slate-700/50 backdrop-blur-md">
+                <div className="relative w-[280px] sm:w-[320px] h-full p-8 rounded-[calc(1.5rem-1px)] flex flex-col items-start gap-6 bg-white dark:bg-slate-900 border border-white/20 dark:border-slate-700/50 backdrop-blur-md shadow-[0_0_30px_rgba(37,99,235,0.1)]">
                   <div className="p-4 bg-blue-50 dark:bg-blue-900/20 text-brand-blue rounded-2xl group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
                     {service.icon}
                   </div>
