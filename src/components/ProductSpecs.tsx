@@ -69,7 +69,7 @@ export default function ProductSpecs() {
           </div>
 
           {/* Desktop Tab Switcher */}
-          <div className="flex bg-slate-200/50 dark:bg-white/5 px-2 rounded-2xl backdrop-blur-xl border border-white/20">
+          <div className="flex bg-slate-200/50 dark:bg-white/5 px-2 rounded-2xl backdrop-blur-xl border border-white/20 overflow-x-auto no-scrollbar max-w-full">
             {TABS.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -77,7 +77,7 @@ export default function ProductSpecs() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative flex items-center gap-2 px-6 py-5 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                  className={`relative flex items-center gap-2 px-4 sm:px-6 py-4 sm:py-5 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${
                     isActive 
                       ? "text-brand-blue" 
                       : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
@@ -198,7 +198,7 @@ export default function ProductSpecs() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-5 sm:grid-cols-5 gap-3 sm:gap-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
                         {SIZES.map((s) => (
                           <button
                             key={s.width}
@@ -234,11 +234,12 @@ export default function ProductSpecs() {
                   {/* Right: Kids' Special Section */}
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-[2.5rem] blur opacity-10 group-hover:opacity-20 transition duration-500" />
-                    <div className="relative h-full bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border border-slate-300/60 dark:border-white/10 shadow-xl">
-                      <div className="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-orange-500 mb-8">
-                        <Baby size={32} />
+                    <div className="relative h-full bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 sm:p-10 border border-slate-300/60 dark:border-white/10 shadow-xl">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-orange-500 mb-6 sm:mb-8">
+                        <Baby size={28} className="sm:hidden" />
+                        <Baby size={32} className="hidden sm:block" />
                       </div>
-                      <h4 className="text-2xl font-black tracking-tighter mb-4 text-slate-900 dark:text-white">KIDS' SPECIAL VARIETIES</h4>
+                      <h4 className="text-xl sm:text-2xl font-black tracking-tighter mb-4 text-slate-900 dark:text-white uppercase">KIDS' SPECIAL VARIETIES</h4>
                       <p className="text-slate-500 dark:text-slate-400 text-sm mb-8 font-light leading-relaxed">
                         Chote bacho ke apparel aur comfortable stretch ke liye specialized options specifically designed for sensitive skin and gentle compression.
                       </p>
@@ -275,52 +276,52 @@ export default function ProductSpecs() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="grid md:grid-cols-2 gap-8"
+                  className="grid md:grid-cols-2 gap-6 sm:gap-8"
                 >
-                  <div className="p-10 rounded-[2.5rem] glass dark:bg-white/5 border border-white/20 shadow-2xl">
-                    <div className="w-12 h-12 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue mb-8">
+                  <div className="p-6 sm:p-10 rounded-[2.5rem] glass dark:bg-white/5 border border-white/20 shadow-2xl">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue mb-6 sm:mb-8">
                       <Settings2 size={24} />
                     </div>
-                    <h4 className="text-2xl font-black tracking-tighter mb-2 text-slate-900 dark:text-white uppercase">Thread Options</h4>
-                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue mb-6">دھاگہ کی اقسام</p>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-10 font-light leading-relaxed">
+                    <h4 className="text-xl sm:text-2xl font-black tracking-tighter mb-2 text-slate-900 dark:text-white uppercase">Thread Options</h4>
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue mb-4 sm:mb-6">دھاگہ کی اقسام</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-6 sm:mb-10 font-light leading-relaxed">
                       Optimized for texture and strength, our thread counts ensure durability across industrial and fashion applications.
                     </p>
                     
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       {[
                         { val: "300", label: "Standard Tech", desc: "Balanced Comfort" },
                         { val: "600", label: "Premium Elite", desc: "Maximum Strength" }
                       ].map((t) => (
-                        <div key={t.val} className="p-6 rounded-2xl bg-brand-blue text-white shadow-xl shadow-brand-blue/20">
-                          <div className="text-3xl font-black tracking-tighter mb-1">{t.val}</div>
-                          <div className="text-[8px] font-black uppercase tracking-widest opacity-80 mb-4">{t.label}</div>
-                          <p className="text-[10px] opacity-60">{t.desc}</p>
+                        <div key={t.val} className="p-4 sm:p-6 rounded-2xl bg-brand-blue text-white shadow-xl shadow-brand-blue/20">
+                          <div className="text-2xl sm:text-3xl font-black tracking-tighter mb-1">{t.val}</div>
+                          <div className="text-[8px] font-black uppercase tracking-widest opacity-80 mb-2 sm:mb-4">{t.label}</div>
+                          <p className="text-[10px] opacity-60 leading-tight">{t.desc}</p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="p-10 rounded-[2.5rem] glass bg-white dark:bg-[#050b1a] text-slate-900 dark:text-white shadow-2xl relative overflow-hidden">
+                  <div className="p-6 sm:p-10 rounded-[2.5rem] glass bg-white dark:bg-[#050b1a] text-slate-900 dark:text-white shadow-2xl relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/10 rounded-full blur-[80px] -mr-32 -mt-32" />
                     
-                    <div className="w-12 h-12 bg-brand-blue/10 dark:bg-white/5 rounded-xl flex items-center justify-center text-brand-blue dark:text-white/50 mb-8">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-brand-blue/10 dark:bg-white/5 rounded-xl flex items-center justify-center text-brand-blue dark:text-white/50 mb-6 sm:mb-8">
                       <Activity size={24} />
                     </div>
-                    <h4 className="text-2xl font-black tracking-tighter mb-2 uppercase">Rubber Density</h4>
-                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue dark:text-cyan-400 mb-6">ربڑ کی کثافت</p>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-10 font-light leading-relaxed">
+                    <h4 className="text-xl sm:text-2xl font-black tracking-tighter mb-2 uppercase">Rubber Density</h4>
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue dark:text-cyan-400 mb-4 sm:mb-6">ربڑ کی کثافت</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-6 sm:mb-10 font-light leading-relaxed">
                       Manufactured using high-grade formulations to ensure permanent shape retention and elastic memory.
                     </p>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {[
                         { val: "38 Rubber", type: "Standard Build", strength: "High Retention" },
                         { val: "44 Rubber", type: "Heavy-Duty Build", strength: "Peak Compression" }
                       ].map((r) => (
-                        <div key={r.val} className="flex justify-between items-center p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+                        <div key={r.val} className="flex justify-between items-center p-4 sm:p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
                           <div>
-                            <div className="text-xl font-bold uppercase tracking-tight">{r.val}</div>
+                            <div className="text-lg sm:text-xl font-bold uppercase tracking-tight">{r.val}</div>
                             <div className="text-[8px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-500">{r.type}</div>
                           </div>
                           <div className="text-right">
@@ -342,42 +343,44 @@ export default function ProductSpecs() {
                   className="relative group"
                 >
                   <div className="absolute -inset-2 bg-gradient-to-r from-brand-blue via-cyan-500 to-indigo-500 rounded-[3rem] blur-xl opacity-20 group-hover:opacity-40 transition duration-1000" />
-                  <div className="relative glass bg-white dark:bg-slate-900 rounded-[3rem] p-12 sm:p-20 border border-white/20 shadow-2xl flex flex-col lg:flex-row items-center gap-12 overflow-hidden">
+                  <div className="relative glass bg-white dark:bg-slate-900 rounded-[3rem] p-6 sm:p-20 border border-white/20 shadow-2xl flex flex-col lg:flex-row items-center gap-8 sm:gap-12 overflow-hidden">
                     
                     <div className="lg:w-1/2">
                       <motion.div 
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="w-16 h-1 w-brand-blue bg-brand-blue mb-10 rounded-full" 
+                        className="w-16 h-1 w-brand-blue bg-brand-blue mb-6 sm:mb-10 rounded-full" 
                       />
-                      <h3 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter leading-tight uppercase">
+                      <h3 className="text-3xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6 sm:mb-8 tracking-tighter leading-tight uppercase text-center lg:text-left">
                         BESPOKE <br />
                         <span className="text-brand-blue italic">SOLUTIONS.</span>
                       </h3>
-                      <p className="text-slate-500 dark:text-slate-400 text-lg mb-10 font-light leading-relaxed max-w-md">
+                      <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg mb-8 sm:mb-10 font-light leading-relaxed max-w-md mx-auto lg:mx-0 text-center lg:text-left">
                         Beyond our standard catalogue, we specialize in high-volume custom manufacturing tailored to your exact technical requirements.
                       </p>
                       
-                      <div className="grid grid-cols-2 gap-8 mb-12">
-                        <div>
-                          <p className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-2">Custom Density</p>
-                          <p className="text-sm font-bold text-slate-900 dark:text-white">Variable formulations beyond 44PR</p>
+                      <div className="grid grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-12">
+                        <div className="text-center lg:text-left">
+                          <p className="text-[9px] sm:text-[10px] font-black text-brand-blue uppercase tracking-widest mb-1 sm:mb-2">Custom Density</p>
+                          <p className="text-[11px] sm:text-sm font-bold text-slate-900 dark:text-white">Variable formulations beyond 44PR</p>
                         </div>
-                        <div>
-                          <p className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-2">Bespoke Thickness</p>
-                          <p className="text-sm font-bold text-slate-900 dark:text-white">Precision gauges for specific textiles</p>
+                        <div className="text-center lg:text-left">
+                          <p className="text-[9px] sm:text-[10px] font-black text-brand-blue uppercase tracking-widest mb-1 sm:mb-2">Bespoke Thickness</p>
+                          <p className="text-[11px] sm:text-sm font-bold text-slate-900 dark:text-white">Precision gauges for specific textiles</p>
                         </div>
                       </div>
 
-                      <button className="flex items-center gap-4 bg-brand-dark dark:bg-brand-blue text-white px-10 py-5 rounded-2xl text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl transition-all hover:scale-105 active:scale-95 group/btn">
-                        Get Custom Quote
-                        <ChevronRight className="group-hover:translate-x-2 transition-transform" />
-                      </button>
+                      <div className="flex justify-center lg:justify-start">
+                        <button className="flex items-center justify-center gap-4 bg-brand-dark dark:bg-brand-blue text-white px-8 sm:px-10 py-4 sm:py-5 rounded-2xl text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl transition-all hover:scale-105 active:scale-95 group/btn w-full sm:w-auto">
+                          Get Custom Quote
+                          <ChevronRight className="group-hover:translate-x-2 transition-transform" />
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="lg:w-1/2 relative">
-                      <div className="w-full aspect-square bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center border border-dashed border-slate-300 dark:border-white/10 group-hover:border-brand-blue transition-colors duration-1000 p-12">
+                    <div className="lg:w-1/2 relative w-full max-w-[300px] sm:max-w-none mx-auto">
+                      <div className="w-full aspect-square bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center border border-dashed border-slate-300 dark:border-white/10 group-hover:border-brand-blue transition-colors duration-1000 p-8 sm:p-12">
                         <div className="relative w-full h-full bg-brand-blue/5 rounded-full flex items-center justify-center overflow-hidden">
                           <motion.div 
                             animate={{ rotate: 360 }}

@@ -153,7 +153,7 @@ export default function Hero() {
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-blue">Premium Latex & Polymer Elastic</span>
               </div>
               
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black text-white leading-[0.9] lg:leading-[0.85] tracking-tighter mb-8 max-w-4xl">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black text-white leading-[1.1] sm:leading-[0.9] lg:leading-[0.85] tracking-tighter mb-8 max-w-4xl">
                 ENGINEERED <br />
                 <motion.span 
                   animate={{ 
@@ -169,7 +169,7 @@ export default function Hero() {
                     repeat: Infinity, 
                     ease: "easeInOut" 
                   }}
-                  className="text-stroke neon-glow italic inline-block"
+                  className="text-stroke neon-glow italic inline-block py-2"
                 >
                   STRETCH
                 </motion.span>
@@ -282,8 +282,8 @@ export default function Hero() {
       </div>
 
       {/* Ticker for "High End" feel */}
-      <div className="absolute bottom-0 left-0 w-full bg-white/5 backdrop-blur-md border-t border-white/10 py-4 sm:py-6 overflow-hidden">
-        <div className="flex animate-marquee-fast sm:animate-marquee space-x-12 whitespace-nowrap px-12">
+      <div className="absolute bottom-0 left-0 w-full bg-white/5 backdrop-blur-md border-t border-white/10 py-5 sm:py-6 overflow-hidden">
+        <div className="flex animate-marquee-fast sm:animate-marquee-slow space-x-12 whitespace-nowrap px-12">
           {[1,2,3,4,5].map((i) => (
             <div key={i} className="flex items-center gap-12">
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">PREMIUM WEBBING</span>

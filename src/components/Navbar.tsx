@@ -92,25 +92,25 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Toggle & Theme Toggle */}
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <button
             onClick={toggleTheme}
-            className={`p-2 transition-colors duration-300 ${
+            className={`p-3 rounded-xl transition-colors duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 ${
               scrolled ? "text-brand-dark dark:text-white" : "text-white"
             }`}
             aria-label="Toggle theme"
           >
-            {isDark ? <Sun size={24} /> : <Moon size={24} />}
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           
           <button
-            className={`p-2 transition-colors duration-300 ${
+            className={`p-3 rounded-xl transition-colors duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 ${
               scrolled ? "text-brand-dark dark:text-white" : "text-white"
             }`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -119,24 +119,27 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full glass md:hidden border-t border-slate-100 dark:border-slate-800"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 w-full glass md:hidden border-t border-slate-100 dark:border-slate-800 overflow-hidden"
           >
-            <div className="flex flex-col p-8 space-y-6">
+            <div className="flex flex-col p-8 space-y-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-xl font-bold text-brand-dark dark:text-white hover:text-brand-blue"
+                  className="text-lg font-black tracking-tight text-brand-dark dark:text-white hover:text-brand-blue py-2 border-b border-slate-50 dark:border-slate-800/50"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </a>
               ))}
-              <hr className="border-slate-100 dark:border-slate-800" />
-              <button className="btn-primary w-full">Get Started</button>
+              <div className="pt-4">
+                <button className="btn-primary w-full py-5 text-[10px] uppercase tracking-[0.3em]">
+                  Get Started
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
