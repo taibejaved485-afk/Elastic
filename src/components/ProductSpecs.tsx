@@ -69,26 +69,35 @@ export default function ProductSpecs() {
           </div>
 
           {/* Desktop Tab Switcher */}
-          <div className="flex bg-slate-200/50 dark:bg-white/5 p-1 rounded-2xl backdrop-blur-xl border border-white/20">
+          <div className="flex bg-slate-200/50 dark:bg-white/5 px-2 rounded-2xl backdrop-blur-xl border border-white/20">
             {TABS.map((tab) => {
               const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${
-                    activeTab === tab.id 
-                      ? "text-white" 
+                  className={`relative flex items-center gap-2 px-6 py-5 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                    isActive 
+                      ? "text-brand-blue" 
                       : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
                   <Icon size={14} />
                   <span className="hidden sm:inline">{tab.label}</span>
-                  {activeTab === tab.id && (
-                    <motion.div 
-                      layoutId="activeTabSpec"
-                      className="absolute inset-0 bg-brand-blue rounded-xl -z-10 shadow-lg shadow-brand-blue/30"
-                    />
+                  {isActive && (
+                    <>
+                      {/* Subtle Glow */}
+                      <motion.div 
+                        layoutId="activeTabSpecGlow"
+                        className="absolute inset-x-2 inset-y-2 bg-brand-blue/5 rounded-xl -z-10"
+                      />
+                      {/* Prominent Underline */}
+                      <motion.div 
+                        layoutId="activeTabSpecLine"
+                        className="absolute bottom-0 left-6 right-6 h-1 bg-brand-blue rounded-full shadow-[0_0_12px_rgba(37,99,235,0.6)]"
+                      />
+                    </>
                   )}
                 </button>
               );
