@@ -20,6 +20,42 @@ function Counter({ value, duration = 2, suffix = "" }: { value: number; duration
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
+function TypingText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const characters = text.split("");
+  
+  return (
+    <motion.p
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.015,
+            delayChildren: delay,
+          },
+        },
+      }}
+      className={className}
+    >
+      {characters.map((char, index) => (
+        <motion.span
+          key={index}
+          variants={{
+            visible: { opacity: 1 },
+            hidden: { opacity: 0 },
+          }}
+          transition={{ duration: 0.1 }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </motion.p>
+  );
+}
+
 export default function About() {
   return (
     <section id="about" className="section-padding bg-white dark:bg-slate-950 overflow-hidden">
@@ -36,12 +72,17 @@ export default function About() {
           <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-8 leading-tight">
             Mastering the science of stretch and recovery.
           </h2>
-          <p className="text-lg text-brand-slate dark:text-slate-400 mb-6 leading-relaxed">
-            Founded with a vision to provide the global manufacturing industry with high-quality, resilient elastic, our company has become a leader in stretch technology. We combine specialized weaving techniques with modern polymer science. 
-          </p>
-          <p className="text-lg text-brand-slate dark:text-slate-400 mb-8 leading-relaxed">
-            Whether it's for high-end fashion, critical medical equipment, or heavy-duty industrial use, our elastic products are designed to perform. We focus on durability and precision across every inch of material.
-          </p>
+          
+          <TypingText 
+            text="Founded with a vision to provide the global manufacturing industry with high-quality, resilient elastic, our company has become a leader in stretch technology. We combine specialized weaving techniques with modern polymer science."
+            className="text-lg text-brand-slate dark:text-slate-400 mb-6 leading-relaxed min-h-[5em]"
+          />
+          
+          <TypingText 
+            delay={2}
+            text="Whether it's for high-end fashion, critical medical equipment, or heavy-duty industrial use, our elastic products are designed to perform. We focus on durability and precision across every inch of material."
+            className="text-lg text-brand-slate dark:text-slate-400 mb-8 leading-relaxed min-h-[5em]"
+          />
           
           <div className="grid grid-cols-2 gap-8 py-6 border-y border-slate-100 dark:border-slate-800">
             <div>
