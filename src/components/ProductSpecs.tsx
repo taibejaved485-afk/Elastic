@@ -31,6 +31,7 @@ const SIZES = [
 
 const TABS = [
   { id: "dimensions", label: "Sizes & Colors", icon: Ruler },
+  { id: "compare", label: "Compare Specs", icon: Activity },
   { id: "technical", label: "Technical Core", icon: Settings2 },
   { id: "custom", label: "Custom Orders", icon: MessageSquare },
 ];
@@ -40,6 +41,19 @@ export default function ProductSpecs() {
   const [selectedWidth, setSelectedWidth] = useState(SIZES[3]);
   const [selectedColor, setSelectedColor] = useState(COLORS[0]);
   const [hoveredColor, setHoveredColor] = useState<string | null>(null);
+  const [comparisonItems, setComparisonItems] = useState<{ width: typeof SIZES[0], color: typeof COLORS[0] }[]>([]);
+
+  const addToCompare = () => {
+    if (comparisonItems.length >= 4) return;
+    const exists = comparisonItems.some(item => item.width.width === selectedWidth.width && item.color.name === selectedColor.name);
+    if (!exists) {
+      setComparisonItems([...comparisonItems, { width: selectedWidth, color: selectedColor }]);
+    }
+  };
+
+  const removeFromCompare = (index: number) => {
+    setComparisonItems(comparisonItems.filter((_, i) => i !== index));
+  };
 
   return (
     <section id="specs" className="py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 overflow-hidden">
@@ -239,15 +253,28 @@ export default function ProductSpecs() {
                         key={selectedWidth.width}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="mt-8 p-6 rounded-2xl bg-brand-blue/5 border border-brand-blue/10 flex items-start gap-4"
+                        className="mt-8 p-6 rounded-2xl bg-brand-blue/5 border border-brand-blue/10 flex flex-col sm:flex-row items-center sm:items-start gap-4"
                       >
-                        <div className="mt-1 p-2 bg-brand-blue rounded-lg text-white">
-                          <CheckCircle2 size={16} />
+                        <div className="flex-1 flex gap-4">
+                          <div className="mt-1 p-2 bg-brand-blue rounded-lg text-white">
+                            <CheckCircle2 size={16} />
+                          </div>
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-brand-blue mb-1">Recommended Application</p>
+                            <p className="text-slate-900 dark:text-white font-medium text-sm sm:text-base">{selectedWidth.app}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-[10px] font-black uppercase tracking-widest text-brand-blue mb-1">Recommended Application</p>
-                          <p className="text-slate-900 dark:text-white font-medium">{selectedWidth.app}</p>
-                        </div>
+                        <button 
+                          onClick={addToCompare}
+                          disabled={comparisonItems.some(item => item.width.width === selectedWidth.width && item.color.name === selectedColor.name)}
+                          className={`mt-4 sm:mt-0 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                            comparisonItems.some(item => item.width.width === selectedWidth.width && item.color.name === selectedColor.name)
+                            ? "bg-slate-200 dark:bg-white/10 text-slate-400 cursor-not-allowed"
+                            : "bg-brand-blue text-white hover:bg-blue-700 shadow-lg shadow-brand-blue/20"
+                          }`}
+                        >
+                          {comparisonItems.some(item => item.width.width === selectedWidth.width && item.color.name === selectedColor.name) ? 'In Comparison' : `Add to Compare (${comparisonItems.length}/4)`}
+                        </button>
                       </motion.div>
                     </div>
                   </div>
@@ -291,6 +318,107 @@ export default function ProductSpecs() {
                 </motion.div>
               )}
 
+              {activeTab === "compare" && (
+                <motion.div
+                  key="compare"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="space-y-8"
+                >
+                  {comparisonItems.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-20 bg-slate-200/30 dark:bg-white/5 rounded-[3rem] border border-dashed border-slate-300 dark:border-white/10">
+                      <Ruler size={48} className="text-slate-300 dark:text-slate-700 mb-6" />
+                      <p className="text-slate-500 font-medium text-lg mb-2">No items selected for comparison</p>
+                      <button 
+                        onClick={() => setActiveTab("dimensions")}
+                        className="text-brand-blue font-black uppercase tracking-widest text-xs hover:underline"
+                      >
+                        Select from Catalogue
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {comparisonItems.map((item, idx) => (
+                        <motion.div 
+                          key={`${item.width.width}-${item.color.name}`}
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="relative p-6 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xl overflow-hidden group"
+                        >
+                          {/* Close button */}
+                          <button 
+                            onClick={() => removeFromCompare(idx)}
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors z-20"
+                          >
+                            ×
+                          </button>
+
+                          <div className="relative z-10 flex flex-col h-full">
+                            <div className="flex items-center gap-3 mb-8">
+                              <div className={`w-10 h-10 rounded-xl border-2 ${item.color.class} ${item.color.name === 'Black' ? 'bg-slate-900' : 'bg-white'}`} />
+                              <div>
+                                <h5 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tighter">{item.width.width}</h5>
+                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{item.color.name}</p>
+                              </div>
+                            </div>
+
+                            <div className="space-y-6 flex-1">
+                              <div>
+                                <p className="text-[9px] font-black text-brand-blue uppercase tracking-widest mb-2">Technical Gauge</p>
+                                <div className="h-1 lg:h-1.5 w-full bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+                                  <motion.div 
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${(item.width.scale / 60) * 100}%` }}
+                                    className="h-full bg-brand-blue"
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+                                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">Recommended Use</p>
+                                <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 leading-relaxed italic">{item.width.app}</p>
+                              </div>
+
+                              {/* Highlights */}
+                              <div className="pt-4 border-t border-slate-100 dark:border-white/10">
+                                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-3">Key Specs</p>
+                                <ul className="space-y-2">
+                                  {[
+                                    { label: 'Stretch', val: item.width.scale > 30 ? 'High' : 'Ultra-Flex' },
+                                    { label: 'Density', val: item.width.scale > 40 ? 'Heavy' : 'Standard' },
+                                    { label: 'Thread', val: '600 Premium' }
+                                  ].map((spec, i) => (
+                                    <li key={i} className="flex justify-between items-center text-[10px]">
+                                      <span className="text-slate-400 font-medium">{spec.label}</span>
+                                      <span className="text-brand-blue font-black uppercase">{spec.val}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+
+                            <div className="mt-8 pt-6 border-t border-slate-100 dark:border-white/10 text-center">
+                              <span className="text-[10px] font-urdu text-brand-blue/60">{item.color.urdu} - {item.width.width}</span>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                      {comparisonItems.length < 4 && (
+                         <button 
+                          onClick={() => setActiveTab("dimensions")}
+                          className="flex flex-col items-center justify-center p-6 rounded-[2rem] bg-slate-100/50 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 hover:border-brand-blue hover:bg-brand-blue/5 transition-all group min-h-[300px]"
+                        >
+                          <div className="w-12 h-12 rounded-full border border-dashed border-slate-400 dark:border-white/20 flex items-center justify-center text-slate-400 group-hover:text-brand-blue group-hover:border-brand-blue transition-all mb-4">
+                            +
+                          </div>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-brand-blue transition-colors">Add Variation</span>
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
+              )}
               {activeTab === "technical" && (
                 <motion.div
                   key="technical"
