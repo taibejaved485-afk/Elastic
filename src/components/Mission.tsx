@@ -26,7 +26,7 @@ const missions = [
 
 export default function Mission() {
   return (
-    <section className="section-padding bg-brand-dark text-white">
+    <section id="mission" className="section-padding bg-brand-dark text-white">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">

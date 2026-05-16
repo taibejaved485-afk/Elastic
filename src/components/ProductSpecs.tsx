@@ -42,7 +42,7 @@ export default function ProductSpecs() {
   const [hoveredColor, setHoveredColor] = useState<string | null>(null);
 
   return (
-    <section id="specifications" className="py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 overflow-hidden">
+    <section id="specs" className="py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
@@ -69,8 +69,8 @@ export default function ProductSpecs() {
             </p>
           </div>
 
-          {/* Desktop Tab Switcher */}
-          <div className="flex bg-slate-200/50 dark:bg-white/5 px-2 rounded-2xl backdrop-blur-xl border border-white/20 overflow-x-auto no-scrollbar max-w-full">
+          {/* Tab Switcher */}
+          <div className="flex justify-center sm:justify-start bg-slate-200/50 dark:bg-white/5 px-1 sm:px-2 rounded-2xl backdrop-blur-xl border border-white/20 overflow-x-auto no-scrollbar max-w-full mx-auto lg:mx-0">
             {TABS.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -78,25 +78,25 @@ export default function ProductSpecs() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative flex items-center gap-2 px-4 sm:px-6 py-4 sm:py-5 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${
+                  className={`relative flex items-center justify-center gap-2 px-5 sm:px-6 py-4 sm:py-5 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${
                     isActive 
                       ? "text-brand-blue" 
-                      : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
-                  <Icon size={14} />
+                  <Icon size={18} className="sm:size-[14px]" />
                   <span className="hidden sm:inline">{tab.label}</span>
                   {isActive && (
                     <>
                       {/* Subtle Glow */}
                       <motion.div 
                         layoutId="activeTabSpecGlow"
-                        className="absolute inset-x-2 inset-y-2 bg-brand-blue/5 rounded-xl -z-10"
+                        className="absolute inset-x-1 inset-y-1 bg-brand-blue/10 rounded-xl -z-10"
                       />
                       {/* Prominent Underline */}
                       <motion.div 
                         layoutId="activeTabSpecLine"
-                        className="absolute bottom-0 left-6 right-6 h-1 bg-brand-blue rounded-full shadow-[0_0_12px_rgba(37,99,235,0.6)]"
+                        className="absolute bottom-0 left-2 right-2 sm:left-6 sm:right-6 h-1 bg-brand-blue rounded-full shadow-[0_0_12px_rgba(37,99,235,0.6)]"
                       />
                     </>
                   )}
@@ -393,10 +393,13 @@ export default function ProductSpecs() {
                       </div>
 
                       <div className="flex justify-center lg:justify-start">
-                        <button className="flex items-center justify-center gap-4 bg-brand-dark dark:bg-brand-blue text-white px-8 sm:px-10 py-4 sm:py-5 rounded-2xl text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl transition-all hover:scale-105 active:scale-95 group/btn w-full sm:w-auto">
+                        <a 
+                          href="#contact"
+                          className="flex items-center justify-center gap-4 bg-brand-dark dark:bg-brand-blue text-white px-8 sm:px-10 py-4 sm:py-5 rounded-2xl text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl transition-all hover:scale-105 active:scale-95 group/btn w-full sm:w-auto"
+                        >
                           Get Custom Quote
                           <ChevronRight className="group-hover:translate-x-2 transition-transform" />
-                        </button>
+                        </a>
                       </div>
                     </div>
 

@@ -119,10 +119,10 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 w-full glass md:hidden border-t border-slate-100 dark:border-slate-800 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 w-full glass md:hidden border-t border-slate-100 dark:border-slate-800 shadow-2xl"
           >
             <div className="flex flex-col p-8 space-y-4">
               {navLinks.map((link) => (
@@ -136,9 +136,13 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="pt-4">
-                <button className="btn-primary w-full py-5 text-[10px] uppercase tracking-[0.3em]">
+                <a 
+                  href="#contact"
+                  className="btn-primary w-full py-5 text-[10px] uppercase tracking-[0.3em] flex items-center justify-center"
+                  onClick={() => setIsOpen(false)}
+                >
                   Get Started
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
