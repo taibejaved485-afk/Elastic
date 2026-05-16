@@ -234,7 +234,7 @@ export default function ProductSpecs() {
                   {/* Right: Kids' Special Section */}
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-[2.5rem] blur opacity-10 group-hover:opacity-20 transition duration-500" />
-                    <div className="relative h-full bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border border-slate-100 dark:border-white/5 shadow-xl">
+                    <div className="relative h-full bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border border-slate-300/60 dark:border-white/10 shadow-xl">
                       <div className="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-orange-500 mb-8">
                         <Baby size={32} />
                       </div>
@@ -248,7 +248,7 @@ export default function ProductSpecs() {
                           { title: "5 Taar Elastic", label: "Ultra-soft", desc: "Infants & Toddlers", urdu: "چھوٹے بچوں کے لئے" },
                           { title: "6 Taar Elastic", label: "Standard Soft", desc: "Undergarments & Shorts", urdu: "نارمل سافٹ اسٹریچ" }
                         ].map((item) => (
-                          <div key={item.title} className="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 group/baby hover:border-orange-500/30 transition-all hover:bg-orange-500/5">
+                          <div key={item.title} className="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-300/60 dark:border-white/10 group/baby hover:border-orange-500/30 transition-all hover:bg-orange-500/5">
                             <div className="flex justify-between items-center mb-1">
                               <span className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">{item.title}</span>
                               <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-600 uppercase tracking-tighter border border-orange-500/20">{item.label}</span>
@@ -261,7 +261,7 @@ export default function ProductSpecs() {
                         ))}
                       </div>
 
-                      <div className="mt-8 pt-8 border-t border-slate-100 dark:border-white/5 text-[9px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600">
+                      <div className="mt-8 pt-8 border-t border-slate-300/60 dark:border-white/10 text-[9px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600">
                         تار کے حساب سے خصوصیات
                       </div>
                     </div>
