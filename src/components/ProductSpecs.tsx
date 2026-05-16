@@ -198,15 +198,15 @@ export default function ProductSpecs() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-5 sm:grid-cols-5 gap-3">
+                      <div className="grid grid-cols-5 sm:grid-cols-5 gap-3 sm:gap-4">
                         {SIZES.map((s) => (
                           <button
                             key={s.width}
                             onClick={() => setSelectedWidth(s)}
-                            className={`py-3 rounded-xl text-[10px] font-bold border transition-all ${
+                            className={`py-3 rounded-xl text-[10px] font-bold border transition-all hover:scale-105 active:scale-95 ${
                               selectedWidth.width === s.width
                                 ? "bg-brand-blue border-brand-blue text-white shadow-lg shadow-brand-blue/20"
-                                : "bg-white dark:bg-white/5 border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:border-brand-blue"
+                                : "bg-white dark:bg-white/5 border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:border-brand-blue hover:bg-brand-blue/5"
                             }`}
                           >
                             {s.width.split(' ')[0]}
