@@ -153,7 +153,7 @@ export default function Contact() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-6xl md:text-7xl font-black text-brand-dark dark:text-white tracking-tighter"
           >
-            LET'S <span className="text-stroke-dark dark:text-stroke opacity-30 italic">STRETCH</span> IDEAS.
+            LET'S <span className="text-stroke-dark dark:text-stroke italic">STRETCH</span> IDEAS.
           </motion.h2>
         </div>
 

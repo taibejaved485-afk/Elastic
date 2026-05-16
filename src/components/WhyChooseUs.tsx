@@ -61,7 +61,7 @@ export default function WhyChooseUs() {
             className="text-4xl sm:text-6xl md:text-7xl font-black text-brand-dark dark:text-white leading-[0.9] tracking-tighter mb-8"
           >
             THE SCIENCE OF <br />
-            <span className="text-stroke-dark dark:text-stroke opacity-30">ELΛSTICITY.</span>
+            <span className="text-stroke-dark dark:text-stroke">ELΛSTICITY.</span>
           </motion.h2>
           <motion.div 
             initial={{ width: 0 }}

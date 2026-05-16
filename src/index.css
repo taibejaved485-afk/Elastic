@@ -8,6 +8,7 @@
   --color-brand-blue: #2563eb; /* Electric Blue */
   --color-brand-dark: #0f172a; /* Slate 900 */
   --color-brand-slate: #475569; /* Slate 600 */
+  --color-brand-accent: #f97316; /* Orange 500 */
 
   --color-bg: #ffffff;
   --color-text: #0f172a;
@@ -63,7 +64,11 @@
   .stop-slate-950 { stop-color: #020617; }
 
   .text-stroke {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
+    color: transparent;
+  }
+  .text-stroke-dark {
+    -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.6);
     color: transparent;
   }
   .neon-glow {
@@ -147,7 +152,7 @@
 }
 
 .card-hover {
-  @apply bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500;
+  @apply bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl dark:hover:shadow-black/50 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500;
 }
 
 /* Minimalist Form Styles */

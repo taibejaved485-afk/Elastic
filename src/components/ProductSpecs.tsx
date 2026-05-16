@@ -301,15 +301,15 @@ export default function ProductSpecs() {
                     </div>
                   </div>
 
-                  <div className="p-10 rounded-[2.5rem] glass bg-slate-900 dark:bg-[#050b1a] text-white shadow-2xl relative overflow-hidden">
+                  <div className="p-10 rounded-[2.5rem] glass bg-white dark:bg-[#050b1a] text-slate-900 dark:text-white shadow-2xl relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/10 rounded-full blur-[80px] -mr-32 -mt-32" />
                     
-                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-white/50 mb-8">
+                    <div className="w-12 h-12 bg-brand-blue/10 dark:bg-white/5 rounded-xl flex items-center justify-center text-brand-blue dark:text-white/50 mb-8">
                       <Activity size={24} />
                     </div>
                     <h4 className="text-2xl font-black tracking-tighter mb-2 uppercase">Rubber Density</h4>
-                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-400 mb-6">ربڑ کی کثافت</p>
-                    <p className="text-slate-400 text-sm mb-10 font-light leading-relaxed">
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue dark:text-cyan-400 mb-6">ربڑ کی کثافت</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-10 font-light leading-relaxed">
                       Manufactured using high-grade formulations to ensure permanent shape retention and elastic memory.
                     </p>
                     
@@ -318,13 +318,13 @@ export default function ProductSpecs() {
                         { val: "38 Rubber", type: "Standard Build", strength: "High Retention" },
                         { val: "44 Rubber", type: "Heavy-Duty Build", strength: "Peak Compression" }
                       ].map((r) => (
-                        <div key={r.val} className="flex justify-between items-center p-6 rounded-2xl bg-white/5 border border-white/10">
+                        <div key={r.val} className="flex justify-between items-center p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
                           <div>
                             <div className="text-xl font-bold uppercase tracking-tight">{r.val}</div>
-                            <div className="text-[8px] font-black uppercase tracking-widest text-slate-500">{r.type}</div>
+                            <div className="text-[8px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-500">{r.type}</div>
                           </div>
                           <div className="text-right">
-                            <div className="text-[10px] font-black text-cyan-400 uppercase tracking-widest">{r.strength}</div>
+                            <div className="text-[10px] font-black text-brand-blue dark:text-cyan-400 uppercase tracking-widest">{r.strength}</div>
                           </div>
                         </div>
                       ))}
