@@ -38,6 +38,7 @@ const TABS = [
 export default function ProductSpecs() {
   const [activeTab, setActiveTab] = useState("dimensions");
   const [selectedWidth, setSelectedWidth] = useState(SIZES[3]);
+  const [selectedColor, setSelectedColor] = useState(COLORS[0]);
 
   return (
     <section id="specifications" className="py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 overflow-hidden">
@@ -113,21 +114,54 @@ export default function ProductSpecs() {
                   <div className="space-y-12">
                     {/* Color Section */}
                     <div>
-                      <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 dark:text-slate-600 mb-6 flex items-center gap-2">
-                        <Palette size={16} /> 01. Color Variants
-                      </h4>
-                      <div className="flex gap-4">
-                        {COLORS.map((color) => (
-                          <div key={color.name} className="group cursor-pointer">
-                            <div className={`w-16 h-16 rounded-2xl border-4 ${color.class} shadow-xl transition-transform group-hover:scale-110 group-hover:-rotate-3 flex flex-col items-center justify-center relative overflow-hidden`}>
-                              {color.name === "Black" && <div className="absolute bottom-0 w-full h-1/2 bg-white/5" />}
-                              <p className="text-[9px] font-black uppercase tracking-tighter group-hover:scale-110 transition-transform mix-blend-difference text-white">
-                                {color.urdu}
+                      <div className="flex items-center justify-between mb-6">
+                        <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 dark:text-slate-600 flex items-center gap-2">
+                          <Palette size={16} /> 01. Color Variants
+                        </h4>
+                        <div className="text-right">
+                          <motion.div 
+                            key={selectedColor.name}
+                            initial={{ opacity: 0, y: 5 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="flex flex-col items-end"
+                          >
+                            <span className="text-xl font-black text-brand-blue uppercase tracking-tighter">{selectedColor.name}</span>
+                            <span className="text-[10px] font-medium text-slate-400 font-urdu">{selectedColor.urdu}</span>
+                          </motion.div>
+                        </div>
+                      </div>
+                      <div className="flex gap-6">
+                        {COLORS.map((color) => {
+                          const isSelected = selectedColor.name === color.name;
+                          return (
+                            <button 
+                              key={color.name} 
+                              onClick={() => setSelectedColor(color)}
+                              className="group relative flex flex-col items-center"
+                            >
+                              <div className={`
+                                w-20 h-20 rounded-3xl border-4 transition-all duration-500 flex items-center justify-center relative overflow-hidden
+                                ${color.class} 
+                                ${isSelected 
+                                  ? `${color.name === 'White' 
+                                      ? 'shadow-[0_0_25px_rgba(255,255,255,0.4)] border-brand-blue/50 scale-110' 
+                                      : 'shadow-[0_0_25px_rgba(37,99,235,0.4)] border-brand-blue scale-110'}` 
+                                  : 'border-transparent shadow-xl group-hover:scale-105 opacity-60 hover:opacity-100'}
+                              `}>
+                                {color.name === "Black" && <div className="absolute inset-0 bg-white/5" />}
+                                {isSelected && (
+                                  <motion.div 
+                                    layoutId="colorSelectionDot"
+                                    className={`w-2 h-2 rounded-full mix-blend-difference bg-white z-10`}
+                                  />
+                                )}
+                              </div>
+                              <p className={`mt-3 text-[10px] font-black uppercase tracking-widest transition-colors ${isSelected ? 'text-brand-blue' : 'text-slate-400'}`}>
+                                {color.name}
                               </p>
-                            </div>
-                            <p className="mt-3 text-[10px] font-black uppercase tracking-widest text-center opacity-60">{color.name}</p>
-                          </div>
-                        ))}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
 
