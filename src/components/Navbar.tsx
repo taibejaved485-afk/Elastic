@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Spline } from "lucide-react";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -56,8 +56,21 @@ export default function Navbar() {
             scrolled ? "text-brand-dark dark:text-white" : "text-white"
           }`}
         >
-          <div className="w-9 h-9 bg-brand-blue rounded-xl flex items-center justify-center transform -skew-x-12 shadow-lg shadow-brand-blue/20">
-            <div className="w-3.5 h-3.5 bg-white rounded-full animate-pulse" />
+          <div className="w-9 h-9 bg-brand-blue rounded-xl flex items-center justify-center transform -skew-x-12 shadow-lg shadow-brand-blue/20 relative overflow-hidden group">
+            <motion.div
+              animate={{ 
+                x: [-30, 30],
+                opacity: [0, 1, 0]
+              }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+            />
+            <motion.div
+              animate={{ scaleX: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Spline size={18} className="text-white relative z-10" />
+            </motion.div>
           </div>
           <span className="font-display uppercase tracking-widest text-lg sm:text-xl">ELΛSTIC</span>
         </a>

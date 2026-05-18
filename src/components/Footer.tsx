@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Phone, MapPin, Twitter, Linkedin, Facebook, Instagram, Send, ArrowRight, X } from "lucide-react";
+import { Mail, Phone, MapPin, Twitter, Linkedin, Facebook, Instagram, Send, ArrowRight, X, Spline } from "lucide-react";
 
 export default function Footer() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -179,8 +179,21 @@ export default function Footer() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/20 rounded-full blur-[60px] transform translate-x-10 -translate-y-10 group-hover:bg-brand-blue/30 transition-colors" />
             
             <a href="#home" className="flex items-center gap-4 mb-10 group/logo">
-              <div className="w-14 h-14 bg-brand-blue rounded-2xl flex items-center justify-center transform -skew-x-12 shadow-2xl shadow-brand-blue/30 transition-all group-hover/logo:scale-110 group-hover/logo:rotate-3">
-                <div className="w-5 h-5 bg-white rounded-full animate-pulse" />
+              <div className="w-14 h-14 bg-brand-blue rounded-2xl flex items-center justify-center transform -skew-x-12 shadow-2xl shadow-brand-blue/30 transition-all group-hover/logo:scale-110 group-hover/logo:rotate-3 relative overflow-hidden">
+                <motion.div
+                  animate={{ 
+                    x: [-40, 40],
+                    opacity: [0, 1, 0]
+                  }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+                />
+                <motion.div
+                  animate={{ scaleX: [1, 1.2, 1] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Spline size={28} className="text-white relative z-10" />
+                </motion.div>
               </div>
               <div className="flex flex-col">
                 <span className="font-black uppercase tracking-[0.4em] text-2xl leading-none">ELΛSTIC</span>
