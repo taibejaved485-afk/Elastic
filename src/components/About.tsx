@@ -113,6 +113,8 @@ export default function About() {
               alt="Professional team collaborating"
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           {/* Decorative elements */}

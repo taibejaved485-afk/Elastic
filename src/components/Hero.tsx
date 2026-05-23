@@ -269,6 +269,7 @@ export default function Hero() {
                   alt="ELΛSTIC high-performance industrial textile weave"
                   className="w-full h-full object-cover opacity-60 group-hover/img:scale-110 group-hover/img:opacity-80 transition-all duration-700"
                   referrerPolicy="no-referrer"
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 via-transparent to-transparent pointer-events-none" />
               </div>
@@ -287,13 +288,13 @@ export default function Hero() {
           {[1,2,3,4,5].map((i) => (
             <div key={i} className="flex items-center gap-12">
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">PREMIUM WEBBING</span>
-              <span className="text-brand-blue">/</span>
+              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">50M+ METERS SHIPPED</span>
-              <span className="text-brand-blue">/</span>
+              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">TEXTILE GRADE</span>
-              <span className="text-brand-blue">/</span>
+              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">INDUSTRIAL STRENGTH</span>
-              <span className="text-brand-blue">/</span>
+              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
             </div>
           ))}
         </div>
