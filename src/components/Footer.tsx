@@ -300,8 +300,14 @@ export default function Footer() {
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {[
-            { icon: MapPin, text: "Faisalabad, Punjab, Pakistan", label: "Location", href: "https://maps.google.com/?q=Faisalabad,Punjab,Pakistan" },
-            { icon: Mail, text: "info@alramzexports.com", label: "Business Inquiry", href: "mailto:info@alramzexports.com" },
+            { icon: MapPin, text: "Small Industrial Estate, Faisalabad, PK", label: "Industrial Address", href: "https://maps.google.com/?q=Small+Industrial+Estate,Faisalabad,Punjab,Pakistan" },
+            { 
+              icon: Mail, 
+              text: "info[at]alramzexports.com", 
+              label: "Business Inquiry", 
+              href: "mailto:info@alramzexports.com",
+              displayOverride: "info@alramzexports.com"
+            },
             { icon: Phone, text: "+92 305 6391503", label: "WhatsApp & Call", href: "https://wa.me/923056391503" }
           ].map((item, i) => {
             const ContainerComponent = item.href ? motion.a : motion.div;
@@ -319,7 +325,10 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-brand-blue text-[9px] font-black uppercase tracking-[0.2em] mb-1">{item.label}</span>
-                  <span className="text-slate-300 text-sm font-medium">{item.text}</span>
+                  <span className="text-slate-300 text-sm font-medium">
+                    {/* @ts-ignore - displayOverride is custom */}
+                    {item.displayOverride || item.text}
+                  </span>
                 </div>
               </ContainerComponent>
             );
