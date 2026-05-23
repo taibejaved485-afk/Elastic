@@ -8,7 +8,7 @@ export default function Footer() {
   const modalContent: Record<string, { title: string; content: string }> = {
     privacy: {
       title: "Privacy Policy",
-      content: `At ELΛSTIC, we take your privacy seriously. This policy outlines how we collect, use, and protect your personal information.
+      content: `At AL-Ramz Exports, we take your privacy seriously. This policy outlines how we collect, use, and protect your personal information.
       
       1. Information Collection: We collect information you provide directly to us, such as when you sign up for our newsletter or contact us for inquiries.
       2. Data Usage: Your data is used to improve our services, communicate updates, and ensure a personalized experience for our industrial partners.
@@ -17,16 +17,16 @@ export default function Footer() {
     },
     terms: {
       title: "Terms & Conditions",
-      content: `By accessing the ELΛSTIC platform, you agree to comply with and be bound by the following terms of use.
+      content: `By accessing the AL-Ramz Exports platform, you agree to comply with and be bound by the following terms of use.
       
-      1. Intellectual Property: All materials, designs, and proprietary technologies displayed on this site are the exclusive property of ELΛSTIC.
+      1. Intellectual Property: All materials, designs, and proprietary technologies displayed on this site are the exclusive property of AL-Ramz Exports.
       2. Usage Limitations: Users are prohibited from reverse-engineering our material specifications or using our branding for unauthorized purposes.
-      3. Liability: ELΛSTIC is not liable for any consequential damages arising from the use or inability to use our premium materials outside of specified industrial parameters.
+      3. Liability: AL-Ramz Exports is not liable for any consequential damages arising from the use or inability to use our premium materials outside of specified industrial parameters.
       4. Governing Law: These terms are governed by the international trade laws of the jurisdiction in which our headquarters is located.`
     },
     cookies: {
       title: "Cookie Settings",
-      content: `ELΛSTIC uses cookies to enhance your browsing experience and analyze site traffic.
+      content: `AL-Ramz Exports uses cookies to enhance your browsing experience and analyze site traffic.
       
       1. Essential Cookies: Necessary for the technical operation of our secure portals.
       2. Analytical Cookies: Help us understand how industrial partners interact with our material specifications.
@@ -71,13 +71,13 @@ export default function Footer() {
     },
     "our-story": {
       title: "Our Story",
-      content: `Founded in 1994, ELΛSTIC began with a single mission: to redefine the structural possibilities of flexible materials.
+      content: `Founded in 1994, AL-Ramz Exports began with a single mission: to redefine the structural possibilities of flexible materials.
       
       What started as a small laboratory project has evolved into a global powerhouse in material science. We don't just manufacture elastic; we engineer the fibers that hold the industries of tomorrow together. From aerospace applications to high-fashion runways, our mark is everywhere.`
     },
     "quality-control": {
       title: "Quality Control",
-      content: `Zero compromise. Our multi-stage testing protocol ensures every centimeter of ELΛSTIC product meets our rigid performance criteria.
+      content: `Zero compromise. Our multi-stage testing protocol ensures every centimeter of AL-Ramz Exports product meets our rigid performance criteria.
       
       • Tensile Testing: Automated stress testing to failure.
       • Longevity Simulation: Accelerated aging chambers mimicking 10 years of use.
@@ -86,7 +86,7 @@ export default function Footer() {
     },
     "sustainability": {
       title: "Sustainability Commitment",
-      content: `At ELΛSTIC, our stretch doesn't come at the Earth's expense.
+      content: `At AL-Ramz Exports, our stretch doesn't come at the Earth's expense.
       
       • Bio-Based Polymers: Increasing use of plant-derived raw materials.
       • Circular Economy: We offer a material reclamation program for our industrial partners.
@@ -97,7 +97,7 @@ export default function Footer() {
       title: "Join the Team",
       content: `We are looking for the brightest minds in material science, engineering, and global logistics.
       
-      At ELΛSTIC, you'll work at the intersection of technology and craftsmanship. We provide an environment where innovation is the default setting. 
+      At AL-Ramz Exports, you'll work at the intersection of technology and craftsmanship. We provide an environment where innovation is the default setting. 
       
       Current Openings:
       • Senior Material Scientist (Polymer Specialists)
@@ -175,10 +175,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-24">
           
           {/* Brand Card */}
-          <div className="lg:col-span-5 p-8 sm:p-12 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl relative overflow-hidden group">
+          <div className="lg:col-span-5 p-8 sm:p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl relative overflow-hidden group flex flex-col">
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/20 rounded-full blur-[60px] transform translate-x-10 -translate-y-10 group-hover:bg-brand-blue/30 transition-colors" />
             
-            <a href="#home" className="flex items-center gap-4 mb-10 group/logo">
+            <a href="#home" className="flex items-center gap-4 mb-8 group/logo">
               <div className="w-14 h-14 bg-brand-blue rounded-2xl flex items-center justify-center transform -skew-x-12 shadow-2xl shadow-brand-blue/30 transition-all group-hover/logo:scale-110 group-hover/logo:rotate-3 relative overflow-hidden">
                 <motion.div
                   animate={{ 
@@ -196,16 +196,21 @@ export default function Footer() {
                 </motion.div>
               </div>
               <div className="flex flex-col">
-                <span className="font-black uppercase tracking-[0.4em] text-2xl leading-none">ELΛSTIC</span>
+                <span className="font-black uppercase tracking-[0.4em] text-2xl leading-none whitespace-nowrap">AL-Ramz Exports</span>
                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-brand-blue/70 mt-1">Premium Industrial Solutions</span>
               </div>
             </a>
             
-            <p className="text-slate-400 text-lg sm:text-xl leading-relaxed mb-12 max-w-md font-light italic">
-              "We don't just manufacture elastic; we engineer the structural integrity of next-generation textiles."
-            </p>
+            <div className="space-y-6 mb-10">
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md font-light">
+                Established as a global pioneer in material science, <span className="text-white font-medium">AL-Ramz Exports</span> specializes in high-tenacity industrial webbing and precision textile grade elastics. Since 1994, we have delivered over 50 million meters of high-performance solutions that define the benchmarks of durability, recovery, and structural integrity for the world's most demanding industries.
+              </p>
+              <p className="text-brand-blue/80 text-base leading-relaxed max-w-md font-light italic border-l-2 border-brand-blue/30 pl-4">
+                "We don't just manufacture elastic; we engineer the structural integrity of next-generation textiles."
+              </p>
+            </div>
             
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 mt-auto">
               {[
                 { icon: Twitter, label: "Twitter" },
                 { icon: Linkedin, label: "LinkedIn" },
@@ -218,7 +223,7 @@ export default function Footer() {
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-blue hover:bg-brand-blue shadow-lg transition-all"
-                  aria-label={`Official ELΛSTIC ${item.label} Profile`}
+                  aria-label={`Official AL-Ramz Exports ${item.label} Profile`}
                 >
                   <item.icon size={22} />
                 </motion.a>
@@ -345,7 +350,7 @@ export default function Footer() {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex flex-col items-center md:items-start gap-4">
             <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">
-              © {new Date().getFullYear()} EΛSTIC Premium Materials.
+              © {new Date().getFullYear()} AL-Ramz Exports Premium Materials.
             </p>
             <div className="flex gap-8 text-slate-600 text-[9px] font-black uppercase tracking-widest">
               <button onClick={() => setActiveModal('privacy')} className="hover:text-brand-blue transition-colors">Privacy</button>

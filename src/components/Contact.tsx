@@ -202,7 +202,7 @@ export default function Contact() {
                   </div>
                   
                   <p className="text-slate-400 text-base sm:text-lg mb-8 sm:mb-12 max-w-sm font-light leading-relaxed">
-                    Our team of material scientists and engineers is standing by to help you integrate ELΛSTIC fibers into your next generation of products.
+                    Our team of material scientists and engineers is standing by to help you integrate AL-Ramz Exports fibers into your next generation of products.
                   </p>
                   
                   <div className="space-y-6 sm:space-y-8">
@@ -210,7 +210,7 @@ export default function Contact() {
                       Icon={Mail} 
                       label="Inquiries" 
                       value="info@alramzexports.com" 
-                      href="mailto:info@alramzexports.com?subject=Inquiry from ELΛSTIC Website"
+                      href="mailto:info@alramzexports.com?subject=Inquiry from AL-Ramz Exports Website"
                     />
                     <ContactItem 
                       Icon={Phone} 

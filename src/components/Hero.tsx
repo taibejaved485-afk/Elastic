@@ -267,7 +267,7 @@ export default function Hero() {
                 </div>
                 <img 
                   src="https://i.pinimg.com/1200x/71/86/d1/7186d1f0cb6f698ccc68de66f96455f6.jpg"
-                  alt="ELΛSTIC high-performance industrial textile weave"
+                  alt="AL-Ramz Exports high-performance industrial textile weave"
                   className="w-full h-full object-cover opacity-60 group-hover/img:scale-110 group-hover/img:opacity-80 transition-all duration-700"
                   referrerPolicy="no-referrer"
                   fetchPriority="high"

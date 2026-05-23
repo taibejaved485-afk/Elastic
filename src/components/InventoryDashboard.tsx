@@ -19,7 +19,7 @@ export default function InventoryDashboard() {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem("elastic_inventory_records");
+    const saved = localStorage.getItem("alramz_inventory_records");
     if (saved) {
       try {
         setRecords(JSON.parse(saved));
@@ -39,7 +39,7 @@ export default function InventoryDashboard() {
 
   // Save to localStorage whenever records change
   useEffect(() => {
-    localStorage.setItem("elastic_inventory_records", JSON.stringify(records));
+    localStorage.setItem("alramz_inventory_records", JSON.stringify(records));
   }, [records]);
 
   const triggerToast = (msg: string) => {
@@ -53,7 +53,7 @@ export default function InventoryDashboard() {
       triggerToast("No records to export.");
       return;
     }
-    exportToCSV(records, `Elastic_Inventory_${new Date().toISOString().split('T')[0]}`);
+    exportToCSV(records, `AL-Ramz_Inventory_${new Date().toISOString().split('T')[0]}`);
     triggerToast("Exported to CSV successfully!");
   };
 

@@ -73,7 +73,7 @@ export default function Navbar() {
               <Spline size={18} className="text-white relative z-10" />
             </motion.div>
           </div>
-          <span className="font-display uppercase tracking-widest text-lg sm:text-xl">ELΛSTIC</span>
+          <span className="font-display uppercase tracking-widest text-lg sm:text-xl">AL-RAMZ EXPORTS</span>
         </a>
 
         {/* Desktop Links */}
