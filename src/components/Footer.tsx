@@ -300,24 +300,30 @@ export default function Footer() {
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {[
-            { icon: MapPin, text: "Industrial Zone 7, Tech Park City", label: "Global HQ" },
-            { icon: Mail, text: "inquiry@elastic-premium.com", label: "Business Inquiry" },
-            { icon: Phone, text: "+1 (800) STRETCH-01", label: "Direct Support" }
-          ].map((item, i) => (
-            <motion.div 
-              key={i}
-              whileHover={{ y: -5 }} 
-              className="flex items-center gap-6 p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all"
-            >
-              <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue">
-                <item.icon size={22} />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-brand-blue text-[9px] font-black uppercase tracking-[0.2em] mb-1">{item.label}</span>
-                <span className="text-slate-300 text-sm font-medium">{item.text}</span>
-              </div>
-            </motion.div>
-          ))}
+            { icon: MapPin, text: "Faisalabad, Punjab, Pakistan", label: "Location", href: "https://maps.google.com/?q=Faisalabad,Punjab,Pakistan" },
+            { icon: Mail, text: "info@alramz.com", label: "Business Inquiry", href: "mailto:info@alramz.com" },
+            { icon: Phone, text: "+92 305 6391503", label: "WhatsApp & Call", href: "https://wa.me/923056391503" }
+          ].map((item, i) => {
+            const ContainerComponent = item.href ? motion.a : motion.div;
+            return (
+              <ContainerComponent 
+                key={i}
+                whileHover={{ y: -5 }} 
+                href={item.href}
+                target={item.href ? "_blank" : undefined}
+                rel={item.href ? "noopener noreferrer" : undefined}
+                className="flex items-center gap-6 p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all cursor-pointer"
+              >
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue">
+                  <item.icon size={22} />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-brand-blue text-[9px] font-black uppercase tracking-[0.2em] mb-1">{item.label}</span>
+                  <span className="text-slate-300 text-sm font-medium">{item.text}</span>
+                </div>
+              </ContainerComponent>
+            );
+          })}
         </div>
 
         {/* Bottom Bar */}

@@ -209,17 +209,24 @@ export default function Contact() {
                     <ContactItem 
                       Icon={Mail} 
                       label="Inquiries" 
-                      value="hello@elastic-premium.com" 
+                      value="info@alramz.com" 
+                      href="mailto:info@alramz.com?subject=Inquiry from ELΛSTIC Website"
+                    />
+                    <ContactItem 
+                      Icon={Phone} 
+                      label="WhatsApp & Call" 
+                      value="+92 305 6391503" 
+                      href="https://wa.me/923056391503"
                     />
                     <ContactItem 
                       Icon={MapPin} 
-                      label="Studio" 
-                      value="Innovation Hub, Silicon Valley" 
+                      label="Location" 
+                      value="Faisalabad, Punjab, Pakistan" 
                     />
                   </div>
 
                   <motion.a 
-                    href="mailto:hello@elastic-premium.com?subject=Inquiry from ELΛSTIC Website"
+                    href="mailto:info@alramz.com?subject=Inquiry from ELΛSTIC Website"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="mt-10 sm:mt-12 inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] border border-white/5 transition-all group/direct w-full sm:w-fit justify-center"
@@ -385,12 +392,9 @@ export default function Contact() {
   );
 }
 
-function ContactItem({ Icon, label, value }: { Icon: any; label: string; value: string }) {
-  return (
-    <motion.div 
-      whileHover={{ x: 10 }}
-      className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
-    >
+function ContactItem({ Icon, label, value, href }: { Icon: any; label: string; value: string; href?: string }) {
+  const content = (
+    <div className="flex items-center gap-4 sm:gap-6 group cursor-pointer">
       <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-brand-blue group-hover:shadow-[0_0_20px_rgba(0,123,255,0.4)] transition-all duration-500 border border-white/5 group-hover:border-transparent shrink-0">
         <Icon size={20} className="text-brand-blue group-hover:text-white transition-colors sm:hidden" />
         <Icon size={24} className="text-brand-blue group-hover:text-white transition-colors hidden sm:block" />
@@ -399,6 +403,18 @@ function ContactItem({ Icon, label, value }: { Icon: any; label: string; value: 
         <p className="text-white/30 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1">{label}</p>
         <p className="text-lg sm:text-xl font-medium group-hover:text-brand-blue transition-colors duration-300 tracking-tight">{value}</p>
       </div>
+    </div>
+  );
+
+  return (
+    <motion.div whileHover={{ x: 10 }}>
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+          {content}
+        </a>
+      ) : (
+        content
+      )}
     </motion.div>
   );
 }
