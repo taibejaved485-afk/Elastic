@@ -301,7 +301,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {[
             { icon: MapPin, text: "Faisalabad, Punjab, Pakistan", label: "Location", href: "https://maps.google.com/?q=Faisalabad,Punjab,Pakistan" },
-            { icon: Mail, text: "info@alramz.com", label: "Business Inquiry", href: "mailto:info@alramz.com" },
+            { icon: Mail, text: "info@alramzexports.com", label: "Business Inquiry", href: "mailto:info@alramzexports.com" },
             { icon: Phone, text: "+92 305 6391503", label: "WhatsApp & Call", href: "https://wa.me/923056391503" }
           ].map((item, i) => {
             const ContainerComponent = item.href ? motion.a : motion.div;

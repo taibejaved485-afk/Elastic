@@ -21,7 +21,7 @@ export default function App() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "100px", // Detect slightly before they enter viewport
+      rootMargin: "100px", 
       threshold: 0.1,
     };
 

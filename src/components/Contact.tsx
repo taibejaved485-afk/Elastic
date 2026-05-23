@@ -209,8 +209,8 @@ export default function Contact() {
                     <ContactItem 
                       Icon={Mail} 
                       label="Inquiries" 
-                      value="info@alramz.com" 
-                      href="mailto:info@alramz.com?subject=Inquiry from ELΛSTIC Website"
+                      value="info@alramzexports.com" 
+                      href="mailto:info@alramzexports.com?subject=Inquiry from ELΛSTIC Website"
                     />
                     <ContactItem 
                       Icon={Phone} 
@@ -226,7 +226,7 @@ export default function Contact() {
                   </div>
 
                   <motion.a 
-                    href="mailto:info@alramz.com?subject=Inquiry from ELΛSTIC Website"
+                    href="mailto:info@alramzexports.com?subject=Inquiry from ELΛSTIC Website"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="mt-10 sm:mt-12 inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] border border-white/5 transition-all group/direct w-full sm:w-fit justify-center"
