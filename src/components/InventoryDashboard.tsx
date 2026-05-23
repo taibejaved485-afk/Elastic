@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Download, Upload, Plus, Trash2, FileSpreadsheet, Package, AlertCircle } from "lucide-react";
 import { exportToCSV, parseCSV } from "../utils/csv";

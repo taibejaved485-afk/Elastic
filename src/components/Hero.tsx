@@ -154,7 +154,7 @@ export default function Hero() {
               </div>
               
               <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black text-white leading-[1.1] sm:leading-[0.9] lg:leading-[0.85] tracking-tighter mb-8 max-w-4xl uppercase">
-                Industrial <br />
+                Premium <br />
                 Webbing <br />
                 <motion.span 
                   animate={{ 
