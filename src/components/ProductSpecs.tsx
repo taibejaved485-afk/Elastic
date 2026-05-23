@@ -75,8 +75,8 @@ export default function ProductSpecs() {
               whileInView={{ opacity: 1, y: 0 }}
               className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]"
             >
-              ENGINEERED <br />
-              <span className="text-brand-blue italic">SPECIFICATIONS.</span>
+              TEXTILE GRADE <br />
+              <span className="text-brand-blue italic">MATERIALS.</span>
             </motion.h2>
             <p className="mt-4 text-slate-400 font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs">
               پراڈکٹ کی تفصیلات اور چوڑائی (سائز) کی معلومات

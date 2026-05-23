@@ -42,7 +42,7 @@ export default function Services() {
           <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4 block">
             Product Line
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark dark:text-white mb-6">Premium Elastic Solutions</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark dark:text-white mb-6">Industrial Grade Materials & Webbing</h2>
           <p className="text-brand-slate dark:text-slate-400 max-w-2xl mx-auto">Engineered for superior stretch, recovery, and long-term durability in every application.</p>
         </div>
 

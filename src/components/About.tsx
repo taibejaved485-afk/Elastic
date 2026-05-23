@@ -70,7 +70,7 @@ export default function About() {
             Our Story
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-8 leading-tight">
-            Mastering the science of stretch and recovery.
+            Mastering the science of textile grade industrial materials.
           </h2>
           
           <TypingText 

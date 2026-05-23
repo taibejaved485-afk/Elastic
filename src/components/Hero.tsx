@@ -153,8 +153,9 @@ export default function Hero() {
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-blue">Premium Latex & Polymer Elastic</span>
               </div>
               
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black text-white leading-[1.1] sm:leading-[0.9] lg:leading-[0.85] tracking-tighter mb-8 max-w-4xl">
-                ENGINEERED <br />
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black text-white leading-[1.1] sm:leading-[0.9] lg:leading-[0.85] tracking-tighter mb-8 max-w-4xl uppercase">
+                Industrial <br />
+                Webbing <br />
                 <motion.span 
                   animate={{ 
                     scale: [1, 1.02, 1],
@@ -171,7 +172,7 @@ export default function Hero() {
                   }}
                   className="text-stroke neon-glow italic inline-block py-2"
                 >
-                  STRETCH
+                  Materials
                 </motion.span>
               </h1>
               
