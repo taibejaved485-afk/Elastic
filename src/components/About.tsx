@@ -74,13 +74,13 @@ export default function About() {
           </h2>
           
           <TypingText 
-            text="Founded with a vision to provide the global manufacturing industry with high-quality, resilient elastic, our company has become a leader in stretch technology. We combine specialized weaving techniques with modern polymer science."
+            text="We are the global benchmark for high-performance premium webbing. With over 50m meters shipped, our materials are engineered for industrial, medical, and textile excellence. We combine specialized weaving techniques with modern polymer science to create the highest quality textile grade solutions."
             className="text-lg text-brand-slate dark:text-slate-400 mb-6 leading-relaxed min-h-[5em]"
           />
           
           <TypingText 
             delay={2}
-            text="Whether it's for high-end fashion, critical medical equipment, or heavy-duty industrial use, our elastic products are designed to perform. We focus on durability and precision across every inch of material."
+            text="Whether it's for high-end fashion, critical medical equipment, or heavy-duty industrial use, our elastic materials are designed to perform. We focus on durability and precision across every inch of materials produced, ensuring elite textile grade performance."
             className="text-lg text-brand-slate dark:text-slate-400 mb-8 leading-relaxed min-h-[5em]"
           />
           

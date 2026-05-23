@@ -81,7 +81,7 @@ export default function Hero() {
   const [displayText, setDisplayText] = useState("");
   const [wordIdx, setWordIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const words = ["high-performance", "medical precision", "industrial strength", "tactical gear"];
+  const words = ["meters shipped", "premium webbing", "textile grade", "industrial grade"];
   const [typingSpeed, setTypingSpeed] = useState(150);
 
   useEffect(() => {
