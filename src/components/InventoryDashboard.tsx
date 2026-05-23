@@ -138,8 +138,8 @@ export default function InventoryDashboard() {
           </div>
         </div>
 
-        {/* Records Table */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl">
+        {/* Desktop Table View (Hidden on mobile) */}
+        <div className="hidden md:block bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -166,7 +166,7 @@ export default function InventoryDashboard() {
                           type="text" 
                           value={record.itemName} 
                           onChange={(e) => updateRecord(record.id, "itemName", e.target.value)}
-                          className="bg-transparent border-none focus:ring-0 w-full p-0 font-semibold text-slate-900 dark:text-white"
+                          className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-semibold text-slate-900 dark:text-white"
                         />
                       </td>
                       <td className="px-6 py-4">
@@ -174,17 +174,17 @@ export default function InventoryDashboard() {
                           type="text" 
                           value={record.category} 
                           onChange={(e) => updateRecord(record.id, "category", e.target.value)}
-                          className="bg-transparent border-none focus:ring-0 w-full p-0 text-slate-500 dark:text-slate-400"
+                          className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full text-slate-500 dark:text-slate-400"
                         />
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
-                          <Package className="w-3 h-3 text-brand-blue" />
+                          <Package className="w-4 h-4 text-brand-blue" />
                           <input 
                             type="number" 
                             value={record.quantity} 
                             onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
-                            className="bg-transparent border-none focus:ring-0 w-20 p-0 text-slate-900 dark:text-white font-mono"
+                            className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-24 text-slate-900 dark:text-white font-mono"
                           />
                         </div>
                       </td>
@@ -194,9 +194,10 @@ export default function InventoryDashboard() {
                       <td className="px-6 py-4 text-right">
                         <button 
                           onClick={() => deleteRecord(record.id)}
-                          className="p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-lg transition-colors"
+                          className="p-3 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-xl transition-colors inline-flex items-center justify-center min-w-[44px] min-h-[44px]"
+                          aria-label="Delete record"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-5 h-5" />
                         </button>
                       </td>
                     </motion.tr>
@@ -212,6 +213,69 @@ export default function InventoryDashboard() {
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* Mobile List View (Shown only on small screens) */}
+        <div className="md:hidden space-y-4">
+          <AnimatePresence initial={false}>
+            {records.map((record) => (
+              <motion.div 
+                key={record.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-lg"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex-1 mr-4">
+                    <input 
+                      type="text" 
+                      value={record.itemName} 
+                      onChange={(e) => updateRecord(record.id, "itemName", e.target.value)}
+                      className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-bold text-lg text-slate-900 dark:text-white"
+                    />
+                    <input 
+                      type="text" 
+                      value={record.category} 
+                      onChange={(e) => updateRecord(record.id, "category", e.target.value)}
+                      className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full text-sm text-slate-500 dark:text-slate-400"
+                    />
+                  </div>
+                  <button 
+                    onClick={() => deleteRecord(record.id)}
+                    className="p-3 text-rose-500 bg-rose-50 dark:bg-rose-900/20 rounded-xl min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    aria-label="Delete"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <div>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Quantity (Meters)</span>
+                    <div className="flex items-center gap-2">
+                       <Package className="w-4 h-4 text-brand-blue" />
+                       <input 
+                        type="number" 
+                        value={record.quantity} 
+                        onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
+                        className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-mono text-slate-900 dark:text-white"
+                      />
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Updated</span>
+                    <span className="text-sm font-mono text-slate-500 dark:text-slate-400">{record.lastUpdated}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+          {records.length === 0 && (
+            <div className="py-12 text-center text-slate-400 italic bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
+              No records found.
+            </div>
+          )}
         </div>
       </div>
 

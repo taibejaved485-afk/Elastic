@@ -206,15 +206,21 @@ export default function Footer() {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              {[Twitter, Linkedin, Facebook, Instagram].map((Icon, idx) => (
+              {[
+                { icon: Twitter, label: "Twitter" },
+                { icon: Linkedin, label: "LinkedIn" },
+                { icon: Facebook, label: "Facebook" },
+                { icon: Instagram, label: "Instagram" }
+              ].map((item, idx) => (
                 <motion.a 
                   key={idx} 
                   href="#" 
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-blue hover:bg-brand-blue shadow-lg transition-all"
+                  className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-blue hover:bg-brand-blue shadow-lg transition-all"
+                  aria-label={`Official ELΛSTIC ${item.label} Profile`}
                 >
-                  <Icon size={20} />
+                  <item.icon size={22} />
                 </motion.a>
               ))}
             </div>

@@ -139,15 +139,19 @@ export default function Navbar() {
             className="absolute top-full left-0 w-full glass md:hidden border-t border-slate-100 dark:border-slate-800 shadow-2xl"
           >
             <div className="flex flex-col p-8 space-y-4">
-              {navLinks.map((link) => (
-                <a
+              {navLinks.map((link, i) => (
+                <motion.a
                   key={link.name}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
                   href={link.href}
-                  className="text-lg font-black tracking-tight text-brand-dark dark:text-white hover:text-brand-blue py-2 border-b border-slate-50 dark:border-slate-800/50"
+                  className="text-lg font-black tracking-tight text-brand-dark dark:text-white hover:text-brand-blue py-6 px-4 border-b border-slate-100 dark:border-slate-800/50 flex items-center min-h-[48px]"
                   onClick={() => setIsOpen(false)}
+                  aria-label={`Navigate to ${link.name}`}
                 >
                   {link.name}
-                </a>
+                </motion.a>
               ))}
               <div className="pt-4">
                 <a 
