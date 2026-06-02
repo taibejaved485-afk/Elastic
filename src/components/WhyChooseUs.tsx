@@ -138,16 +138,16 @@ export default function WhyChooseUs() {
               <div className="flex items-center gap-12 sm:gap-24 px-12">
                 <BrandLogo brand="NIKE" type="Sport Performance" />
                 <BrandLogo brand="ADIDAS" type="Material Lab" />
-                <BrandLogo brand="NASA" type="Aerospace Grade" />
-                <BrandLogo brand="SPACEX" type="Tactical Systems" />
-                <BrandLogo brand="TESLA" type="Energy Fibers" />
+                <BrandLogo brand="PUMA" type="Athletic Wear" />
+                <BrandLogo brand="UNDER ARMOUR" type="Dynamic Tech" />
+                <BrandLogo brand="LULULEMON" type="Premium Garments" />
               </div>
               <div className="flex items-center gap-12 sm:gap-24 px-12">
                 <BrandLogo brand="NIKE" type="Sport Performance" />
                 <BrandLogo brand="ADIDAS" type="Material Lab" />
-                <BrandLogo brand="NASA" type="Aerospace Grade" />
-                <BrandLogo brand="SPACEX" type="Tactical Systems" />
-                <BrandLogo brand="TESLA" type="Energy Fibers" />
+                <BrandLogo brand="PUMA" type="Athletic Wear" />
+                <BrandLogo brand="UNDER ARMOUR" type="Dynamic Tech" />
+                <BrandLogo brand="LULULEMON" type="Premium Garments" />
               </div>
             </div>
           </div>
