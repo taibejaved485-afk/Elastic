@@ -215,8 +215,8 @@ export default function Contact() {
                     <ContactItem 
                       Icon={Phone} 
                       label="WhatsApp & Call" 
-                      value="+92 305 6391503" 
-                      href="https://wa.me/923056391503"
+                      value="0331 1066453" 
+                      href="https://wa.me/923311066453"
                     />
                     <ContactItem 
                       Icon={MapPin} 

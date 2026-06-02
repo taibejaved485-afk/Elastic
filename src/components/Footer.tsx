@@ -319,7 +319,7 @@ export default function Footer() {
               href: "mailto:info@alramzexports.com",
               displayOverride: "info@alramzexports.com"
             },
-            { icon: Phone, text: "+92 305 6391503", label: "WhatsApp & Call", href: "https://wa.me/923056391503" }
+            { icon: Phone, text: "0331 1066453", label: "WhatsApp & Call", href: "https://wa.me/923311066453" }
           ].map((item, i) => {
             const ContainerComponent = item.href ? motion.a : motion.div;
             return (
