@@ -290,7 +290,7 @@ export default function Hero() {
             <div key={i} className="flex items-center gap-12">
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">PREMIUM WEBBING</span>
               <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
-              <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">50M+ METERS SHIPPED</span>
+              <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">50 MILLION+ METERS SHIPPED</span>
               <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">TEXTILE GRADE</span>
               <span className="text-brand-blue"> &nbsp;/&nbsp; </span>

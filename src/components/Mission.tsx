@@ -36,7 +36,7 @@ export default function Mission() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Industrial Webbing <span className="text-brand-blue">Materials</span>.</h2>
           </div>
           <p className="text-slate-400 max-w-sm mb-2 text-sm leading-relaxed text-left lg:text-right">
-            We believe that the best products start with the best components. Our textile grade webbing is the backbone of premium manufacturing with 50m+ meters shipped.
+            We believe that the best products start with the best components. Our textile grade webbing is the backbone of premium manufacturing with over 50 Million Meters shipped.
           </p>
         </div>
 
