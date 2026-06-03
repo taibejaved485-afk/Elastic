@@ -6,6 +6,9 @@ import LottieAnimation from "./LottieAnimation";
 interface FormData {
   name: string;
   email: string;
+  phone: string;
+  company: string;
+  volume: string;
   subject: string;
   message: string;
 }
@@ -13,6 +16,9 @@ interface FormData {
 interface FormErrors {
   name?: string;
   email?: string;
+  phone?: string;
+  company?: string;
+  volume?: string;
   subject?: string;
   message?: string;
 }
@@ -21,6 +27,9 @@ export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
+    phone: "",
+    company: "",
+    volume: "",
     subject: "",
     message: "",
   });
@@ -40,6 +49,12 @@ export default function Contact() {
         if (!value.trim()) return "Email address is required";
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(value)) return "Please enter a valid email address";
+        return "";
+      case "company":
+        if (!value.trim()) return "Company name is required";
+        return "";
+      case "volume":
+        if (!value.trim()) return "Expected volume is required";
         return "";
       case "subject":
         if (!value.trim()) return "Subject is required";
@@ -87,7 +102,7 @@ export default function Contact() {
     });
 
     setErrors(newErrors);
-    setTouched({ name: true, email: true, subject: true, message: true });
+    setTouched({ name: true, email: true, phone: true, company: true, volume: true, subject: true, message: true });
 
     if (hasErrors) return;
 
@@ -98,7 +113,7 @@ export default function Contact() {
     
     setIsSubmitting(false);
     setIsSubmitted(true);
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({ name: "", email: "", phone: "", company: "", volume: "", subject: "", message: "" });
     setTouched({});
     setErrors({});
     
@@ -289,16 +304,52 @@ export default function Contact() {
                     />
                   </div>
 
-                  <InputField 
-                    id="subject"
-                    label="How can we help?"
-                    value={formData.subject}
-                    error={errors.subject}
-                    touched={touched.subject}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={isSubmitting}
-                  />
+                  <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
+                    <InputField 
+                      id="phone"
+                      type="tel"
+                      label="Phone Number (Optional)"
+                      value={formData.phone}
+                      error={errors.phone}
+                      touched={touched.phone}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={isSubmitting}
+                    />
+                    <InputField 
+                      id="company"
+                      label="Company Name"
+                      value={formData.company}
+                      error={errors.company}
+                      touched={touched.company}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
+                    <InputField 
+                      id="volume"
+                      label="Expected Volume (Meters)"
+                      value={formData.volume}
+                      error={errors.volume}
+                      touched={touched.volume}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={isSubmitting}
+                    />
+                    <InputField 
+                      id="subject"
+                      label="Product Interest / Subject"
+                      value={formData.subject}
+                      error={errors.subject}
+                      touched={touched.subject}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={isSubmitting}
+                    />
+                  </div>
 
                   <div className="relative group/field">
                     <textarea
