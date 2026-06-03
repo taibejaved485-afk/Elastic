@@ -203,7 +203,7 @@ export default function Footer() {
             
             <div className="space-y-6 mb-10">
               <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md font-light">
-                Established as a global pioneer in material science, <span className="text-white font-medium">AL-Ramz Exports</span> specializes in high-tenacity industrial webbing and precision textile grade elastics. Since 1994, we have delivered over 50 million meters of high-performance solutions that define the benchmarks of durability, recovery, and structural integrity for the world's most demanding industries.
+                Established as a global pioneer in material science, <span className="text-white font-medium">AL-Ramz Exports</span> specializes in high-tenacity industrial webbing and precision textile grade elastics. Since 1994, we have delivered high-performance solutions that define the benchmarks of durability, recovery, and structural integrity for the world's most demanding industries. Trusted Worldwide.
               </p>
               <p className="text-brand-blue/80 text-base leading-relaxed max-w-md font-light italic border-l-2 border-brand-blue/30 pl-4">
                 "We don't just manufacture elastic; we engineer the structural integrity of next-generation textiles."

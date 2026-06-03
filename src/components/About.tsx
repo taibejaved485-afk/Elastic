@@ -74,7 +74,7 @@ export default function About() {
           </h2>
           
           <TypingText 
-            text="We are the global benchmark for high-performance premium webbing. With over 50 Million Meters shipped, our materials are engineered for industrial, medical, and textile excellence. We combine specialized weaving techniques with modern polymer science to create the highest quality textile grade solutions."
+            text="We are the global benchmark for high-performance premium webbing. Trusted Worldwide, our materials are engineered for industrial, medical, and textile excellence. We combine specialized weaving techniques with modern polymer science to create the highest quality textile grade solutions."
             className="text-lg text-brand-slate dark:text-slate-400 mb-6 leading-relaxed min-h-[5em]"
           />
           
