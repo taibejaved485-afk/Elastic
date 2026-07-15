@@ -85,62 +85,6 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const words = ["meters shipped", "premium webbing", "textile grade", "industrial grade"];
   const [typingSpeed, setTypingSpeed] = useState(150);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Force essential attributes for autoplay compatibility in new browsers/private modes
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-    video.muted = true;
-    video.defaultMuted = true;
-
-    // Force the video element to load the sources
-    try {
-      video.load();
-    } catch (e) {
-      console.warn("video.load() error:", e);
-    }
-
-    const playVideo = () => {
-      if (video) {
-        video.play().catch((err) => {
-          console.log("Autoplay waiting for user gesture or loading: ", err.message);
-        });
-      }
-    };
-
-    // Attempt play immediately
-    playVideo();
-
-    // Listen to buffering/ready events to play as soon as video has loaded enough
-    video.addEventListener("loadedmetadata", playVideo);
-    video.addEventListener("canplay", playVideo);
-
-    // Play on first user interaction as a foolproof fallback
-    const handleInteraction = () => {
-      playVideo();
-      window.removeEventListener("click", handleInteraction);
-      window.removeEventListener("touchstart", handleInteraction);
-      window.removeEventListener("scroll", handleInteraction);
-    };
-
-    window.addEventListener("click", handleInteraction);
-    window.addEventListener("touchstart", handleInteraction);
-    window.addEventListener("scroll", handleInteraction);
-
-    return () => {
-      if (video) {
-        video.removeEventListener("loadedmetadata", playVideo);
-        video.removeEventListener("canplay", playVideo);
-      }
-      window.removeEventListener("click", handleInteraction);
-      window.removeEventListener("touchstart", handleInteraction);
-      window.removeEventListener("scroll", handleInteraction);
-    };
-  }, []);
 
   useEffect(() => {
     const handleTyping = () => {
@@ -173,31 +117,16 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-32 pb-36 lg:pb-32"
     >
-      {/* Background Video with premium overlay */}
+      {/* Background Image with premium overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
-        >
-          {/* 1. Custom User uploaded video (Highest Priority) */}
-          <source src="/custom-video.mp4?v=2" type="video/mp4" />
-          
-          {/* 2. Original local video */}
-          <source src="/hero-section-video.mp4?v=2" type="video/mp4" />
-
-          {/* 3. High-performance cloud CDN backup for guaranteed fast loading and instant playback */}
-          <source src="https://elastic-one.vercel.app/hero-section-video.mp4" type="video/mp4" />
-
-          {/* 4. High speed public textile weaving CDN fallback */}
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4" type="video/mp4" />
-        </video>
+        <img
+          src="https://i.pinimg.com/736x/ba/94/66/ba94660a1f738e96182a8ac3af213cb9.jpg"
+          alt="Alramz Premium Elastic Webbing Background"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.78] filter brightness-[0.72] contrast-[1.05] scale-[1.03] origin-center transition-all duration-1000"
+          referrerPolicy="no-referrer"
+        />
         {/* Soft, rich dark overlay for outstanding premium typography readability */}
-        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-black/45" />
         
         {/* Elegant bottom gradient fade to mask watermarks and blend into the next section */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent" />
