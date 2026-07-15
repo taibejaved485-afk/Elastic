@@ -86,6 +86,13 @@ export default function Hero() {
   const words = ["meters shipped", "premium webbing", "textile grade", "industrial grade"];
   const [typingSpeed, setTypingSpeed] = useState(150);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoSrc, setVideoSrc] = useState("/hero-section-video.mp4");
+
+  // Fallback function when local video fails to load
+  const handleVideoError = () => {
+    console.log("Local video failed to load, switching to high-speed CDN video...");
+    setVideoSrc("https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4");
+  };
 
   useEffect(() => {
     const playVideo = () => {
@@ -100,6 +107,14 @@ export default function Hero() {
     // Play on mount
     playVideo();
 
+    // Check if video loaded successfully within 2 seconds. If not, switch to the CDN fallback
+    const timeout = setTimeout(() => {
+      if (videoRef.current && (videoRef.current.paused || videoRef.current.readyState < 3)) {
+        console.log("Local video is taking too long or failing to decode. Swapping to premium CDN fallback video.");
+        setVideoSrc("https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4");
+      }
+    }, 2000);
+
     // Play on first user interaction as a foolproof fallback
     const handleInteraction = () => {
       playVideo();
@@ -111,10 +126,11 @@ export default function Hero() {
     window.addEventListener("touchstart", handleInteraction);
 
     return () => {
+      clearTimeout(timeout);
       window.removeEventListener("click", handleInteraction);
       window.removeEventListener("touchstart", handleInteraction);
     };
-  }, []);
+  }, [videoSrc]);
 
   useEffect(() => {
     const handleTyping = () => {
@@ -151,22 +167,17 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
           ref={videoRef}
+          src={videoSrc}
           autoPlay
           loop
           muted
           playsInline
+          defaultMuted
           preload="auto"
+          onError={handleVideoError}
+          poster="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1200&auto=format&fit=crop"
           className="w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
-        >
-          <source
-            src="/hero-section-video.mp4"
-            type="video/mp4"
-          />
-          <source
-            src="https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4"
-            type="video/mp4"
-          />
-        </video>
+        />
         {/* Soft, rich dark overlay for outstanding premium typography readability */}
         <div className="absolute inset-0 bg-black/55" />
         
