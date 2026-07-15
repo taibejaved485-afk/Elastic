@@ -177,15 +177,15 @@ export default function Hero() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
         >
-          {/* 1. Primary User-provided custom video (0715.mp4 placed in /public) */}
-          <source src="/0715.mp4" type="video/mp4" />
+          {/* 1. Custom User uploaded video (Highest Priority) */}
+          <source src="/custom-video.mp4" type="video/mp4" />
           
-          {/* 2. Original local backup video */}
+          {/* 2. Original local video */}
           <source src="/hero-section-video.mp4" type="video/mp4" />
-          
-          {/* 3. High-performance cloud CDN backup (3.6MB) for guaranteed fast loading */}
+
+          {/* 3. High-performance cloud CDN backup for guaranteed fast loading and instant playback */}
           <source src="https://elastic-one.vercel.app/hero-section-video.mp4" type="video/mp4" />
-          
+
           {/* 4. High speed public textile weaving CDN fallback */}
           <source src="https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4" type="video/mp4" />
         </video>
