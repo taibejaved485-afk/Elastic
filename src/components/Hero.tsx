@@ -117,161 +117,120 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-32 pb-36 lg:pb-32"
     >
-      {/* Mesh Gradient Background */}
+      {/* Background Video with premium overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-[0.22] filter brightness-75 scale-105"
+        >
+          <source
+            src="Hero section Video .mp4"
+            type="video/mp4"
+          />
+        </video>
+        {/* Deep, rich dark overlay for outstanding premium typography readability */}
+        <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-[1px]" />
+        
         <ParticleBackground mouseX={mouseX} mouseY={mouseY} />
         <motion.div 
-          className="absolute inset-0 bg-cover bg-center opacity-[0.07] mix-blend-overlay grayscale scale-110"
-          style={{ backgroundImage: `url('https://i.pinimg.com/1200x/71/86/d1/7186d1f0cb6f698ccc68de66f96455f6.jpg')`, x: springBgX, y: springBgY }}
-        />
-        <motion.div 
           style={{ x: springFloatX, y: springFloatY }}
-          className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue/20 via-transparent to-transparent blur-3xl animate-pulse" 
+          className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue/30 via-transparent to-transparent blur-3xl animate-pulse" 
         />
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
-        
-        {/* Floating Decorative Elements */}
-        <motion.div 
-          style={{ x: springFloatX, y: springFloatY, rotate: 15 }}
-          className="absolute top-1/4 left-1/4 w-64 h-64 border border-white/5 rounded-full blur-[2px]"
-        />
-        <motion.div 
-          style={{ x: springBgX, y: springBgY, rotate: -15 }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 border border-brand-blue/10 rounded-full blur-[1px]"
-        />
       </div>
 
-      <div className="w-full px-6 md:px-12 z-10">
-        <div className="grid lg:grid-cols-12 gap-20 items-center">
-          {/* Content Side */}
-          <div className="lg:col-span-7 relative z-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-brand-blue/10 border border-brand-blue/20 backdrop-blur-md mb-8">
-                <Sparkles size={14} className="text-brand-blue" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-blue">{config.heroBadge}</span>
-              </div>
-              
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black text-white leading-[1.1] sm:leading-[0.9] lg:leading-[0.85] tracking-tighter mb-8 max-w-4xl uppercase">
-                {config.heroTitle.split(" ").slice(0, -1).join(" ")} <br />
-                <motion.span 
-                  animate={{ 
-                    scale: [1, 1.02, 1],
-                    textShadow: [
-                      "0 0 10px rgba(37, 99, 235, 0.2)",
-                      "0 0 30px rgba(37, 99, 235, 0.5)",
-                      "0 0 10px rgba(37, 99, 235, 0.2)"
-                    ]
+      <div className="w-full px-6 md:px-12 z-10 max-w-5xl mx-auto">
+        <div className="flex flex-col items-center text-center relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center"
+          >
+            <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-brand-blue/10 border border-brand-blue/20 backdrop-blur-md mb-8">
+              <Sparkles size={14} className="text-brand-blue" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-blue">{config.heroBadge}</span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[6.5rem] font-black text-white leading-[1.1] sm:leading-[1.0] lg:leading-[0.9] tracking-tighter mb-8 uppercase max-w-4xl text-center">
+              {config.heroTitle.split(" ").slice(0, -1).join(" ")} <br />
+              <motion.span 
+                animate={{ 
+                  scale: [1, 1.02, 1],
+                  textShadow: [
+                    "0 0 10px rgba(37, 99, 235, 0.2)",
+                    "0 0 30px rgba(37, 99, 235, 0.5)",
+                    "0 0 10px rgba(37, 99, 235, 0.2)"
+                  ]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="text-stroke neon-glow italic inline-block py-2"
+              >
+                {config.heroTitle.split(" ").slice(-1)[0]}
+              </motion.span>
+            </h1>
+            
+            <p className="max-w-2xl text-lg sm:text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed font-light min-h-[4rem] text-center">
+              {config.heroSubtitle}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-8 mt-4 sm:mt-0">
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-primary w-full sm:w-auto px-12 py-6 text-sm uppercase tracking-[0.2em] flex items-center justify-center group relative overflow-hidden"
+              >
+                <motion.div 
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileHover={{ 
+                    scale: [1, 2],
+                    opacity: [0.4, 0],
                   }}
                   transition={{ 
-                    duration: 4, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
+                    duration: 1.2, 
+                    repeat: Infinity,
+                    ease: "easeOut"
                   }}
-                  className="text-stroke neon-glow italic inline-block py-2"
-                >
-                  {config.heroTitle.split(" ").slice(-1)[0]}
-                </motion.span>
-              </h1>
-              
-              <p className="max-w-xl text-lg sm:text-xl md:text-2xl text-slate-400 mb-12 leading-relaxed font-light min-h-[4rem]">
-                {config.heroSubtitle}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center gap-8 md:gap-6 mt-4 sm:mt-0">
-                <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="btn-primary w-full sm:w-auto px-12 py-6 text-sm uppercase tracking-[0.2em] flex items-center justify-center group relative overflow-hidden"
-                >
-                  <motion.div 
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileHover={{ 
-                      scale: [1, 2],
-                      opacity: [0.4, 0],
-                    }}
-                    transition={{ 
-                      duration: 1.2, 
-                      repeat: Infinity,
-                      ease: "easeOut"
-                    }}
-                    className="absolute inset-0 bg-white/30 rounded-full"
-                  />
-                  <span className="relative z-10 flex items-center">
-                    Explore Products <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform" />
-                  </span>
-                </motion.button>
-                <div className="flex items-center gap-4 text-white/50 text-[10px] sm:text-xs font-bold uppercase tracking-widest pl-2 group/teams cursor-default">
-                  <div className="flex -space-x-3">
-                    {[
-                      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=120&h=120&auto=format&fit=crop",
-                      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=120&h=120&auto=format&fit=crop",
-                      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=120&h=120&auto=format&fit=crop"
-                    ].map((url, i) => (
-                      <motion.div 
-                        key={i} 
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.5 + i * 0.1 }}
-                        whileHover={{ scale: 1.2, zIndex: 10, y: -5 }}
-                        className="w-10 h-10 rounded-full border-2 border-[#020617] bg-slate-800 overflow-hidden shadow-lg shadow-black/50 transition-all duration-300"
-                      >
-                        <img src={url} alt="Team Member" className="w-full h-full object-cover grayscale group-hover/teams:grayscale-0 transition-all duration-500" />
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-white font-black group-hover/teams:text-brand-blue transition-colors">2K+ TEAMS</span>
-                    <span className="text-[8px] opacity-60">TRUST OUR SCIENCE</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* High-End Visual Side */}
-          <div className="lg:col-span-5 hidden lg:block">
-            <motion.div
-              style={{
-                rotateX: springRotateX,
-                rotateY: springRotateY,
-                transformStyle: "preserve-3d",
-              }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-square"
-            >
-              {/* Hero Image Container */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl rounded-[4rem] border border-white/20 shadow-2xl overflow-hidden group/img"
-                style={{ transform: "translateZ(50px)" }}
-              >
-                <div className="absolute inset-0 opacity-20 dark:opacity-30 mix-blend-screen pointer-events-none">
-                  <LottieAnimation 
-                    animationUrl="https://lottie.host/81f8f74a-2544-482a-a92c-623b092fd6b2/v8G97uMOnJ.json"
-                    className="w-full h-full"
-                  />
-                </div>
-                <img 
-                  src="https://i.pinimg.com/1200x/71/86/d1/7186d1f0cb6f698ccc68de66f96455f6.jpg"
-                  alt="AL-Ramz Exports high-performance industrial textile weave"
-                  className="w-full h-full object-cover opacity-60 group-hover/img:scale-110 group-hover/img:opacity-80 transition-all duration-700"
-                  referrerPolicy="no-referrer"
-                  fetchPriority="high"
+                  className="absolute inset-0 bg-white/30 rounded-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 via-transparent to-transparent pointer-events-none" />
+                <span className="relative z-10 flex items-center">
+                  Explore Products <ArrowRight size={20} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                </span>
+              </motion.button>
+              <div className="flex items-center gap-4 text-white/50 text-[10px] sm:text-xs font-bold uppercase tracking-widest pl-2 group/teams cursor-default">
+                <div className="flex -space-x-3">
+                  {[
+                    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=120&h=120&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=120&h=120&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=120&h=120&auto=format&fit=crop"
+                  ].map((url, i) => (
+                    <motion.div 
+                      key={i} 
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.5 + i * 0.1 }}
+                      whileHover={{ scale: 1.2, zIndex: 10, y: -5 }}
+                      className="w-10 h-10 rounded-full border-2 border-[#020617] bg-slate-800 overflow-hidden shadow-lg shadow-black/50 transition-all duration-300"
+                    >
+                      <img src={url} alt="Team Member" className="w-full h-full object-cover grayscale group-hover/teams:grayscale-0 transition-all duration-500" />
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-white font-black group-hover/teams:text-brand-blue transition-colors">2K+ TEAMS</span>
+                  <span className="text-[8px] opacity-60">TRUST OUR SCIENCE</span>
+                </div>
               </div>
-
-              {/* Decorative rings around the visual */}
-              <div className="absolute -inset-10 border border-white/5 rounded-full scale-[1.1] opacity-50" />
-              <div className="absolute -inset-20 border border-brand-blue/10 rounded-full scale-[1.2] opacity-30" />
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
