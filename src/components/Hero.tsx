@@ -117,10 +117,12 @@ export default function Hero() {
       playVideo();
       window.removeEventListener("click", handleInteraction);
       window.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("scroll", handleInteraction);
     };
 
     window.addEventListener("click", handleInteraction);
     window.addEventListener("touchstart", handleInteraction);
+    window.addEventListener("scroll", handleInteraction);
 
     return () => {
       if (video) {
@@ -129,6 +131,7 @@ export default function Hero() {
       }
       window.removeEventListener("click", handleInteraction);
       window.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("scroll", handleInteraction);
     };
   }, []);
 
@@ -164,7 +167,7 @@ export default function Hero() {
       className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-32 pb-36 lg:pb-32"
     >
       {/* Background Video with premium overlay */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
         <video
           ref={videoRef}
           autoPlay
@@ -172,16 +175,18 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
-          poster="https://i.pinimg.com/736x/ba/94/66/ba94660a1f738e96182a8ac3af213cb9.jpg"
-          className="w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
         >
-          {/* 1. Fast, highly optimized Vercel CDN video (3.6MB) - Plays instantly */}
-          <source src="https://elastic-one.vercel.app/hero-section-video.mp4" type="video/mp4" />
+          {/* 1. Primary User-provided custom video (0715.mp4 placed in /public) */}
+          <source src="/0715.mp4" type="video/mp4" />
           
-          {/* 2. Local fallback video (14MB) */}
+          {/* 2. Original local backup video */}
           <source src="/hero-section-video.mp4" type="video/mp4" />
           
-          {/* 3. High-quality textile loom alternative fallback */}
+          {/* 3. High-performance cloud CDN backup (3.6MB) for guaranteed fast loading */}
+          <source src="https://elastic-one.vercel.app/hero-section-video.mp4" type="video/mp4" />
+          
+          {/* 4. High speed public textile weaving CDN fallback */}
           <source src="https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4" type="video/mp4" />
         </video>
         {/* Soft, rich dark overlay for outstanding premium typography readability */}

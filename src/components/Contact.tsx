@@ -107,9 +107,31 @@ export default function Contact() {
     if (hasErrors) return;
 
     setIsSubmitting(true);
+
+    // Save submission to localStorage
+    const newSubmission = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || "N/A",
+      company: formData.company,
+      volume: formData.volume,
+      subject: formData.subject,
+      message: formData.message,
+      timestamp: new Date().toLocaleString(),
+      status: "New"
+    };
+
+    try {
+      const saved = localStorage.getItem("alramz_contact_submissions");
+      const currentSubmissions = saved ? JSON.parse(saved) : [];
+      localStorage.setItem("alramz_contact_submissions", JSON.stringify([newSubmission, ...currentSubmissions]));
+    } catch (e) {
+      console.error("Error saving form submission", e);
+    }
     
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
     setIsSubmitting(false);
     setIsSubmitted(true);

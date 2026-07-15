@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useConfig, WebsiteConfig } from "../utils/ConfigContext";
 import InventoryDashboard from "./InventoryDashboard";
+import InboxPanel from "./InboxPanel";
 import { 
   Lock, Save, RotateCcw, CheckCircle, 
   Settings, Phone, Layout, BookOpen, Sparkles, 
   ArrowLeft, LogOut, Database, Clock, Check, 
-  HelpCircle, AlertCircle, ShieldAlert
+  HelpCircle, AlertCircle, ShieldAlert, Mail
 } from "lucide-react";
 
 export default function AdminPanel() {
@@ -16,7 +17,7 @@ export default function AdminPanel() {
     return sessionStorage.getItem("alramz_admin_authorized") === "true";
   });
   const [loginError, setLoginError] = useState("");
-  const [activeTab, setActiveTab] = useState<"general" | "hero" | "about" | "benefits" | "inventory" | "faq">("general");
+  const [activeTab, setActiveTab] = useState<"general" | "hero" | "about" | "benefits" | "inventory" | "faq" | "inbox">("general");
   const [tempConfig, setTempConfig] = useState<WebsiteConfig>({ ...config });
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "success">("idle");
   const [showResetConfirm, setShowResetConfirm] = useState(false);
@@ -305,6 +306,21 @@ export default function AdminPanel() {
                   <span>Industrial Inventory</span>
                 </div>
                 {activeTab === "inventory" && <Check className="w-3.5 h-3.5" />}
+              </button>
+
+              <button
+                onClick={() => setActiveTab("inbox")}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                  activeTab === "inbox"
+                    ? "bg-blue-600 text-white border-blue-500 shadow-md"
+                    : "text-slate-400 bg-slate-900/50 border-slate-800 hover:bg-slate-900 hover:text-white"
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Customer Inbox</span>
+                </div>
+                {activeTab === "inbox" && <Check className="w-3.5 h-3.5" />}
               </button>
 
               <div className="h-px bg-slate-850 my-3" />
@@ -737,13 +753,20 @@ export default function AdminPanel() {
                       </div>
                     </div>
                   )}
+
+                  {/* TAB 7: Customer Inbox */}
+                  {activeTab === "inbox" && (
+                    <div className="space-y-6">
+                      <InboxPanel />
+                    </div>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </main>
           </div>
 
-          {/* Persistent Save footer bar (hidden for inventory tab as inventory saves automatically, or for help tab) */}
-          {activeTab !== "inventory" && activeTab !== "faq" && (
+          {/* Persistent Save footer bar (hidden for inventory, faq, and inbox tabs as they save automatically) */}
+          {activeTab !== "inventory" && activeTab !== "faq" && activeTab !== "inbox" && (
             <footer className="bg-slate-900 border-t border-slate-800 px-6 py-4 flex flex-col sm:flex-row gap-4 justify-between items-center sticky bottom-0 z-20 shadow-lg">
               <button
                 onClick={() => setShowResetConfirm(true)}
