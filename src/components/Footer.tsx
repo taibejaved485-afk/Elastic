@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Phone, MapPin, Twitter, Linkedin, Facebook, Instagram, Send, ArrowRight, X, Spline } from "lucide-react";
+import { useConfig } from "../utils/ConfigContext";
 
 export default function Footer() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const { config } = useConfig();
 
   const modalContent: Record<string, { title: string; content: string }> = {
     privacy: {
@@ -311,15 +313,15 @@ export default function Footer() {
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {[
-            { icon: MapPin, text: "Small Industrial Estate, Faisalabad, PK", label: "Industrial Address", href: "https://maps.google.com/?q=Small+Industrial+Estate,Faisalabad,Punjab,Pakistan" },
+            { icon: MapPin, text: config.address, label: "Industrial Address", href: `https://maps.google.com/?q=${encodeURIComponent(config.address)}` },
             { 
               icon: Mail, 
-              text: "info[at]alramzexports.com", 
+              text: config.email.replace("@", "[at]"), 
               label: "Business Inquiry", 
-              href: "mailto:info@alramzexports.com",
-              displayOverride: "info@alramzexports.com"
+              href: `mailto:${config.email}`,
+              displayOverride: config.email
             },
-            { icon: Phone, text: "0331 1066453", label: "WhatsApp & Call", href: "https://wa.me/923311066453" }
+            { icon: Phone, text: config.phone, label: "WhatsApp & Call", href: `https://wa.me/${config.phone.replace(/[^0-9]/g, "")}` }
           ].map((item, i) => {
             const ContainerComponent = item.href ? motion.a : motion.div;
             return (
@@ -349,13 +351,18 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex flex-col items-center md:items-start gap-4">
-            <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">
+            <p 
+              className="text-slate-500 hover:text-slate-400 cursor-pointer text-[10px] font-black uppercase tracking-[0.3em] transition-colors select-none"
+              onClick={() => window.location.hash = "#/admin"}
+              title="Click to edit website content"
+            >
               © {new Date().getFullYear()} AL-Ramz Exports Premium Materials.
             </p>
-            <div className="flex gap-8 text-slate-600 text-[9px] font-black uppercase tracking-widest">
-              <button onClick={() => setActiveModal('privacy')} className="hover:text-brand-blue transition-colors">Privacy</button>
-              <button onClick={() => setActiveModal('terms')} className="hover:text-brand-blue transition-colors">Terms</button>
-              <button onClick={() => setActiveModal('cookies')} className="hover:text-brand-blue transition-colors">Cookies</button>
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-slate-600 text-[9px] font-black uppercase tracking-widest justify-center md:justify-start">
+              <button onClick={() => setActiveModal('privacy')} className="hover:text-brand-blue transition-colors cursor-pointer">Privacy</button>
+              <button onClick={() => setActiveModal('terms')} className="hover:text-brand-blue transition-colors cursor-pointer">Terms</button>
+              <button onClick={() => setActiveModal('cookies')} className="hover:text-brand-blue transition-colors cursor-pointer">Cookies</button>
+              <button onClick={() => window.location.hash = "#/admin"} className="text-brand-blue hover:text-blue-400 transition-colors cursor-pointer font-bold border-l border-white/10 pl-4">Admin Panel</button>
             </div>
           </div>
 

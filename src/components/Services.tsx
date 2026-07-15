@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Factory, Shirt, HeartPulse, Zap, Scissors, Dumbbell } from "lucide-react";
+import { useConfig } from "../utils/ConfigContext";
 
 const services = [
   {
@@ -35,6 +36,7 @@ const services = [
 ];
 
 export default function Services() {
+  const { config } = useConfig();
   return (
     <section id="services" className="pt-10 pb-16 px-6 md:px-12 lg:px-24 bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto">
@@ -42,8 +44,8 @@ export default function Services() {
           <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4 block">
             Product Line
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark dark:text-white mb-6">Industrial Grade Materials & Webbing</h2>
-          <p className="text-brand-slate dark:text-slate-400 max-w-2xl mx-auto">Engineered for superior stretch, recovery, and long-term durability in every industrial grade application. Trusted Worldwide for premium textile grade solutions.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark dark:text-white mb-6">{config.servicesTitle}</h2>
+          <p className="text-brand-slate dark:text-slate-400 max-w-2xl mx-auto">{config.servicesSubtitle}</p>
         </div>
 
         {/* Desktop Grid View */}

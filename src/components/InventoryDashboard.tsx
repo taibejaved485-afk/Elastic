@@ -12,7 +12,7 @@ interface InventoryRecord {
   lastUpdated: string;
 }
 
-export default function InventoryDashboard() {
+export default function InventoryDashboard({ readOnly = false }: { readOnly?: boolean }) {
   const [records, setRecords] = useState<InventoryRecord[]>([]);
   const [showToast, setShowToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
@@ -33,14 +33,16 @@ export default function InventoryDashboard() {
         { id: "2", itemName: "6 Taar Premium Stretch", category: "Garment Grade", quantity: "1200", unit: "Meters", lastUpdated: new Date().toLocaleDateString() },
       ];
       setRecords(initial);
-      localStorage.setItem("elastic_inventory_records", JSON.stringify(initial));
+      localStorage.setItem("alramz_inventory_records", JSON.stringify(initial));
     }
   }, []);
 
   // Save to localStorage whenever records change
   useEffect(() => {
-    localStorage.setItem("alramz_inventory_records", JSON.stringify(records));
-  }, [records]);
+    if (!readOnly) {
+      localStorage.setItem("alramz_inventory_records", JSON.stringify(records));
+    }
+  }, [records, readOnly]);
 
   const triggerToast = (msg: string) => {
     setToastMsg(msg);
@@ -100,8 +102,8 @@ export default function InventoryDashboard() {
   };
 
   return (
-    <section id="inventory-dashboard" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section id="inventory-dashboard" className={readOnly ? "py-24 bg-white dark:bg-slate-950 relative overflow-hidden" : "py-4 bg-transparent relative overflow-hidden"}>
+      <div className={readOnly ? "max-w-7xl mx-auto px-6 relative z-10" : "relative z-10"}>
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
             <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4 block">
@@ -109,32 +111,52 @@ export default function InventoryDashboard() {
             </span>
             <h2 className="text-4xl md:text-5xl font-bold dark:text-white mb-4">Industrial Records</h2>
             <p className="text-slate-500 dark:text-slate-400 max-w-xl">
-              Import, edit, and export your batch inventory data. All changes are saved locally for private industrial management.
+              {readOnly 
+                ? "Live tracked batch inventory records of premium materials and elastic webbing. Updated directly from the industrial control room."
+                : "Import, edit, and export your batch inventory data. All changes are saved locally for private industrial management."
+              }
             </p>
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <label className="flex items-center gap-2 px-5 py-3 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition-all cursor-pointer border border-slate-200 dark:border-slate-800">
-              <Upload className="w-4 h-4" />
-              <span className="font-semibold text-sm">Import CSV</span>
-              <input type="file" accept=".csv" onChange={handleImport} className="hidden" />
-            </label>
+            {readOnly ? (
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-500/10 text-emerald-500 rounded-full text-xs font-semibold uppercase tracking-wider border border-emerald-500/20">
+                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping" />
+                  Live Production Data
+                </span>
+                <a
+                  href="#/admin"
+                  className="flex items-center gap-2 px-5 py-3 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition-all cursor-pointer border border-slate-200 dark:border-slate-800 text-sm font-semibold"
+                >
+                  Manage Records
+                </a>
+              </div>
+            ) : (
+              <>
+                <label className="flex items-center gap-2 px-5 py-3 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition-all cursor-pointer border border-slate-200 dark:border-slate-800">
+                  <Upload className="w-4 h-4" />
+                  <span className="font-semibold text-sm">Import CSV</span>
+                  <input type="file" accept=".csv" onChange={handleImport} className="hidden" />
+                </label>
 
-            <button 
-              onClick={handleExport}
-              className="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20"
-            >
-              <FileSpreadsheet className="w-4 h-4" />
-              <span className="font-semibold text-sm">Export Excel/CSV</span>
-            </button>
+                <button 
+                  onClick={handleExport}
+                  className="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20"
+                >
+                  <FileSpreadsheet className="w-4 h-4" />
+                  <span className="font-semibold text-sm">Export Excel/CSV</span>
+                </button>
 
-            <button 
-              onClick={addNewRecord}
-              className="flex items-center gap-2 px-5 py-3 bg-brand-blue text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20"
-            >
-              <Plus className="w-4 h-4" />
-              <span className="font-semibold text-sm">Add Batch</span>
-            </button>
+                <button 
+                  onClick={addNewRecord}
+                  className="flex items-center gap-2 px-5 py-3 bg-brand-blue text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span className="font-semibold text-sm">Add Batch</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
 
@@ -148,7 +170,7 @@ export default function InventoryDashboard() {
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Category</th>
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Qty (Meters)</th>
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Last Updated</th>
-                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400 text-right">Actions</th>
+                  {!readOnly && <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400 text-right">Actions</th>}
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -162,51 +184,65 @@ export default function InventoryDashboard() {
                       className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors"
                     >
                       <td className="px-6 py-4">
-                        <input 
-                          type="text" 
-                          value={record.itemName} 
-                          onChange={(e) => updateRecord(record.id, "itemName", e.target.value)}
-                          className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-semibold text-slate-900 dark:text-white"
-                        />
+                        {readOnly ? (
+                          <span className="font-semibold text-slate-900 dark:text-white px-2 block">{record.itemName}</span>
+                        ) : (
+                          <input 
+                            type="text" 
+                            value={record.itemName} 
+                            onChange={(e) => updateRecord(record.id, "itemName", e.target.value)}
+                            className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-semibold text-slate-900 dark:text-white"
+                          />
+                        )}
                       </td>
                       <td className="px-6 py-4">
-                        <input 
-                          type="text" 
-                          value={record.category} 
-                          onChange={(e) => updateRecord(record.id, "category", e.target.value)}
-                          className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full text-slate-500 dark:text-slate-400"
-                        />
+                        {readOnly ? (
+                          <span className="text-slate-500 dark:text-slate-400 px-2 block">{record.category}</span>
+                        ) : (
+                          <input 
+                            type="text" 
+                            value={record.category} 
+                            onChange={(e) => updateRecord(record.id, "category", e.target.value)}
+                            className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full text-slate-500 dark:text-slate-400"
+                          />
+                        )}
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <Package className="w-4 h-4 text-brand-blue" />
-                          <input 
-                            type="number" 
-                            value={record.quantity} 
-                            onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
-                            className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-24 text-slate-900 dark:text-white font-mono"
-                          />
+                          {readOnly ? (
+                            <span className="text-slate-900 dark:text-white font-mono px-2 block font-semibold">{Number(record.quantity).toLocaleString()} Meters</span>
+                          ) : (
+                            <input 
+                              type="number" 
+                              value={record.quantity} 
+                              onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
+                              className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-24 text-slate-900 dark:text-white font-mono"
+                            />
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-slate-400 font-mono">
                         {record.lastUpdated}
                       </td>
-                      <td className="px-6 py-4 text-right">
-                        <button 
-                          onClick={() => deleteRecord(record.id)}
-                          className="p-3 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-xl transition-colors inline-flex items-center justify-center min-w-[44px] min-h-[44px]"
-                          aria-label="Delete record"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                      </td>
+                      {!readOnly && (
+                        <td className="px-6 py-4 text-right">
+                          <button 
+                            onClick={() => deleteRecord(record.id)}
+                            className="p-3 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-xl transition-colors inline-flex items-center justify-center min-w-[44px] min-h-[44px]"
+                            aria-label="Delete record"
+                          >
+                            <Trash2 className="w-5 h-5" />
+                          </button>
+                        </td>
+                      )}
                     </motion.tr>
                   ))}
                 </AnimatePresence>
                 {records.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-slate-400 italic">
-                      No records found. Import a CSV or add a new batch to get started.
+                    <td colSpan={readOnly ? 4 : 5} className="px-6 py-12 text-center text-slate-400 italic">
+                      No records found.
                     </td>
                   </tr>
                 )}
@@ -228,39 +264,54 @@ export default function InventoryDashboard() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex-1 mr-4">
-                    <input 
-                      type="text" 
-                      value={record.itemName} 
-                      onChange={(e) => updateRecord(record.id, "itemName", e.target.value)}
-                      className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-bold text-lg text-slate-900 dark:text-white"
-                    />
-                    <input 
-                      type="text" 
-                      value={record.category} 
-                      onChange={(e) => updateRecord(record.id, "category", e.target.value)}
-                      className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full text-sm text-slate-500 dark:text-slate-400"
-                    />
+                    {readOnly ? (
+                      <>
+                        <h4 className="font-bold text-lg text-slate-900 dark:text-white leading-snug">{record.itemName}</h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{record.category}</p>
+                      </>
+                    ) : (
+                      <>
+                        <input 
+                          type="text" 
+                          value={record.itemName} 
+                          onChange={(e) => updateRecord(record.id, "itemName", e.target.value)}
+                          className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-bold text-lg text-slate-900 dark:text-white"
+                        />
+                        <input 
+                          type="text" 
+                          value={record.category} 
+                          onChange={(e) => updateRecord(record.id, "category", e.target.value)}
+                          className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full text-sm text-slate-500 dark:text-slate-400"
+                        />
+                      </>
+                    )}
                   </div>
-                  <button 
-                    onClick={() => deleteRecord(record.id)}
-                    className="p-3 text-rose-500 bg-rose-50 dark:bg-rose-900/20 rounded-xl min-w-[44px] min-h-[44px] flex items-center justify-center"
-                    aria-label="Delete"
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
+                  {!readOnly && (
+                    <button 
+                      onClick={() => deleteRecord(record.id)}
+                      className="p-3 text-rose-500 bg-rose-50 dark:bg-rose-900/20 rounded-xl min-w-[44px] min-h-[44px] flex items-center justify-center"
+                      aria-label="Delete"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </button>
+                  )}
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
                   <div>
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Quantity (Meters)</span>
                     <div className="flex items-center gap-2">
-                       <Package className="w-4 h-4 text-brand-blue" />
-                       <input 
-                        type="number" 
-                        value={record.quantity} 
-                        onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
-                        className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-mono text-slate-900 dark:text-white"
-                      />
+                      <Package className="w-4 h-4 text-brand-blue" />
+                      {readOnly ? (
+                        <span className="font-mono font-semibold text-slate-900 dark:text-white">{Number(record.quantity).toLocaleString()}</span>
+                      ) : (
+                        <input 
+                          type="number" 
+                          value={record.quantity} 
+                          onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
+                          className="bg-transparent border-none focus:ring-2 focus:ring-brand-blue/30 rounded px-2 -mx-2 w-full font-mono text-slate-900 dark:text-white"
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="text-right">

@@ -1,43 +1,46 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Zap, ShieldCheck, Microscope, Earth } from "lucide-react";
-
-const benefits = [
-  {
-    title: "Super Stretch & Recovery",
-    description: "Our elastic can stretch up to 8 times its length and returns to its original size perfectly without losing its grip.",
-    icon: <Zap className="w-6 h-6" />,
-    color: "from-blue-500 to-cyan-400",
-    metric: "800%",
-    label: "Tensile Range"
-  },
-  {
-    title: "Skin-Safe & Hypoallergenic",
-    description: "Our fabrics are certified safe, allergy-free, and perfectly comfortable for long hours of direct contact with skin.",
-    icon: <ShieldCheck className="w-6 h-6" />,
-    color: "from-emerald-500 to-teal-400",
-    metric: "100%",
-    label: "Hypoallergenic"
-  },
-  {
-    title: "Perfect Quality Control",
-    description: "We scan every single meter with advanced sensors to ensure uniform thickness, strength, and tension throughout the roll.",
-    icon: <Microscope className="w-6 h-6" />,
-    color: "from-purple-500 to-indigo-400",
-    metric: "0.01μm",
-    label: "Tolerance"
-  },
-  {
-    title: "Long-Lasting Durability",
-    description: "Built to last through more than 5,000 washes without losing any of its stretch, strength, or premium shape.",
-    icon: <Earth className="w-6 h-6" />,
-    color: "from-orange-500 to-red-400",
-    metric: "5,000+",
-    label: "Cycle Count"
-  }
-];
+import { useConfig } from "../utils/ConfigContext";
 
 export default function WhyChooseUs() {
+  const { config } = useConfig();
+
+  const dynamicBenefits = [
+    {
+      title: config.stretchBenefitTitle,
+      description: config.stretchBenefitDesc,
+      icon: <Zap className="w-6 h-6" />,
+      color: "from-blue-500 to-cyan-400",
+      metric: config.elasticStretchVal,
+      label: "Tensile Range"
+    },
+    {
+      title: config.safeBenefitTitle,
+      description: config.safeBenefitDesc,
+      icon: <ShieldCheck className="w-6 h-6" />,
+      color: "from-emerald-500 to-teal-400",
+      metric: config.qualityMetricVal,
+      label: "Hypoallergenic"
+    },
+    {
+      title: config.qualityBenefitTitle,
+      description: config.qualityBenefitDesc,
+      icon: <Microscope className="w-6 h-6" />,
+      color: "from-purple-500 to-indigo-400",
+      metric: "0.01μm",
+      label: "Tolerance"
+    },
+    {
+      title: config.durabilityBenefitTitle,
+      description: config.durabilityBenefitDesc,
+      icon: <Earth className="w-6 h-6" />,
+      color: "from-orange-500 to-red-400",
+      metric: config.durabilityMetricVal,
+      label: "Cycle Count"
+    }
+  ];
+
   return (
     <section id="why-us" className="pt-20 sm:pt-24 pb-10 sm:pb-12 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 relative overflow-hidden">
       {/* Dynamic Background Elements */}
@@ -58,26 +61,32 @@ export default function WhyChooseUs() {
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-black text-brand-dark dark:text-white leading-[0.9] tracking-tighter mb-8"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-brand-dark dark:text-white leading-[1.1] tracking-tighter mb-4 uppercase"
           >
-            THE SCIENCE OF <br />
-            <span className="text-stroke-dark dark:text-stroke">ELASTICITY.</span>
+            {config.whyChooseUsTitle}
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mb-8"
+          >
+            {config.whyChooseUsSubtitle}
+          </motion.p>
           <motion.div 
             initial={{ width: 0 }}
             whileInView={{ width: "100px" }}
             className="h-1.5 bg-brand-blue mx-auto rounded-full"
           />
         </div>
-
+      
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Column */}
           <div className="lg:col-span-4 space-y-6">
-            {benefits.slice(0, 2).map((benefit, index) => (
+            {dynamicBenefits.slice(0, 2).map((benefit, index) => (
               <BenefitCard key={benefit.title} benefit={benefit} index={index} />
             ))}
           </div>
-
+      
           {/* Center Column - Visual Hub */}
           <div className="lg:col-span-4 flex justify-center py-4 lg:py-0">
             <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80">
@@ -115,10 +124,10 @@ export default function WhyChooseUs() {
               ))}
             </div>
           </div>
-
+      
           {/* Right Column */}
           <div className="lg:col-span-4 space-y-6">
-            {benefits.slice(2, 4).map((benefit, index) => (
+            {dynamicBenefits.slice(2, 4).map((benefit, index) => (
               <BenefitCard key={benefit.title} benefit={benefit} index={index + 2} />
             ))}
           </div>

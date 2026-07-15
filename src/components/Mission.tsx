@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Target, Shield, Zap, Heart } from "lucide-react";
+import { useConfig } from "../utils/ConfigContext";
 
 const missions = [
   {
@@ -25,6 +26,7 @@ const missions = [
 ];
 
 export default function Mission() {
+  const { config } = useConfig();
   return (
     <section id="mission" className="section-padding bg-brand-dark text-white">
       <div className="max-w-7xl mx-auto">
@@ -33,10 +35,10 @@ export default function Mission() {
             <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4 block">
               Quality Assurance
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Industrial Webbing <span className="text-brand-blue">Materials</span>.</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">{config.missionTitle}</h2>
           </div>
           <p className="text-slate-400 max-w-sm mb-2 text-sm leading-relaxed text-left lg:text-right">
-            We believe that the best products start with the best components. Our textile grade webbing is the backbone of premium manufacturing, Trusted Worldwide.
+            {config.missionDescription}
           </p>
         </div>
 

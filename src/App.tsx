@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import Hero from "./components/Hero";
@@ -17,8 +17,25 @@ import InventoryDashboard from "./components/InventoryDashboard";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
+import AdminPanel from "./components/AdminPanel";
+import { ConfigProvider } from "./utils/ConfigContext";
 
 export default function App() {
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      setCurrentHash(hash);
+      // Only scroll to top when switching between main routes (starting with #/)
+      if (hash.startsWith("#/")) {
+        window.scrollTo(0, 0);
+      }
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -40,49 +57,57 @@ export default function App() {
     revealElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [currentHash]);
+
+  const isAdminView = currentHash === "#/admin";
 
   return (
-    <div className="min-h-screen">
-      <ScrollProgressBar />
-      <Navbar />
-      <main>
-        <Hero />
-        <ShapeMorphDivider fill="fill-white dark:fill-slate-950" className="-mt-1 relative z-20" />
-        
-        <div id="about" className="reveal">
-          <About />
-        </div>
+    <ConfigProvider>
+      {isAdminView ? (
+        <AdminPanel />
+      ) : (
+        <div className="min-h-screen">
+          <ScrollProgressBar />
+          <Navbar />
+          <main>
+            <Hero />
+            <ShapeMorphDivider fill="fill-white dark:fill-slate-950" className="-mt-1 relative z-20" />
+            
+            <div id="about" className="reveal">
+              <About />
+            </div>
 
-        <div id="mission" className="reveal">
-          <Mission />
-        </div>
+            <div id="mission" className="reveal">
+              <Mission />
+            </div>
 
-        <div id="why-us" className="reveal">
-          <WhyChooseUs />
-        </div>
+            <div id="why-us" className="reveal">
+              <WhyChooseUs />
+            </div>
 
-        <div id="services" className="reveal">
-          <Services />
-        </div>
+            <div id="services" className="reveal">
+              <Services />
+            </div>
 
-        <div id="specs" className="reveal">
-          <ProductSpecs />
-        </div>
+            <div id="specs" className="reveal">
+              <ProductSpecs />
+            </div>
 
-        <div id="records" className="reveal">
-          <InventoryDashboard />
-        </div>
+            <div id="records" className="reveal">
+              <InventoryDashboard readOnly={true} />
+            </div>
 
-        <div id="contact" className="reveal">
-          <Contact />
+            <div id="contact" className="reveal">
+              <Contact />
+            </div>
+          </main>
+          
+          <Footer />
+          
+          <BackToTop />
         </div>
-      </main>
-      
-      <Footer />
-      
-      <BackToTop />
-    </div>
+      )}
+    </ConfigProvider>
   );
 }
 

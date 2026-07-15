@@ -1,5 +1,6 @@
 import { motion, useInView, animate } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { useConfig } from "../utils/ConfigContext";
 
 function Counter({ value, duration = 2, suffix = "" }: { value: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -20,7 +21,7 @@ function Counter({ value, duration = 2, suffix = "" }: { value: number; duration
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-function TypingText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
+function TypingText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number; key?: any }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const characters = text.split("");
@@ -57,6 +58,7 @@ function TypingText({ text, className, delay = 0 }: { text: string; className?: 
 }
 
 export default function About() {
+  const { config } = useConfig();
   return (
     <section id="about" className="pt-6 pb-16 px-6 md:px-12 lg:px-24 bg-white dark:bg-slate-950 overflow-hidden">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -69,12 +71,13 @@ export default function About() {
           <span className="text-brand-accent font-semibold tracking-widest uppercase text-sm mb-4 block">
             Our Story
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-8 leading-tight">
-            Mastering the science of textile grade industrial materials.
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-8 leading-tight animate-fade-in">
+            {config.aboutTitle}
           </h2>
           
           <TypingText 
-            text="We are the global benchmark for high-performance premium webbing. Trusted Worldwide, our materials are engineered for industrial, medical, and textile excellence. We combine specialized weaving techniques with modern polymer science to create the highest quality textile grade solutions."
+            key={config.aboutDescription}
+            text={config.aboutDescription}
             className="text-lg text-brand-slate dark:text-slate-400 mb-6 leading-relaxed min-h-[5em]"
           />
           

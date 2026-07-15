@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, MotionValue
 import { ArrowRight, Sparkles, Zap, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
 import LottieAnimation from "./LottieAnimation";
+import { useConfig } from "../utils/ConfigContext";
 
 function Particle({ p, mouseX, mouseY }: any) {
   const moveX = useTransform(mouseX, [-500, 500], [-p.drift, p.drift]);
@@ -51,6 +52,7 @@ function ParticleBackground({ mouseX, mouseY }: { mouseX: MotionValue<number>, m
 }
 
 export default function Hero() {
+  const { config } = useConfig();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -150,12 +152,11 @@ export default function Hero() {
             >
               <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-brand-blue/10 border border-brand-blue/20 backdrop-blur-md mb-8">
                 <Sparkles size={14} className="text-brand-blue" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-blue">Premium Latex & Polymer Elastic</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-blue">{config.heroBadge}</span>
               </div>
               
               <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-black text-white leading-[1.1] sm:leading-[0.9] lg:leading-[0.85] tracking-tighter mb-8 max-w-4xl uppercase">
-                Premium <br />
-                Webbing <br />
+                {config.heroTitle.split(" ").slice(0, -1).join(" ")} <br />
                 <motion.span 
                   animate={{ 
                     scale: [1, 1.02, 1],
@@ -172,21 +173,12 @@ export default function Hero() {
                   }}
                   className="text-stroke neon-glow italic inline-block py-2"
                 >
-                  Materials
+                  {config.heroTitle.split(" ").slice(-1)[0]}
                 </motion.span>
               </h1>
               
               <p className="max-w-xl text-lg sm:text-xl md:text-2xl text-slate-400 mb-12 leading-relaxed font-light min-h-[4rem]">
-                The world's most resilient elastic materials. Designed for <br className="sm:hidden" />
-                <span className="text-white font-bold inline-flex items-center gap-1">
-                  <span className="min-w-[1ch]">{displayText}</span>
-                  <motion.span 
-                    animate={{ opacity: [1, 0, 1] }} 
-                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                    className="w-1 h-6 bg-brand-blue rounded-full"
-                  />
-                </span> 
-                {" "}textiles and industrial engineering.
+                {config.heroSubtitle}
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-8 md:gap-6 mt-4 sm:mt-0">
