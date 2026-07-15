@@ -113,7 +113,7 @@ export default function Hero() {
     <section
       id="home"
       onMouseMove={handleMouseMove}
-      className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-32 pb-48 lg:pb-40"
+      className="min-h-screen flex items-center relative overflow-hidden hero-gradient pt-32 pb-36 lg:pb-32"
     >
       {/* Mesh Gradient Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

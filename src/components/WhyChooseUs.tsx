@@ -39,7 +39,7 @@ const benefits = [
 
 export default function WhyChooseUs() {
   return (
-    <section id="why-us" className="py-20 sm:py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 relative overflow-hidden">
+    <section id="why-us" className="pt-20 sm:pt-24 pb-10 sm:pb-12 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 relative overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-20 dark:opacity-40">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-blue/30 rounded-full blur-[120px] animate-pulse" />
@@ -125,7 +125,7 @@ export default function WhyChooseUs() {
         </div>
         
         {/* Enhanced Trusted By Banner */}
-        <div className="mt-20 pt-12 border-t border-slate-200 dark:border-white/5 relative">
+        <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-slate-200 dark:border-white/5 relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 bg-slate-50 dark:bg-[#020617] transition-colors duration-500">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/20">Strategic Partners</span>
           </div>

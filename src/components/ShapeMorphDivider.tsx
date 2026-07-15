@@ -46,7 +46,7 @@ export default function ShapeMorphDivider({ className, fill = "fill-slate-50 dar
         ref={svgRef}
         viewBox="0 0 1000 100"
         preserveAspectRatio="none"
-        className={`w-full h-[120px] sm:h-[180px] transform rotate-180 scale-y-[-1] transition-colors duration-300`}
+        className={`w-full h-[60px] sm:h-[80px] transform rotate-180 scale-y-[-1] transition-colors duration-300`}
       >
         <defs>
           <linearGradient id="morph-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
