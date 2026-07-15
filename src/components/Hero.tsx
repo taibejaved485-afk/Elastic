@@ -88,18 +88,29 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Force essential attributes for autoplay compatibility in new browsers/private modes
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.muted = true;
+    video.defaultMuted = true;
+
     const playVideo = () => {
-      if (videoRef.current) {
-        videoRef.current.defaultMuted = true;
-        videoRef.current.muted = true;
-        videoRef.current.play().catch((err) => {
-          console.log("Autoplay blocked by browser policy, waiting for user gesture.", err);
+      if (video) {
+        video.play().catch((err) => {
+          console.log("Autoplay waiting for user gesture or loading: ", err.message);
         });
       }
     };
-    
-    // Play on mount
+
+    // Attempt play immediately
     playVideo();
+
+    // Listen to buffering/ready events to play as soon as video has loaded enough
+    video.addEventListener("loadedmetadata", playVideo);
+    video.addEventListener("canplay", playVideo);
 
     // Play on first user interaction as a foolproof fallback
     const handleInteraction = () => {
@@ -112,6 +123,10 @@ export default function Hero() {
     window.addEventListener("touchstart", handleInteraction);
 
     return () => {
+      if (video) {
+        video.removeEventListener("loadedmetadata", playVideo);
+        video.removeEventListener("canplay", playVideo);
+      }
       window.removeEventListener("click", handleInteraction);
       window.removeEventListener("touchstart", handleInteraction);
     };
@@ -152,15 +167,20 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
           ref={videoRef}
-          src="/hero-section-video.mp4"
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          poster="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1200&auto=format&fit=crop"
           className="w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
-        />
+        >
+          {/* Main local video */}
+          <source src="/hero-section-video.mp4" type="video/mp4" />
+          {/* Optimized cloud hosted video backup (only 3.6MB) for instant load on fresh/slow browsers */}
+          <source src="https://elastic-one.vercel.app/hero-section-video.mp4" type="video/mp4" />
+          {/* High speed CDN backup of textile weaving machines */}
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4" type="video/mp4" />
+        </video>
         {/* Soft, rich dark overlay for outstanding premium typography readability */}
         <div className="absolute inset-0 bg-black/55" />
         
