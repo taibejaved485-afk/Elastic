@@ -156,7 +156,7 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-[0.55] filter brightness-75 scale-105"
+          className="w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-100"
         >
           <source
             src="/hero-section-video.mp4"
@@ -168,7 +168,7 @@ export default function Hero() {
           />
         </video>
         {/* Soft, rich dark overlay for outstanding premium typography readability */}
-        <div className="absolute inset-0 bg-slate-950/60" />
+        <div className="absolute inset-0 bg-black/55" />
         
         <ParticleBackground mouseX={mouseX} mouseY={mouseY} />
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
@@ -182,9 +182,9 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-brand-blue/10 border border-brand-blue/20 backdrop-blur-md mb-8">
-              <Sparkles size={14} className="text-brand-blue" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-blue">{config.heroBadge}</span>
+            <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-white/5 border border-white/15 backdrop-blur-md mb-8">
+              <Sparkles size={14} className="text-white/80" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/80">{config.heroBadge}</span>
             </div>
             
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[6.5rem] font-black text-white leading-[1.1] sm:leading-[1.0] lg:leading-[0.9] tracking-tighter mb-8 uppercase max-w-4xl text-center">
@@ -193,9 +193,9 @@ export default function Hero() {
                 animate={{ 
                   scale: [1, 1.02, 1],
                   textShadow: [
-                    "0 0 10px rgba(37, 99, 235, 0.2)",
-                    "0 0 30px rgba(37, 99, 235, 0.5)",
-                    "0 0 10px rgba(37, 99, 235, 0.2)"
+                    "0 0 10px rgba(255, 255, 255, 0.15)",
+                    "0 0 25px rgba(255, 255, 255, 0.4)",
+                    "0 0 10px rgba(255, 255, 255, 0.15)"
                   ]
                 }}
                 transition={{ 
@@ -272,13 +272,13 @@ export default function Hero() {
           {[1,2,3,4,5].map((i) => (
             <div key={i} className="flex items-center gap-12">
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">PREMIUM WEBBING</span>
-              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
+              <span className="text-white/20"> &nbsp;/&nbsp; </span>
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">TRUSTED WORLDWIDE</span>
-              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
+              <span className="text-white/20"> &nbsp;/&nbsp; </span>
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">TEXTILE GRADE</span>
-              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
+              <span className="text-white/20"> &nbsp;/&nbsp; </span>
               <span className="text-white/20 font-black text-xl sm:text-2xl uppercase tracking-tighter">INDUSTRIAL STRENGTH</span>
-              <span className="text-brand-blue"> &nbsp;/&nbsp; </span>
+              <span className="text-white/20"> &nbsp;/&nbsp; </span>
             </div>
           ))}
         </div>

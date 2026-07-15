@@ -60,7 +60,7 @@
   .stop-white { stop-color: #ffffff; }
   .stop-slate-50 { stop-color: #f8fafc; }
   .stop-slate-900 { stop-color: #0f172a; }
-  .stop-slate-950 { stop-color: #020617; }
+  .stop-slate-950 { stop-color: #0a0a0a; }
 
   .text-stroke {
     -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
@@ -71,7 +71,7 @@
     color: transparent;
   }
   .neon-glow {
-    text-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
   }
 }
 
@@ -87,7 +87,7 @@
   }
 
   .dark body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-neutral-950 text-slate-100;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -118,7 +118,7 @@
 }
 
 .hero-gradient {
-  background: #020617;
+  background: #0a0a0a;
 }
 
 @keyframes liquid {
