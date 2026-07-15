@@ -172,13 +172,16 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
+          poster="https://i.pinimg.com/736x/ba/94/66/ba94660a1f738e96182a8ac3af213cb9.jpg"
           className="w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
         >
-          {/* Main local video */}
-          <source src="/hero-section-video.mp4" type="video/mp4" />
-          {/* Optimized cloud hosted video backup (only 3.6MB) for instant load on fresh/slow browsers */}
+          {/* 1. Fast, highly optimized Vercel CDN video (3.6MB) - Plays instantly */}
           <source src="https://elastic-one.vercel.app/hero-section-video.mp4" type="video/mp4" />
-          {/* High speed CDN backup of textile weaving machines */}
+          
+          {/* 2. Local fallback video (14MB) */}
+          <source src="/hero-section-video.mp4" type="video/mp4" />
+          
+          {/* 3. High-quality textile loom alternative fallback */}
           <source src="https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4" type="video/mp4" />
         </video>
         {/* Soft, rich dark overlay for outstanding premium typography readability */}
