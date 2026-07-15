@@ -97,6 +97,13 @@ export default function Hero() {
     video.muted = true;
     video.defaultMuted = true;
 
+    // Force the video element to load the sources
+    try {
+      video.load();
+    } catch (e) {
+      console.warn("video.load() error:", e);
+    }
+
     const playVideo = () => {
       if (video) {
         video.play().catch((err) => {
@@ -178,10 +185,10 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
         >
           {/* 1. Custom User uploaded video (Highest Priority) */}
-          <source src="/custom-video.mp4" type="video/mp4" />
+          <source src="/custom-video.mp4?v=2" type="video/mp4" />
           
           {/* 2. Original local video */}
-          <source src="/hero-section-video.mp4" type="video/mp4" />
+          <source src="/hero-section-video.mp4?v=2" type="video/mp4" />
 
           {/* 3. High-performance cloud CDN backup for guaranteed fast loading and instant playback */}
           <source src="https://elastic-one.vercel.app/hero-section-video.mp4" type="video/mp4" />
