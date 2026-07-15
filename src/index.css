@@ -118,9 +118,7 @@
 }
 
 .hero-gradient {
-  background: radial-gradient(circle at 70% 30%, rgba(37, 99, 235, 0.2) 0%, transparent 60%),
-              radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
-              #020617;
+  background: #020617;
 }
 
 @keyframes liquid {

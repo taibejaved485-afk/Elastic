@@ -24,7 +24,7 @@ function Particle({ p, mouseX, mouseY }: any) {
         x: springX,
         y: springY,
       }}
-      className="absolute rounded-full bg-brand-blue/40 blur-[1px]"
+      className="absolute rounded-full bg-white/25 blur-[1px]"
     />
   );
 }
@@ -124,21 +124,18 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-[0.22] filter brightness-75 scale-105"
+          preload="auto"
+          className="w-full h-full object-cover opacity-[0.55] filter brightness-75 scale-105"
         >
           <source
-            src="Hero section Video .mp4"
+            src="/hero-section-video.mp4"
             type="video/mp4"
           />
         </video>
-        {/* Deep, rich dark overlay for outstanding premium typography readability */}
-        <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-[1px]" />
+        {/* Soft, rich dark overlay for outstanding premium typography readability */}
+        <div className="absolute inset-0 bg-slate-950/60" />
         
         <ParticleBackground mouseX={mouseX} mouseY={mouseY} />
-        <motion.div 
-          style={{ x: springFloatX, y: springFloatY }}
-          className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue/30 via-transparent to-transparent blur-3xl animate-pulse" 
-        />
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
       </div>
 
