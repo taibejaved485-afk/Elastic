@@ -50,7 +50,7 @@ export default function Navbar() {
           : "py-8 bg-transparent border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+      <div className="w-full px-6 md:px-12 flex justify-between items-center">
         <a 
           href="#home" 
           className={`text-2xl font-black italic tracking-tighter flex items-center gap-3 transition-colors duration-300 ${

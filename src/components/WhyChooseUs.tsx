@@ -4,32 +4,32 @@ import { Zap, ShieldCheck, Microscope, Earth } from "lucide-react";
 
 const benefits = [
   {
-    title: "Unrivaled Elasticity",
-    description: "Our proprietary polymers achieve up to 800% elongation with 99.9% recovery memory, setting a new industry benchmark.",
+    title: "Super Stretch & Recovery",
+    description: "Our elastic can stretch up to 8 times its length and returns to its original size perfectly without losing its grip.",
     icon: <Zap className="w-6 h-6" />,
     color: "from-blue-500 to-cyan-400",
     metric: "800%",
     label: "Tensile Range"
   },
   {
-    title: "Clinical Grade Safety",
-    description: "Certified hypoallergenic and OEKO-TEX® Standard 100 compliant, making our fibers safe for direct prolonged skin contact.",
+    title: "Skin-Safe & Hypoallergenic",
+    description: "Our fabrics are certified safe, allergy-free, and perfectly comfortable for long hours of direct contact with skin.",
     icon: <ShieldCheck className="w-6 h-6" />,
     color: "from-emerald-500 to-teal-400",
     metric: "100%",
     label: "Hypoallergenic"
   },
   {
-    title: "Precision Engineering",
-    description: "Every micron is scanned using advanced optical sensors to ensure uniform thickness and tension across thousands of meters.",
+    title: "Perfect Quality Control",
+    description: "We scan every single meter with advanced sensors to ensure uniform thickness, strength, and tension throughout the roll.",
     icon: <Microscope className="w-6 h-6" />,
     color: "from-purple-500 to-indigo-400",
     metric: "0.01μm",
     label: "Tolerance"
   },
   {
-    title: "Infinite Life Cycle",
-    description: "Engineered to withstand 5,000+ high-intensity wash cycles without losing tensile strength or structural integrity.",
+    title: "Long-Lasting Durability",
+    description: "Built to last through more than 5,000 washes without losing any of its stretch, strength, or premium shape.",
     icon: <Earth className="w-6 h-6" />,
     color: "from-orange-500 to-red-400",
     metric: "5,000+",

@@ -139,7 +139,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
+      <div className="w-full px-6 md:px-12 z-10">
         <div className="grid lg:grid-cols-12 gap-20 items-center">
           {/* Content Side */}
           <div className="lg:col-span-7 relative z-20">
