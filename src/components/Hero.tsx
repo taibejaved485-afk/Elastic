@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, MotionValue } from "motion/react";
 import { ArrowRight, Sparkles, Zap, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -85,6 +85,36 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const words = ["meters shipped", "premium webbing", "textile grade", "industrial grade"];
   const [typingSpeed, setTypingSpeed] = useState(150);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.muted = true;
+        videoRef.current.play().catch((err) => {
+          console.log("Autoplay blocked by browser policy, waiting for user gesture.", err);
+        });
+      }
+    };
+    
+    // Play on mount
+    playVideo();
+
+    // Play on first user interaction as a foolproof fallback
+    const handleInteraction = () => {
+      playVideo();
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+
+    window.addEventListener("click", handleInteraction);
+    window.addEventListener("touchstart", handleInteraction);
+
+    return () => {
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+  }, []);
 
   useEffect(() => {
     const handleTyping = () => {
@@ -120,6 +150,7 @@ export default function Hero() {
       {/* Background Video with premium overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
@@ -129,6 +160,10 @@ export default function Hero() {
         >
           <source
             src="/hero-section-video.mp4"
+            type="video/mp4"
+          />
+          <source
+            src="https://assets.mixkit.co/videos/preview/mixkit-weaving-loom-machine-making-fabric-40552-large.mp4"
             type="video/mp4"
           />
         </video>
