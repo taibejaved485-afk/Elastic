@@ -156,7 +156,7 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-100"
+          className="w-full h-full object-cover opacity-[0.75] filter brightness-90 scale-[1.12] origin-center"
         >
           <source
             src="/hero-section-video.mp4"
@@ -169,6 +169,9 @@ export default function Hero() {
         </video>
         {/* Soft, rich dark overlay for outstanding premium typography readability */}
         <div className="absolute inset-0 bg-black/55" />
+        
+        {/* Elegant bottom gradient fade to mask watermarks and blend into the next section */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent" />
         
         <ParticleBackground mouseX={mouseX} mouseY={mouseY} />
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
