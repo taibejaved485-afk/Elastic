@@ -95,32 +95,32 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen w-full bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
       
       {/* Auth Screen */}
       {!isAuthorized ? (
-        <div className="flex-1 flex flex-col items-center justify-center p-6 bg-[#090D16]">
+        <div className="flex-1 flex flex-col items-center justify-center p-6 bg-slate-100">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="w-full max-w-md bg-slate-900 border border-slate-800 p-8 sm:p-10 rounded-3xl shadow-xl text-center relative"
+            className="w-full max-w-md bg-white border border-slate-200 p-8 sm:p-10 rounded-3xl shadow-lg text-center relative"
           >
             <button 
               onClick={handleGoHome}
-              className="absolute top-6 left-6 text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 text-xs"
+              className="absolute top-6 left-6 text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1.5 text-xs font-semibold"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> Site
             </button>
 
-            <div className="w-16 h-16 bg-blue-600/10 rounded-2xl flex items-center justify-center text-blue-500 mx-auto mb-6 border border-blue-500/10 mt-4">
+            <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mx-auto mb-6 border border-blue-100 mt-4">
               <Lock className="w-8 h-8" />
             </div>
             
-            <h3 className="text-xl font-bold tracking-tight mb-2 text-white">
+            <h3 className="text-xl font-bold tracking-tight mb-2 text-slate-900">
               Admin Access Required
             </h3>
-            <p className="text-slate-400 text-xs max-w-xs mx-auto mb-8">
+            <p className="text-slate-500 text-xs max-w-xs mx-auto mb-8">
               Verify your security credentials to manage live catalogs, contact info, and production batches.
             </p>
 
@@ -131,26 +131,26 @@ export default function AdminPanel() {
                   placeholder="Enter access code (admin123)"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm outline-none text-center transition-all text-white placeholder:text-slate-600"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm outline-none text-center transition-all text-slate-900 placeholder:text-slate-400 focus:bg-white"
                   autoFocus
                 />
               </div>
 
               {loginError && (
-                <p className="text-rose-400 text-xs flex items-center gap-1.5 justify-center bg-rose-500/10 py-2.5 px-3 rounded-lg border border-rose-500/10">
+                <p className="text-rose-600 text-xs flex items-center gap-1.5 justify-center bg-rose-50 py-2.5 px-3 rounded-lg border border-rose-150">
                   <ShieldAlert className="w-3.5 h-3.5 shrink-0" /> {loginError}
                 </p>
               )}
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white transition-colors flex items-center justify-center gap-2 mt-2"
+                className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white transition-colors flex items-center justify-center gap-2 mt-2 shadow-md"
               >
                 Sign In
               </button>
             </form>
 
-            <div className="mt-8 pt-6 border-t border-slate-800 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+            <div className="mt-8 pt-6 border-t border-slate-200 flex items-center justify-between text-[10px] text-slate-400 font-mono">
               <span>ALR-OPERATOR</span>
               <span>{time.toLocaleTimeString()}</span>
             </div>
@@ -161,7 +161,7 @@ export default function AdminPanel() {
         <div className="flex-1 flex flex-col">
           
           {/* Elegant Top Header */}
-          <header className="bg-slate-900 border-b border-slate-800 px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 sticky top-0 z-30 shadow-md">
+          <header className="bg-white border-b border-slate-200 px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 sticky top-0 z-30 shadow-xs">
             
             {/* Brand Logo & Info */}
             <div className="flex items-center gap-3.5 w-full sm:w-auto">
@@ -170,10 +170,10 @@ export default function AdminPanel() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-md font-bold tracking-tight uppercase text-white">
+                  <h1 className="text-md font-bold tracking-tight uppercase text-slate-900">
                     Al-Ramz Exports
                   </h1>
-                  <span className="text-[9px] uppercase font-bold bg-blue-600/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/10 tracking-wider">
+                  <span className="text-[9px] uppercase font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded border border-blue-200 tracking-wider">
                     Control Panel
                   </span>
                 </div>
@@ -187,13 +187,13 @@ export default function AdminPanel() {
             <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
               <button
                 onClick={handleGoHome}
-                className="px-4 py-2.5 bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer border border-slate-700/50"
+                className="px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer border border-slate-200 shadow-xs"
               >
-                <ArrowLeft className="w-3.5 h-3.5 text-blue-500" /> Return to Website
+                <ArrowLeft className="w-3.5 h-3.5 text-blue-600" /> Return to Website
               </button>
               <button
                 onClick={handleLogout}
-                className="p-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 rounded-xl transition-all cursor-pointer border border-rose-500/10"
+                className="p-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl transition-all cursor-pointer border border-rose-200"
                 title="Log Out Operator"
               >
                 <LogOut className="w-4 h-4" />
@@ -202,24 +202,24 @@ export default function AdminPanel() {
           </header>
 
           {/* Quick Metrics (Simple, Muted row) */}
-          <section className="bg-slate-900/40 border-b border-slate-850 py-3 px-6 sm:px-8">
-            <div className="max-w-7xl mx-auto flex flex-wrap gap-x-8 gap-y-2 text-xs text-slate-400">
+          <section className="bg-slate-100 border-b border-slate-200 py-3 px-6 sm:px-8">
+            <div className="w-full flex flex-wrap gap-x-8 gap-y-2 text-xs text-slate-500">
               <div>
-                <span className="text-slate-500">Active Modules:</span> <span className="font-mono text-slate-300 font-bold">5 Sections</span>
+                <span className="text-slate-500">Active Modules:</span> <span className="font-mono text-slate-700 font-bold">5 Sections</span>
               </div>
-              <div className="hidden sm:inline">|</div>
+              <div className="hidden sm:inline text-slate-350">|</div>
               <div>
-                <span className="text-slate-500">Security Scope:</span> <span className="font-mono text-slate-300 font-bold">Local Sandboxed Cache</span>
+                <span className="text-slate-500">Security Scope:</span> <span className="font-mono text-slate-700 font-bold">Local Sandboxed Cache</span>
               </div>
-              <div className="hidden sm:inline">|</div>
+              <div className="hidden sm:inline text-slate-350">|</div>
               <div>
-                <span className="text-slate-500">Export Inventory:</span> <span className="font-mono text-slate-300 font-bold">{getBatchCount()} Active Batches</span>
+                <span className="text-slate-500">Export Inventory:</span> <span className="font-mono text-slate-700 font-bold">{getBatchCount()} Active Batches</span>
               </div>
             </div>
           </section>
 
           {/* Workspace split layout */}
-          <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 gap-6">
+          <div className="flex-1 flex flex-col lg:flex-row w-full p-4 sm:p-6 lg:p-8 gap-6">
             
             {/* Sidebar Navigation */}
             <aside className="w-full lg:w-64 shrink-0 flex flex-col gap-1.5">
@@ -232,7 +232,7 @@ export default function AdminPanel() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   activeTab === "general"
                     ? "bg-blue-600 text-white border-blue-500 shadow-md"
-                    : "text-slate-400 bg-slate-900/50 border-slate-800 hover:bg-slate-900 hover:text-white"
+                    : "text-slate-600 bg-white border-slate-200 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -247,7 +247,7 @@ export default function AdminPanel() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   activeTab === "hero"
                     ? "bg-blue-600 text-white border-blue-500 shadow-md"
-                    : "text-slate-400 bg-slate-900/50 border-slate-800 hover:bg-slate-900 hover:text-white"
+                    : "text-slate-600 bg-white border-slate-200 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -262,7 +262,7 @@ export default function AdminPanel() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   activeTab === "about"
                     ? "bg-blue-600 text-white border-blue-500 shadow-md"
-                    : "text-slate-400 bg-slate-900/50 border-slate-800 hover:bg-slate-900 hover:text-white"
+                    : "text-slate-600 bg-white border-slate-200 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -277,7 +277,7 @@ export default function AdminPanel() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   activeTab === "benefits"
                     ? "bg-blue-600 text-white border-blue-500 shadow-md"
-                    : "text-slate-400 bg-slate-900/50 border-slate-800 hover:bg-slate-900 hover:text-white"
+                    : "text-slate-600 bg-white border-slate-200 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -287,7 +287,7 @@ export default function AdminPanel() {
                 {activeTab === "benefits" && <Check className="w-3.5 h-3.5" />}
               </button>
 
-              <div className="h-px bg-slate-850 my-3" />
+              <div className="h-px bg-slate-200 my-3" />
 
               <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-3 mb-2 block">
                 Database Logistics
@@ -298,7 +298,7 @@ export default function AdminPanel() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   activeTab === "inventory"
                     ? "bg-emerald-600 text-white border-emerald-500 shadow-md"
-                    : "text-emerald-400 bg-emerald-500/5 border-emerald-500/10 hover:bg-emerald-500/10 hover:text-emerald-300"
+                    : "text-emerald-600 bg-white border-slate-200 hover:bg-slate-50 hover:text-emerald-700"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -313,7 +313,7 @@ export default function AdminPanel() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   activeTab === "inbox"
                     ? "bg-blue-600 text-white border-blue-500 shadow-md"
-                    : "text-slate-400 bg-slate-900/50 border-slate-800 hover:bg-slate-900 hover:text-white"
+                    : "text-slate-600 bg-white border-slate-200 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -323,7 +323,7 @@ export default function AdminPanel() {
                 {activeTab === "inbox" && <Check className="w-3.5 h-3.5" />}
               </button>
 
-              <div className="h-px bg-slate-850 my-3" />
+              <div className="h-px bg-slate-200 my-3" />
 
               <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-3 mb-2 block">
                 Information
@@ -334,7 +334,7 @@ export default function AdminPanel() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   activeTab === "faq"
                     ? "bg-blue-600 text-white border-blue-500 shadow-md"
-                    : "text-slate-400 bg-slate-900/50 border-slate-800 hover:bg-slate-900 hover:text-white"
+                    : "text-slate-600 bg-white border-slate-200 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -346,7 +346,7 @@ export default function AdminPanel() {
             </aside>
 
             {/* Main Form Fields Container */}
-            <main className="flex-1 bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
+            <main className="flex-1 bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab}
@@ -359,53 +359,53 @@ export default function AdminPanel() {
                   {activeTab === "general" && (
                     <div className="space-y-6">
                       <div>
-                        <h2 className="text-lg font-bold text-white mb-1">Company Info & Contacts</h2>
-                        <p className="text-xs text-slate-400">Configure global parameters like brand names, WhatsApp numbers, and physical office addresses.</p>
+                        <h2 className="text-lg font-bold text-slate-900 mb-1">Company Info & Contacts</h2>
+                        <p className="text-xs text-slate-500">Configure global parameters like brand names, WhatsApp numbers, and physical office addresses.</p>
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-5 pt-4">
                         <div>
-                          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                             Company Brand Name
                           </label>
                           <input
                             type="text"
                             value={tempConfig.companyName}
                             onChange={(e) => handleFieldChange("companyName", e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                            className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                           />
                         </div>
                         <div>
-                          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                             WhatsApp Phone Line
                           </label>
                           <input
                             type="text"
                             value={tempConfig.phone}
                             onChange={(e) => handleFieldChange("phone", e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                            className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                           />
                         </div>
                         <div>
-                          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                             Support & Inquiry Email
                           </label>
                           <input
                             type="text"
                             value={tempConfig.email}
                             onChange={(e) => handleFieldChange("email", e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                            className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                           />
                         </div>
                         <div>
-                          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                             Registered Office Address
                           </label>
                           <input
                             type="text"
                             value={tempConfig.address}
                             onChange={(e) => handleFieldChange("address", e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                            className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                           />
                         </div>
                       </div>
@@ -416,44 +416,44 @@ export default function AdminPanel() {
                   {activeTab === "hero" && (
                     <div className="space-y-6">
                       <div>
-                        <h2 className="text-lg font-bold text-white mb-1">Hero Banner</h2>
-                        <p className="text-xs text-slate-400">Configure text parameters that populate the top of the main page.</p>
+                        <h2 className="text-lg font-bold text-slate-900 mb-1">Hero Banner</h2>
+                        <p className="text-xs text-slate-500">Configure text parameters that populate the top of the main page.</p>
                       </div>
 
                       <div className="space-y-5 pt-4">
                         <div className="grid md:grid-cols-3 gap-5">
                           <div className="md:col-span-2">
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               Display Headline Title
                             </label>
                             <input
                               type="text"
                               value={tempConfig.heroTitle}
                               onChange={(e) => handleFieldChange("heroTitle", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                             />
                           </div>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               Hero Mini Badge Text
                             </label>
                             <input
                               type="text"
                               value={tempConfig.heroBadge}
                               onChange={(e) => handleFieldChange("heroBadge", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                             />
                           </div>
                         </div>
                         <div>
-                          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                             Pitch Description Subtitle
                           </label>
                           <textarea
                             rows={3}
                             value={tempConfig.heroSubtitle}
                             onChange={(e) => handleFieldChange("heroSubtitle", e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all resize-none leading-relaxed"
+                            className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all resize-none leading-relaxed focus:bg-white"
                           />
                         </div>
                       </div>
@@ -464,54 +464,54 @@ export default function AdminPanel() {
                   {activeTab === "about" && (
                     <div className="space-y-6">
                       <div>
-                        <h2 className="text-lg font-bold text-white mb-1">Profile & Mission Values</h2>
-                        <p className="text-xs text-slate-400">Modify the comprehensive background descriptions outlining manufacturing quality and goals.</p>
+                        <h2 className="text-lg font-bold text-slate-900 mb-1">Profile & Mission Values</h2>
+                        <p className="text-xs text-slate-500">Modify the comprehensive background descriptions outlining manufacturing quality and goals.</p>
                       </div>
 
                       <div className="space-y-5 pt-4">
                         <div className="space-y-4">
-                          <h4 className="text-xs font-bold text-blue-400 uppercase tracking-wider">About Section</h4>
+                          <h4 className="text-xs font-bold text-blue-600 uppercase tracking-wider">About Section</h4>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               About Header
                             </label>
                             <input
                               type="text"
                               value={tempConfig.aboutTitle}
                               onChange={(e) => handleFieldChange("aboutTitle", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                             />
                           </div>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               About Detailed Narrative
                             </label>
                             <textarea
                               rows={3}
                               value={tempConfig.aboutDescription}
                               onChange={(e) => handleFieldChange("aboutDescription", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all resize-none leading-relaxed"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all resize-none leading-relaxed focus:bg-white"
                             />
                           </div>
                         </div>
 
-                        <div className="h-px bg-slate-800 my-4" />
+                        <div className="h-px bg-slate-200 my-4" />
 
                         <div className="space-y-4">
-                          <h4 className="text-xs font-bold text-blue-400 uppercase tracking-wider">Mission Section</h4>
+                          <h4 className="text-xs font-bold text-blue-600 uppercase tracking-wider">Mission Section</h4>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               Mission Header Title
                             </label>
                             <input
                               type="text"
                               value={tempConfig.missionTitle}
                               onChange={(e) => handleFieldChange("missionTitle", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                             />
                           </div>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               Mission Statement Text
                             </label>
                             <textarea
@@ -530,65 +530,65 @@ export default function AdminPanel() {
                   {activeTab === "benefits" && (
                     <div className="space-y-6">
                       <div>
-                        <h2 className="text-lg font-bold text-white mb-1">Bento Grid Benefits & Metrics</h2>
-                        <p className="text-xs text-slate-400">Configure key headlines, bento descriptions, and physical textile specs.</p>
+                        <h2 className="text-lg font-bold text-slate-900 mb-1">Bento Grid Benefits & Metrics</h2>
+                        <p className="text-xs text-slate-500">Configure key headlines, bento descriptions, and physical textile specs.</p>
                       </div>
 
                       <div className="space-y-5 pt-4">
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               Services Grid Header
                             </label>
                             <input
                               type="text"
                               value={tempConfig.servicesTitle}
                               onChange={(e) => handleFieldChange("servicesTitle", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                             />
                           </div>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               "Why Choose Us" Header
                             </label>
                             <input
                               type="text"
                               value={tempConfig.whyChooseUsTitle}
                               onChange={(e) => handleFieldChange("whyChooseUsTitle", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all focus:bg-white"
                             />
                           </div>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               Services Subtitle
                             </label>
                             <textarea
                               rows={2}
                               value={tempConfig.servicesSubtitle}
                               onChange={(e) => handleFieldChange("servicesSubtitle", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl p-3 text-xs text-white outline-none resize-none"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl p-3 text-xs text-slate-900 outline-none resize-none focus:bg-white"
                             />
                           </div>
                           <div>
-                            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wide block mb-1.5">
+                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block mb-1.5">
                               "Why Choose Us" Subtext
                             </label>
                             <textarea
                               rows={2}
                               value={tempConfig.whyChooseUsSubtitle}
                               onChange={(e) => handleFieldChange("whyChooseUsSubtitle", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl p-3 text-xs text-white outline-none resize-none"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl p-3 text-xs text-slate-900 outline-none resize-none focus:bg-white"
                             />
                           </div>
                         </div>
 
-                        <div className="h-px bg-slate-800 my-4" />
-                        <h4 className="text-xs font-bold text-blue-400 uppercase tracking-wider">Configure Specific Benefit Cells</h4>
+                        <div className="h-px bg-slate-200 my-4" />
+                        <h4 className="text-xs font-bold text-blue-600 uppercase tracking-wider">Configure Specific Benefit Cells</h4>
                         
                         <div className="grid md:grid-cols-2 gap-5">
                           {/* Card 1 */}
-                          <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3">
-                            <span className="text-[10px] font-bold text-blue-400 block uppercase">Benefit 1: Elastic Webbing</span>
+                          <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                            <span className="text-[10px] font-bold text-blue-600 block uppercase">Benefit 1: Elastic Webbing</span>
                             <div className="grid grid-cols-3 gap-2">
                               <div>
                                 <label className="text-[9px] text-slate-500 uppercase block mb-1">Metric</label>
@@ -596,7 +596,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value={tempConfig.elasticStretchVal}
                                   onChange={(e) => handleFieldChange("elasticStretchVal", e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg font-bold text-center text-blue-400 outline-none"
+                                  className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg font-bold text-center text-blue-600 outline-none"
                                 />
                               </div>
                               <div className="col-span-2">
@@ -605,7 +605,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value={tempConfig.stretchBenefitTitle}
                                   onChange={(e) => handleFieldChange("stretchBenefitTitle", e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg font-semibold text-white outline-none"
+                                  className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg font-semibold text-slate-900 outline-none"
                                 />
                               </div>
                             </div>
@@ -615,14 +615,14 @@ export default function AdminPanel() {
                                 rows={2}
                                 value={tempConfig.stretchBenefitDesc}
                                 onChange={(e) => handleFieldChange("stretchBenefitDesc", e.target.value)}
-                                className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg text-slate-300 outline-none resize-none"
+                                className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg text-slate-700 outline-none resize-none"
                               />
                             </div>
                           </div>
 
                           {/* Card 2 */}
-                          <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3">
-                            <span className="text-[10px] font-bold text-emerald-400 block uppercase">Benefit 2: Skin-Safe Fabric</span>
+                          <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                            <span className="text-[10px] font-bold text-emerald-600 block uppercase">Benefit 2: Skin-Safe Fabric</span>
                             <div className="grid grid-cols-3 gap-2">
                               <div>
                                 <label className="text-[9px] text-slate-500 uppercase block mb-1">Metric</label>
@@ -630,7 +630,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value={tempConfig.qualityMetricVal}
                                   onChange={(e) => handleFieldChange("qualityMetricVal", e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg font-bold text-center text-emerald-400 outline-none"
+                                  className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg font-bold text-center text-emerald-600 outline-none"
                                 />
                               </div>
                               <div className="col-span-2">
@@ -639,7 +639,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value={tempConfig.safeBenefitTitle}
                                   onChange={(e) => handleFieldChange("safeBenefitTitle", e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg font-semibold text-white outline-none"
+                                  className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg font-semibold text-slate-900 outline-none"
                                 />
                               </div>
                             </div>
@@ -649,14 +649,14 @@ export default function AdminPanel() {
                                 rows={2}
                                 value={tempConfig.safeBenefitDesc}
                                 onChange={(e) => handleFieldChange("safeBenefitDesc", e.target.value)}
-                                className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg text-slate-300 outline-none resize-none"
+                                className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg text-slate-700 outline-none resize-none"
                               />
                             </div>
                           </div>
 
                           {/* Card 3 */}
-                          <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3">
-                            <span className="text-[10px] font-bold text-purple-400 block uppercase">Benefit 3: Sensor Web Scanning</span>
+                          <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                            <span className="text-[10px] font-bold text-purple-600 block uppercase">Benefit 3: Sensor Web Scanning</span>
                             <div className="grid grid-cols-3 gap-2">
                               <div>
                                 <label className="text-[9px] text-slate-500 uppercase block mb-1">Metric</label>
@@ -664,7 +664,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value="0.01μm"
                                   disabled
-                                  className="w-full bg-slate-900/50 border border-slate-800/80 text-xs p-2 rounded-lg font-bold text-center text-purple-400/55 cursor-not-allowed outline-none"
+                                  className="w-full bg-slate-100 border border-slate-200 text-xs p-2 rounded-lg font-bold text-center text-purple-600 cursor-not-allowed outline-none"
                                 />
                               </div>
                               <div className="col-span-2">
@@ -673,7 +673,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value={tempConfig.qualityBenefitTitle}
                                   onChange={(e) => handleFieldChange("qualityBenefitTitle", e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg font-semibold text-white outline-none"
+                                  className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg font-semibold text-slate-900 outline-none"
                                 />
                               </div>
                             </div>
@@ -683,14 +683,14 @@ export default function AdminPanel() {
                                 rows={2}
                                 value={tempConfig.qualityBenefitDesc}
                                 onChange={(e) => handleFieldChange("qualityBenefitDesc", e.target.value)}
-                                className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg text-slate-300 outline-none resize-none"
+                                className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg text-slate-700 outline-none resize-none"
                               />
                             </div>
                           </div>
 
                           {/* Card 4 */}
-                          <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3">
-                            <span className="text-[10px] font-bold text-orange-400 block uppercase">Benefit 4: Long-Lasting Durability</span>
+                          <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                            <span className="text-[10px] font-bold text-orange-600 block uppercase">Benefit 4: Long-Lasting Durability</span>
                             <div className="grid grid-cols-3 gap-2">
                               <div>
                                 <label className="text-[9px] text-slate-500 uppercase block mb-1">Metric</label>
@@ -698,7 +698,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value={tempConfig.durabilityMetricVal}
                                   onChange={(e) => handleFieldChange("durabilityMetricVal", e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg font-bold text-center text-orange-400 outline-none"
+                                  className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg font-bold text-center text-orange-600 outline-none"
                                 />
                               </div>
                               <div className="col-span-2">
@@ -707,7 +707,7 @@ export default function AdminPanel() {
                                   type="text"
                                   value={tempConfig.durabilityBenefitTitle}
                                   onChange={(e) => handleFieldChange("durabilityBenefitTitle", e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg font-semibold text-white outline-none"
+                                  className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg font-semibold text-slate-900 outline-none"
                                 />
                               </div>
                             </div>
@@ -717,7 +717,7 @@ export default function AdminPanel() {
                                 rows={2}
                                 value={tempConfig.durabilityBenefitDesc}
                                 onChange={(e) => handleFieldChange("durabilityBenefitDesc", e.target.value)}
-                                className="w-full bg-slate-900 border border-slate-800 text-xs p-2 rounded-lg text-slate-300 outline-none resize-none"
+                                className="w-full bg-white border border-slate-200 text-xs p-2 rounded-lg text-slate-700 outline-none resize-none"
                               />
                             </div>
                           </div>
@@ -730,11 +730,11 @@ export default function AdminPanel() {
                   {activeTab === "inventory" && (
                     <div className="space-y-6">
                       <div>
-                        <h2 className="text-lg font-bold text-white mb-1">Industrial Logistics Inventory</h2>
-                        <p className="text-xs text-slate-400">Add, edit, or delete actual live production textile batches. Updates are written instantly to database local records.</p>
+                        <h2 className="text-lg font-bold text-slate-900 mb-1">Industrial Logistics Inventory</h2>
+                        <p className="text-xs text-slate-500">Add, edit, or delete actual live production textile batches. Updates are written instantly to database local records.</p>
                       </div>
 
-                      <div className="bg-slate-950 border border-slate-800/80 rounded-2xl p-4 sm:p-6 shadow-inner">
+                      <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-inner">
                         <InventoryDashboard readOnly={false} />
                       </div>
                     </div>
@@ -744,8 +744,8 @@ export default function AdminPanel() {
                   {activeTab === "faq" && (
                     <div className="space-y-6">
                       <div>
-                        <h2 className="text-lg font-bold text-white mb-1">Operations Manual & FAQs</h2>
-                        <p className="text-xs text-slate-400">Helpful tips and information on how the Al-Ramz administrative panel works.</p>
+                        <h2 className="text-lg font-bold text-slate-900 mb-1">Operations Manual & FAQs</h2>
+                        <p className="text-xs text-slate-500">Helpful tips and information on how the Al-Ramz administrative panel works.</p>
                       </div>
 
                       <div className="pt-4">
@@ -767,10 +767,10 @@ export default function AdminPanel() {
 
           {/* Persistent Save footer bar (hidden for inventory, faq, and inbox tabs as they save automatically) */}
           {activeTab !== "inventory" && activeTab !== "faq" && activeTab !== "inbox" && (
-            <footer className="bg-slate-900 border-t border-slate-800 px-6 py-4 flex flex-col sm:flex-row gap-4 justify-between items-center sticky bottom-0 z-20 shadow-lg">
+            <footer className="bg-white border-t border-slate-200 px-6 py-4 flex flex-col sm:flex-row gap-4 justify-between items-center sticky bottom-0 z-20 shadow-md">
               <button
                 onClick={() => setShowResetConfirm(true)}
-                className="px-4 py-2.5 rounded-xl border border-rose-500/10 text-rose-400 hover:bg-rose-500/10 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer w-full sm:w-auto justify-center"
+                className="px-4 py-2.5 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer w-full sm:w-auto justify-center"
               >
                 <RotateCcw className="w-3.5 h-3.5" /> Wipe & Revert Defaults
               </button>
@@ -778,14 +778,14 @@ export default function AdminPanel() {
               <div className="flex gap-2.5 w-full sm:w-auto justify-end">
                 <button
                   onClick={handleGoHome}
-                  className="px-5 py-2.5 bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer w-full sm:w-auto text-center"
+                  className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer w-full sm:w-auto text-center border border-slate-200"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={saveStatus === "saving"}
-                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-800 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer w-full sm:w-auto justify-center"
+                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer w-full sm:w-auto justify-center text-white"
                 >
                   {saveStatus === "saving" ? (
                     <>
@@ -824,20 +824,20 @@ export default function AdminPanel() {
               initial={{ scale: 0.95 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.95 }}
-              className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl max-w-sm w-full relative shadow-xl"
+              className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl max-w-sm w-full relative shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="w-12 h-12 bg-rose-500/10 rounded-xl flex items-center justify-center text-rose-500 mb-5 border border-rose-500/10">
+              <div className="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 mb-5 border border-rose-100">
                 <AlertCircle className="w-6 h-6" />
               </div>
-              <h4 className="text-lg font-bold uppercase mb-2 text-white">Reset Configuration?</h4>
-              <p className="text-slate-400 text-xs leading-relaxed mb-6">
+              <h4 className="text-lg font-bold uppercase mb-2 text-slate-900">Reset Configuration?</h4>
+              <p className="text-slate-500 text-xs leading-relaxed mb-6">
                 Are you sure? This will wipe your custom layout text, contact details, and benefits list, reverting to Al-Ramz standard defaults.
               </p>
               <div className="flex gap-2.5 justify-end">
                 <button
                   onClick={() => setShowResetConfirm(false)}
-                  className="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-750 text-slate-300 text-xs font-semibold cursor-pointer"
+                  className="px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold cursor-pointer border border-slate-200"
                 >
                   Cancel
                 </button>
@@ -885,14 +885,14 @@ function FAQAccordion() {
         return (
           <div 
             key={idx}
-            className="border border-slate-800/80 rounded-xl bg-slate-950 overflow-hidden transition-all duration-300"
+            className="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden transition-all duration-300"
           >
             <button
               onClick={() => setOpenIndex(isOpen ? null : idx)}
-              className="w-full text-left px-5 py-4 flex justify-between items-center hover:bg-slate-900 transition-colors cursor-pointer"
+              className="w-full text-left px-5 py-4 flex justify-between items-center hover:bg-slate-100 transition-colors cursor-pointer"
             >
-              <span className="font-bold text-xs text-slate-200 pr-4">{faq.q}</span>
-              <span className={`text-blue-500 font-bold text-lg transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+              <span className="font-bold text-xs text-slate-800 pr-4">{faq.q}</span>
+              <span className={`text-blue-600 font-bold text-lg transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
                 +
               </span>
             </button>
@@ -905,7 +905,7 @@ function FAQAccordion() {
                   transition={{ duration: 0.2, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
-                  <div className="px-5 pb-4 pt-1 text-xs text-slate-400 leading-relaxed border-t border-slate-900">
+                  <div className="px-5 pb-4 pt-2 text-xs text-slate-600 leading-relaxed border-t border-slate-200">
                     {faq.a}
                   </div>
                 </motion.div>
