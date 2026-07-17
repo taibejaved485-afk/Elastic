@@ -3,11 +3,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { useConfig, WebsiteConfig } from "../utils/ConfigContext";
 import InventoryDashboard from "./InventoryDashboard";
 import InboxPanel from "./InboxPanel";
+import { exportToCSV } from "../utils/csv";
 import { 
   Lock, Save, RotateCcw, CheckCircle, 
   Settings, Phone, Layout, BookOpen, Sparkles, 
   ArrowLeft, LogOut, Database, Clock, Check, 
-  HelpCircle, AlertCircle, ShieldAlert, Mail
+  HelpCircle, AlertCircle, ShieldAlert, Mail,
+  FileSpreadsheet
 } from "lucide-react";
 
 export default function AdminPanel() {
@@ -78,6 +80,19 @@ export default function AdminPanel() {
 
   const handleGoHome = () => {
     window.location.hash = "#/";
+  };
+
+  const handleExportInventory = () => {
+    try {
+      const saved = localStorage.getItem("alramz_inventory_records");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.length === 0) return;
+        exportToCSV(parsed, `Al-Ramz_Inventory_${new Date().toISOString().split('T')[0]}`);
+      }
+    } catch (e) {
+      console.error("Export failed", e);
+    }
   };
 
   // Helper to count active batch items in localStorage
@@ -518,7 +533,7 @@ export default function AdminPanel() {
                               rows={3}
                               value={tempConfig.missionDescription}
                               onChange={(e) => handleFieldChange("missionDescription", e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-white outline-none transition-all resize-none leading-relaxed"
+                              className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all resize-none leading-relaxed focus:bg-white"
                             />
                           </div>
                         </div>
@@ -729,9 +744,18 @@ export default function AdminPanel() {
                   {/* TAB 5: Industrial Inventory */}
                   {activeTab === "inventory" && (
                     <div className="space-y-6">
-                      <div>
-                        <h2 className="text-lg font-bold text-slate-900 mb-1">Industrial Logistics Inventory</h2>
-                        <p className="text-xs text-slate-500">Add, edit, or delete actual live production textile batches. Updates are written instantly to database local records.</p>
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                        <div>
+                          <h2 className="text-lg font-bold text-slate-900 mb-1">Industrial Logistics Inventory</h2>
+                          <p className="text-xs text-slate-500">Add, edit, or delete actual live production textile batches. Updates are written instantly to database local records.</p>
+                        </div>
+                        <button
+                          onClick={handleExportInventory}
+                          className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-all shrink-0 cursor-pointer"
+                        >
+                          <FileSpreadsheet className="w-3.5 h-3.5" />
+                          <span>Export Master CSV</span>
+                        </button>
                       </div>
 
                       <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-inner">

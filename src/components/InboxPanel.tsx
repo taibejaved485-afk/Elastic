@@ -181,11 +181,11 @@ export default function InboxPanel() {
       {/* Title & Context */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <Mail className="w-5 h-5 text-blue-500" />
+          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <Mail className="w-5 h-5 text-blue-600" />
             Customer Leads &amp; Inquiries Inbox
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Monitor real-time quote requests, bulk material inquiries, and direct leads captured from the contact gateway.
           </p>
         </div>
@@ -194,7 +194,7 @@ export default function InboxPanel() {
           {totalLeads === 0 && (
             <button
               onClick={loadPresets}
-              className="px-3 py-1.5 bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-blue-500/15 cursor-pointer flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-blue-200 cursor-pointer flex items-center gap-1.5 transition-colors"
             >
               <Sparkles className="w-3.5 h-3.5" />
               Generate Mock Leads
@@ -203,7 +203,7 @@ export default function InboxPanel() {
           {totalLeads > 0 && (
             <button
               onClick={clearAll}
-              className="px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-rose-500/15 cursor-pointer flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-rose-200 cursor-pointer flex items-center gap-1.5 transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Wipe Inbox
@@ -214,49 +214,49 @@ export default function InboxPanel() {
 
       {/* Metrics Banner */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-slate-950/60 border border-slate-800 p-4 rounded-xl">
+        <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
           <span className="text-[9px] uppercase font-bold text-slate-500 block">Total Inquiries</span>
-          <span className="text-xl font-black text-white font-mono mt-0.5 block">{totalLeads}</span>
+          <span className="text-xl font-black text-slate-900 font-mono mt-0.5 block">{totalLeads}</span>
         </div>
-        <div className="bg-slate-950/60 border border-slate-800 p-4 rounded-xl">
+        <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
           <span className="text-[9px] uppercase font-bold text-slate-500 block">Unread &amp; New</span>
-          <span className="text-xl font-black text-blue-400 font-mono mt-0.5 block flex items-center gap-2">
+          <span className="text-xl font-black text-blue-600 font-mono mt-0.5 block flex items-center gap-2">
             {unreadCount}
             {unreadCount > 0 && (
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping" />
             )}
           </span>
         </div>
-        <div className="bg-slate-950/60 border border-slate-800 p-4 rounded-xl">
+        <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
           <span className="text-[9px] uppercase font-bold text-slate-500 block">High Volume Contracts</span>
-          <span className="text-xl font-black text-amber-500 font-mono mt-0.5 block">
+          <span className="text-xl font-black text-amber-600 font-mono mt-0.5 block">
             {highVolumeCount} <span className="text-[9px] font-bold text-slate-500 font-sans">(&gt;5k m)</span>
           </span>
         </div>
-        <div className="bg-slate-950/60 border border-slate-800 p-4 rounded-xl">
+        <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
           <span className="text-[9px] uppercase font-bold text-slate-500 block">Response Rate</span>
-          <span className="text-xl font-black text-emerald-400 font-mono mt-0.5 block">
+          <span className="text-xl font-black text-emerald-600 font-mono mt-0.5 block">
             {totalLeads ? Math.round((repliedCount / totalLeads) * 100) : 0}%
           </span>
         </div>
       </div>
 
       {/* Main Split Layout */}
-      <div className="grid lg:grid-cols-12 gap-6 min-h-[450px]">
+      <div className="grid lg:grid-cols-12 gap-6 min-h-[500px]">
         
         {/* Left Hand: Inquiries List */}
-        <div className="lg:col-span-5 bg-slate-950/40 border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+        <div className="lg:col-span-4 bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col shadow-sm">
           
           {/* Controls Bar */}
-          <div className="p-3 border-b border-slate-800 bg-slate-950/60 flex flex-col sm:flex-row gap-2.5">
+          <div className="p-3 border-b border-slate-100 bg-slate-50 flex flex-col gap-2.5">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
               <input
                 type="text"
                 placeholder="Search leads..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-800 rounded-lg py-1.5 pl-9 pr-3 text-xs text-white outline-none focus:border-blue-500 placeholder:text-slate-600"
+                className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 outline-none focus:border-blue-500 placeholder:text-slate-400 transition-all"
               />
             </div>
 
@@ -264,7 +264,7 @@ export default function InboxPanel() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value as any)}
-                className="bg-slate-900 border border-slate-800 text-xs text-slate-300 rounded-lg py-1.5 px-3 outline-none cursor-pointer focus:border-blue-500"
+                className="w-full bg-white border border-slate-200 text-xs text-slate-600 rounded-lg py-1.5 px-3 outline-none cursor-pointer focus:border-blue-500 transition-all"
               >
                 <option value="All">All Statuses</option>
                 <option value="New">New</option>
@@ -275,7 +275,7 @@ export default function InboxPanel() {
           </div>
 
           {/* List Scroll */}
-          <div className="flex-1 overflow-y-auto max-h-[450px] divide-y divide-slate-850">
+          <div className="flex-1 overflow-y-auto max-h-[550px] divide-y divide-slate-100">
             <AnimatePresence initial={false}>
               {filteredSubmissions.map((sub) => {
                 const isSelected = selectedSubmission?.id === sub.id;
@@ -286,45 +286,45 @@ export default function InboxPanel() {
                   <div
                     key={sub.id}
                     onClick={() => handleSelectSubmission(sub)}
-                    className={`p-4 transition-all cursor-pointer relative ${
+                    className={`p-4 transition-all cursor-pointer relative group ${
                       isSelected 
-                        ? "bg-blue-600/10 border-l-2 border-blue-500" 
-                        : "hover:bg-slate-900/40 border-l-2 border-transparent"
+                        ? "bg-blue-50 border-l-4 border-blue-600" 
+                        : "hover:bg-slate-50 border-l-4 border-transparent"
                     }`}
                   >
                     <div className="flex justify-between items-start mb-1">
                       <div className="flex items-center gap-1.5">
-                        <span className={`font-bold text-xs ${isNew ? "text-white" : "text-slate-300"}`}>
+                        <span className={`font-bold text-xs ${isNew ? "text-slate-900" : "text-slate-600"}`}>
                           {sub.name}
                         </span>
                         {isNew && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                         )}
                         {isReplied && (
-                          <span className="text-[8px] uppercase font-black bg-emerald-500/10 text-emerald-400 px-1 py-0.5 rounded border border-emerald-500/10">Replied</span>
+                          <span className="text-[8px] uppercase font-black bg-emerald-100 text-emerald-700 px-1 py-0.5 rounded border border-emerald-200">Replied</span>
                         )}
                       </div>
-                      <span className="text-[9px] text-slate-500 font-mono">{sub.timestamp.split(',')[0]}</span>
+                      <span className="text-[9px] text-slate-400 font-mono">{sub.timestamp.split(',')[0]}</span>
                     </div>
 
-                    <div className="text-[10px] text-blue-400 font-bold tracking-tight mb-1 truncate">
+                    <div className="text-[10px] text-blue-600 font-bold tracking-tight mb-1 truncate">
                       {sub.company}
                     </div>
 
-                    <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
+                    <p className={`text-[11px] line-clamp-2 leading-relaxed ${isNew ? "text-slate-700 font-medium" : "text-slate-500"}`}>
                       {sub.message}
                     </p>
 
                     {/* Quantity Badge on card */}
                     <div className="mt-2.5 flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1 text-[9px] font-bold text-slate-500 uppercase font-mono">
-                        <Volume2 className="w-3 h-3 text-slate-600" /> {sub.volume}
+                      <span className="inline-flex items-center gap-1 text-[9px] font-bold text-slate-400 uppercase font-mono">
+                        <Volume2 className="w-3 h-3 text-slate-300" /> {sub.volume}
                       </span>
                       
-                      <div className="flex gap-1.5 opacity-0 hover:opacity-100 group-hover:opacity-100">
+                      <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                           onClick={(e) => deleteSubmission(sub.id, e)}
-                          className="p-1 hover:text-rose-400 transition-colors"
+                          className="p-1 text-slate-300 hover:text-rose-600 transition-colors"
                           title="Delete Lead"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -337,8 +337,8 @@ export default function InboxPanel() {
             </AnimatePresence>
 
             {filteredSubmissions.length === 0 && (
-              <div className="py-16 text-center text-slate-500 text-xs italic flex flex-col items-center gap-3">
-                <Inbox className="w-8 h-8 text-slate-700" />
+              <div className="py-20 text-center text-slate-400 text-xs italic flex flex-col items-center gap-3">
+                <Inbox className="w-10 h-10 text-slate-100" />
                 <span>No customer messages in this filter.</span>
               </div>
             )}
@@ -346,20 +346,20 @@ export default function InboxPanel() {
         </div>
 
         {/* Right Hand: Lead Detail & Simulation Reply */}
-        <div className="lg:col-span-7 bg-slate-950/20 border border-slate-800 rounded-xl overflow-hidden flex flex-col p-6 min-h-[400px]">
+        <div className="lg:col-span-8 bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col shadow-sm min-h-[500px]">
           {selectedSubmission ? (
-            <div className="space-y-6 flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col">
               
               {/* Header profile info */}
-              <div className="border-b border-slate-800 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+              <div className="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-4 bg-slate-50/30">
                 <div>
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-slate-300">
-                      <User className="w-4.5 h-4.5 text-blue-400" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 shadow-sm">
+                      <User className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-white">{selectedSubmission.name}</h4>
-                      <p className="text-[10px] text-slate-400 mt-0.5">{selectedSubmission.email}</p>
+                      <h4 className="font-bold text-sm text-slate-900">{selectedSubmission.name}</h4>
+                      <p className="text-[10px] text-slate-500 mt-0.5">{selectedSubmission.email}</p>
                     </div>
                   </div>
                 </div>
@@ -368,7 +368,7 @@ export default function InboxPanel() {
                   <select
                     value={selectedSubmission.status}
                     onChange={(e) => markAsStatus(selectedSubmission.id, e.target.value as any, e as any)}
-                    className="bg-slate-900 border border-slate-800 text-[10px] font-bold uppercase tracking-wider text-slate-300 rounded-lg py-1 px-2 outline-none cursor-pointer"
+                    className="bg-white border border-slate-200 text-[10px] font-bold uppercase tracking-wider text-slate-600 rounded-lg py-1.5 px-3 outline-none cursor-pointer hover:border-slate-300 transition-all"
                   >
                     <option value="New">New</option>
                     <option value="Read">Read</option>
@@ -377,109 +377,116 @@ export default function InboxPanel() {
 
                   <button
                     onClick={(e) => deleteSubmission(selectedSubmission.id, e as any)}
-                    className="p-1.5 bg-slate-900 hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-slate-800 hover:border-rose-500/20 rounded-lg transition-all"
+                    className="p-2 bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-600 border border-slate-200 hover:border-rose-200 rounded-lg transition-all shadow-sm"
                     title="Delete Inquiry"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
-              {/* Lead Details Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
-                <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800/80">
-                  <span className="text-[9px] uppercase font-bold text-slate-500 block mb-0.5">Enterprise Client</span>
-                  <div className="flex items-center gap-1 text-slate-300 font-semibold truncate">
-                    <Building2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                    {selectedSubmission.company}
-                  </div>
-                </div>
-
-                <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800/80">
-                  <span className="text-[9px] uppercase font-bold text-slate-500 block mb-0.5">Phone Call / WhatsApp</span>
-                  <div className="flex items-center gap-1 text-slate-300 font-mono font-semibold">
-                    <Phone className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                    {selectedSubmission.phone}
-                  </div>
-                </div>
-
-                <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800/80 col-span-2 md:col-span-1">
-                  <span className="text-[9px] uppercase font-bold text-slate-500 block mb-0.5">Expected Contract Size</span>
-                  <div className="flex items-center gap-1 text-amber-400 font-semibold font-mono">
-                    <FileText className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                    {selectedSubmission.volume}
-                  </div>
-                </div>
-              </div>
-
-              {/* Inquiry Message Body */}
-              <div className="space-y-2 flex-1">
-                <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                  <MessageSquare className="w-3.5 h-3.5" /> Message Topic: <span className="text-blue-400 italic font-medium">{selectedSubmission.subject}</span>
-                </div>
-                <div className="p-4 bg-slate-950/40 border border-slate-850 rounded-xl text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-wrap">
-                  {selectedSubmission.message}
-                </div>
-                <span className="text-[9px] text-slate-500 block text-right font-mono">Captured: {selectedSubmission.timestamp}</span>
-              </div>
-
-              {/* Simulation Response Form */}
-              <div className="border-t border-slate-850 pt-4.5">
-                {!isReplying ? (
-                  <button
-                    onClick={() => setIsReplying(true)}
-                    className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer"
-                  >
-                    <Send className="w-3.5 h-3.5" /> Write Draft Reply
-                  </button>
-                ) : (
-                  <form onSubmit={handleSendReply} className="space-y-3.5">
-                    <div className="flex justify-between items-center text-[10px] font-bold uppercase text-slate-500 tracking-wider">
-                      <span>Response drafted to: {selectedSubmission.email}</span>
-                      <button 
-                        type="button" 
-                        onClick={() => setIsReplying(false)} 
-                        className="text-rose-400 hover:underline cursor-pointer"
-                      >
-                        Cancel
-                      </button>
+              <div className="p-6 space-y-6 flex-1 flex flex-col">
+                {/* Lead Details Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span className="text-[9px] uppercase font-bold text-slate-400 block mb-1">Enterprise Client</span>
+                    <div className="flex items-center gap-1.5 text-slate-700 font-semibold truncate text-xs">
+                      <Building2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                      {selectedSubmission.company}
                     </div>
+                  </div>
 
-                    <textarea
-                      rows={3}
-                      placeholder="Write your email proposal, shipping rates, or WhatsApp contact draft..."
-                      value={replyText}
-                      onChange={(e) => setReplyText(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-xs text-slate-200 placeholder:text-slate-600 outline-none focus:border-blue-500 resize-none leading-relaxed"
-                      required
-                    />
-
-                    <div className="flex justify-end gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setIsReplying(false)}
-                        className="px-4.5 py-2 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded-lg text-xs font-semibold cursor-pointer"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type="submit"
-                        className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-md"
-                      >
-                        <Send className="w-3.5 h-3.5" /> Dispatch Reply
-                      </button>
+                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span className="text-[9px] uppercase font-bold text-slate-400 block mb-1">Phone Call / WhatsApp</span>
+                    <div className="flex items-center gap-1.5 text-slate-700 font-mono font-semibold text-xs">
+                      <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      {selectedSubmission.phone}
                     </div>
-                  </form>
-                )}
+                  </div>
+
+                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span className="text-[9px] uppercase font-bold text-slate-400 block mb-1">Expected Contract Size</span>
+                    <div className="flex items-center gap-1.5 text-amber-700 font-semibold font-mono text-xs">
+                      <FileText className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      {selectedSubmission.volume}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Inquiry Message Body */}
+                <div className="space-y-3 flex-1">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    <MessageSquare className="w-3.5 h-3.5 text-slate-400" /> 
+                    Subject: <span className="text-blue-700 font-bold ml-1">{selectedSubmission.subject}</span>
+                  </div>
+                  <div className="p-5 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-700 leading-relaxed font-sans whitespace-pre-wrap shadow-inner min-h-[120px]">
+                    {selectedSubmission.message}
+                  </div>
+                  <span className="text-[9px] text-slate-400 block text-right font-mono italic">Captured: {selectedSubmission.timestamp}</span>
+                </div>
+
+                {/* Simulation Response Form */}
+                <div className="border-t border-slate-100 pt-6">
+                  {!isReplying ? (
+                    <button
+                      onClick={() => setIsReplying(true)}
+                      className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer shadow-md"
+                    >
+                      <Send className="w-3.5 h-3.5" /> Write Draft Reply
+                    </button>
+                  ) : (
+                    <form onSubmit={handleSendReply} className="space-y-4">
+                      <div className="flex justify-between items-center text-[10px] font-bold uppercase text-slate-500 tracking-wider">
+                        <span>Response drafted to: {selectedSubmission.email}</span>
+                        <button 
+                          type="button" 
+                          onClick={() => setIsReplying(false)} 
+                          className="text-rose-600 hover:underline cursor-pointer font-bold"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+
+                      <textarea
+                        rows={4}
+                        placeholder="Write your email proposal, shipping rates, or WhatsApp contact draft..."
+                        value={replyText}
+                        onChange={(e) => setReplyText(e.target.value)}
+                        className="w-full bg-white border border-slate-200 rounded-xl p-4 text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 resize-none leading-relaxed transition-all shadow-sm"
+                        required
+                      />
+
+                      <div className="flex justify-end gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setIsReplying(false)}
+                          className="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-colors border border-slate-200"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-md transition-all"
+                        >
+                          <Send className="w-3.5 h-3.5" /> Dispatch Reply
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </div>
               </div>
 
             </div>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-center p-6 text-slate-500 italic text-xs gap-3">
-              <Mail className="w-10 h-10 text-slate-800 animate-pulse" />
+            <div className="flex-1 flex flex-col items-center justify-center text-center p-12 text-slate-400 italic text-xs gap-4">
+              <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-2">
+                <Mail className="w-10 h-10 text-slate-200" />
+              </div>
               <div>
-                <p className="font-bold text-slate-400 not-italic mb-1">No Active Inquiry Selected</p>
-                <p className="text-[10px] text-slate-600">Select an inbound message from the sidebar to inspect company profiles, phone records, and dispatch custom replies.</p>
+                <p className="font-bold text-slate-800 not-italic mb-1 text-base">No Active Inquiry Selected</p>
+                <p className="text-[11px] text-slate-500 max-w-sm mx-auto leading-relaxed">
+                  Select an inbound message from the sidebar to inspect company profiles, phone records, and dispatch custom replies.
+                </p>
               </div>
             </div>
           )}
@@ -494,9 +501,9 @@ export default function InboxPanel() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.95 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 bg-slate-900 text-white rounded-xl shadow-xl flex items-center gap-3.5 border border-slate-800 text-xs font-bold uppercase"
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] px-6 py-3.5 bg-slate-900 text-white rounded-2xl shadow-2xl flex items-center gap-4 border border-slate-800 text-xs font-bold uppercase tracking-wide"
           >
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
             <span>{toastMsg}</span>
           </motion.div>
         )}

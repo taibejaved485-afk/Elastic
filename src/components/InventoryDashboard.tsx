@@ -23,6 +23,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
+  const [sortConfig, setSortConfig] = useState<{ key: keyof InventoryRecord; direction: 'asc' | 'desc' } | null>(null);
   const [sortBy, setSortBy] = useState<"name" | "qty-desc" | "qty-asc" | "updated">("updated");
   
   const [showToast, setShowToast] = useState(false);
@@ -234,10 +235,19 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
     ? Math.round(records.reduce((sum, r) => sum + (parseInt(r.stretchIndex) || 150), 0) / records.length) 
     : 0;
 
+  const requestSort = (key: keyof InventoryRecord) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
   // Filter & Sort records
   const filteredRecords = records
     .filter((r) => {
       const matchesSearch = r.itemName.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            r.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             r.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             r.color.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === "All" || r.category === selectedCategory;
@@ -245,6 +255,20 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
       return matchesSearch && matchesCategory && matchesStatus;
     })
     .sort((a, b) => {
+      // Priority: Header Sort (sortConfig) > Dropdown Sort (sortBy)
+      if (sortConfig) {
+        const { key, direction } = sortConfig;
+        let comparison = 0;
+        
+        if (key === "quantity") {
+          comparison = (Number(a[key]) || 0) - (Number(b[key]) || 0);
+        } else {
+          comparison = String(a[key] || "").localeCompare(String(b[key] || ""));
+        }
+        
+        return direction === 'asc' ? comparison : -comparison;
+      }
+
       if (sortBy === "name") {
         return a.itemName.localeCompare(b.itemName);
       } else if (sortBy === "qty-desc") {
@@ -400,7 +424,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Search by name, category, or color..."
+              placeholder="Search by name, SKU, or color..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl py-2.5 pl-11 pr-4 text-xs text-slate-800 dark:text-white outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600"
@@ -469,12 +493,44 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-                  <th className="pl-6 pr-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Material Name &amp; Loom Pitch</th>
-                  <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Sector Category</th>
-                  <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Live Quantity</th>
+                  <th 
+                    className="pl-6 pr-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors group"
+                    onClick={() => requestSort("itemName")}
+                  >
+                    <div className="flex items-center gap-1">
+                      Material Name &amp; Loom Pitch
+                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "itemName" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                    </div>
+                  </th>
+                  <th 
+                    className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors group"
+                    onClick={() => requestSort("category")}
+                  >
+                    <div className="flex items-center gap-1">
+                      Sector Category
+                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "category" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                    </div>
+                  </th>
+                  <th 
+                    className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors group"
+                    onClick={() => requestSort("quantity")}
+                  >
+                    <div className="flex items-center gap-1">
+                      Live Quantity
+                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "quantity" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                    </div>
+                  </th>
                   <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Loom Elastic Stretch</th>
                   <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Aesthetic Color</th>
-                  <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Pipeline Status</th>
+                  <th 
+                    className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors group"
+                    onClick={() => requestSort("status")}
+                  >
+                    <div className="flex items-center gap-1">
+                      Pipeline Status
+                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "status" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                    </div>
+                  </th>
                   <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Checked</th>
                   {!readOnly && <th className="pr-6 pl-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 text-right">Action</th>}
                 </tr>
@@ -596,7 +652,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                           <select
                             value={record.status}
                             onChange={(e) => updateRecord(record.id, "status", e.target.value as any)}
-                            className="bg-slate-950 border border-slate-850 rounded-lg py-1 px-2 text-[11px] font-bold text-slate-200 outline-none cursor-pointer focus:border-blue-500"
+                            className="bg-white border border-slate-200 rounded-lg py-1 px-2 text-[11px] font-bold text-slate-700 outline-none cursor-pointer focus:border-blue-500 transition-all"
                           >
                             <option value="In Stock">In Stock</option>
                             <option value="Low Stock">Low Stock</option>
@@ -677,7 +733,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                       <select
                         value={record.status}
                         onChange={(e) => updateRecord(record.id, "status", e.target.value as any)}
-                        className="bg-slate-950 border border-slate-800 rounded-lg py-1 px-2 text-[10px] font-bold text-slate-200 outline-none"
+                        className="bg-white border border-slate-200 rounded-lg py-1 px-2 text-[10px] font-bold text-slate-700 outline-none transition-all"
                       >
                         <option value="In Stock">In Stock</option>
                         <option value="Low Stock">Low Stock</option>
