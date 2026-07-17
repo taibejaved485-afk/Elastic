@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   Download, Upload, Plus, Trash2, FileSpreadsheet, Package, AlertCircle,
-  Search, Filter, ArrowUpDown, Layers, Activity, ClipboardList, RefreshCw, CheckCircle2, Palette, ChevronDown
+  Search, Filter, ArrowUpDown, ArrowUp, ArrowDown, Layers, Activity, ClipboardList, RefreshCw, CheckCircle2, Palette, ChevronDown,
+  Box, Hash
 } from "lucide-react";
 import { exportToCSV, parseCSV } from "../utils/csv";
 
@@ -28,6 +29,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
   
   const [showToast, setShowToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const sampleBatches: InventoryRecord[] = [
     { 
@@ -140,6 +142,25 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
     setTimeout(() => setShowToast(false), 3000);
   };
 
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    // Artificial delay for high-fidelity feel
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    const saved = localStorage.getItem("alramz_inventory_records");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setRecords(parsed);
+      } catch (e) {
+        console.error("Refresh failed", e);
+      }
+    }
+    
+    setIsRefreshing(false);
+    triggerToast("Inventory synchronized");
+  };
+
   const handleExport = () => {
     if (records.length === 0) {
       triggerToast("No records to export.");
@@ -228,6 +249,8 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
   const statuses = ["All", "In Stock", "Low Stock", "In Production", "Shipped"];
 
   // Compute stats metrics dynamically
+  const totalItems = records.length;
+  const uniqueCategoriesCount = new Set(records.map(r => r.category)).size;
   const totalMeters = records.reduce((sum, r) => sum + (Number(r.quantity) || 0), 0);
   const lowStockCount = records.filter(r => r.status === "Low Stock").length;
   const inProductionCount = records.filter(r => r.status === "In Production").length;
@@ -262,6 +285,11 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
         
         if (key === "quantity") {
           comparison = (Number(a[key]) || 0) - (Number(b[key]) || 0);
+        } else if (key === "stretchIndex") {
+          // Parse numeric value from string like "150%" or "80"
+          const valA = parseFloat(a[key]) || 0;
+          const valB = parseFloat(b[key]) || 0;
+          comparison = valA - valB;
         } else {
           comparison = String(a[key] || "").localeCompare(String(b[key] || ""));
         }
@@ -280,6 +308,15 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
         return b.id.localeCompare(a.id);
       }
     });
+
+  const SortIcon = ({ column }: { column: keyof InventoryRecord }) => {
+    if (sortConfig?.key !== column) {
+      return <ArrowUpDown className="w-3 h-3 opacity-0 group-hover:opacity-40 transition-opacity" />;
+    }
+    return sortConfig.direction === "asc" 
+      ? <ArrowUp className="w-3 h-3 text-blue-500" /> 
+      : <ArrowDown className="w-3 h-3 text-blue-500" />;
+  };
 
   return (
     <section 
@@ -360,57 +397,57 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
         {/* Dynamic Analytics & Metrics Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           
-          {/* Metric 1 */}
-          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          {/* Metric 1: Total Stock */}
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
             <div className="p-3 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-xl shrink-0">
               <Package className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Total Live Volume</span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Total Stock Count</span>
               <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-white font-mono leading-none mt-0.5 block">
                 {totalMeters.toLocaleString()} <span className="text-xs font-semibold text-slate-400">m</span>
               </span>
             </div>
           </div>
 
-          {/* Metric 2 */}
-          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          {/* Metric 2: Total Items */}
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
+            <div className="p-3 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-xl shrink-0">
+              <Hash className="w-6 h-6" />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Total Catalog Items</span>
+              <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-white font-mono leading-none mt-0.5 block">
+                {totalItems} <span className="text-xs font-semibold text-slate-400">SKUs</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Metric 3: Unique Categories */}
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
+            <div className="p-3 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl shrink-0">
+              <Layers className="w-6 h-6" />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Unique Categories</span>
+              <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-white font-mono leading-none mt-0.5 block">
+                {uniqueCategoriesCount} <span className="text-xs font-semibold text-slate-400">Sectors</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Metric 4: Low Stock Alerter */}
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
             <div className="p-3 bg-amber-500/10 text-amber-600 dark:text-amber-400 rounded-xl shrink-0">
               <AlertCircle className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Low Stock Alerter</span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Low Stock Alerts</span>
               <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-white font-mono leading-none mt-0.5 block flex items-center gap-2">
                 {lowStockCount} 
                 {lowStockCount > 0 && (
-                  <span className="text-[9px] uppercase font-bold bg-amber-500/10 text-amber-500 px-1.5 py-0.5 rounded animate-pulse border border-amber-500/10">Needs Run</span>
+                  <span className="text-[9px] uppercase font-bold bg-amber-500/10 text-amber-500 px-1.5 py-0.5 rounded animate-pulse border border-amber-500/10">Action Required</span>
                 )}
-              </span>
-            </div>
-          </div>
-
-          {/* Metric 3 */}
-          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700">
-            <div className="p-3 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl shrink-0">
-              <Activity className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Average Stretch</span>
-              <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-white font-mono leading-none mt-0.5 block">
-                {averageStretch}% <span className="text-[10px] font-bold text-emerald-500">Recovery</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Metric 4 */}
-          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-5 rounded-2xl flex items-center gap-4 transition-all hover:border-slate-300 dark:hover:border-slate-700">
-            <div className="p-3 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-xl shrink-0">
-              <ClipboardList className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Active Runs</span>
-              <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-white font-mono leading-none mt-0.5 block">
-                {inProductionCount} <span className="text-xs font-semibold text-slate-400">batches</span>
               </span>
             </div>
           </div>
@@ -485,6 +522,17 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
             </select>
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
           </div>
+
+          {/* Manual Refresh Button */}
+          <button
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="w-full md:w-auto px-4 py-2.5 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+            title="Refresh Inventory Data"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 text-blue-500 ${isRefreshing ? "animate-spin" : "group-hover:rotate-180 transition-transform duration-500"}`} />
+            <span className="md:hidden lg:inline">{isRefreshing ? "Refreshing..." : "Refresh"}</span>
+          </button>
         </div>
 
         {/* Desktop Complex Logistics Table (Hidden on small mobile screens) */}
@@ -499,7 +547,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                   >
                     <div className="flex items-center gap-1">
                       Material Name &amp; Loom Pitch
-                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "itemName" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                      <SortIcon column="itemName" />
                     </div>
                   </th>
                   <th 
@@ -508,7 +556,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                   >
                     <div className="flex items-center gap-1">
                       Sector Category
-                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "category" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                      <SortIcon column="category" />
                     </div>
                   </th>
                   <th 
@@ -517,18 +565,34 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                   >
                     <div className="flex items-center gap-1">
                       Live Quantity
-                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "quantity" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                      <SortIcon column="quantity" />
                     </div>
                   </th>
-                  <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Loom Elastic Stretch</th>
-                  <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Aesthetic Color</th>
+                  <th 
+                    className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors group"
+                    onClick={() => requestSort("stretchIndex")}
+                  >
+                    <div className="flex items-center gap-1">
+                      Loom Elastic Stretch
+                      <SortIcon column="stretchIndex" />
+                    </div>
+                  </th>
+                  <th 
+                    className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors group"
+                    onClick={() => requestSort("color")}
+                  >
+                    <div className="flex items-center gap-1">
+                      Aesthetic Color
+                      <SortIcon column="color" />
+                    </div>
+                  </th>
                   <th 
                     className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/30 transition-colors group"
                     onClick={() => requestSort("status")}
                   >
                     <div className="flex items-center gap-1">
                       Pipeline Status
-                      <ArrowUpDown className={`w-3 h-3 transition-opacity ${sortConfig?.key === "status" ? "opacity-100 text-blue-500" : "opacity-0 group-hover:opacity-40"}`} />
+                      <SortIcon column="status" />
                     </div>
                   </th>
                   <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Checked</th>
@@ -544,7 +608,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="hover:bg-slate-50/50 dark:hover:bg-slate-850/20 transition-colors"
+                      className="hover:bg-slate-100/80 dark:hover:bg-slate-800/40 transition-colors"
                     >
                       {/* Name / Loom Pitch */}
                       <td className="pl-6 pr-4 py-4.5">
@@ -703,7 +767,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-4"
+                className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-4 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md transition-all"
               >
                 {/* Header info */}
                 <div className="flex justify-between items-start">
