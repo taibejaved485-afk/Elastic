@@ -206,3 +206,67 @@
   @apply shadow-2xl shadow-brand-blue/20;
 }
 
+@media print {
+  /* Hide non-essential elements */
+  nav, footer, button, .no-print, input, select, .action-panel, .alert-threshold-panel {
+    display: none !important;
+  }
+
+  /* Reset background and colors for printing */
+  body, .bg-white, .dark\:bg-slate-950, .bg-slate-50, .bg-slate-900 {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Force white background on the dashboard */
+  #inventory-dashboard {
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Table styling for print */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 10pt !important;
+  }
+
+  th, td {
+    border: 1px solid #ddd !important;
+    padding: 6px !important;
+    text-align: left !important;
+  }
+
+  th {
+    background-color: #f8f9fa !important;
+    color: black !important;
+  }
+
+  /* Ensure rows don't break across pages awkwardly */
+  tr {
+    page-break-inside: avoid !important;
+  }
+
+  /* Remove any absolute positioning or fixed elements that might overlap */
+  .fixed, .sticky {
+    position: static !important;
+  }
+
+  /* Hide metrics and filters if they look bad in print */
+  .grid, .flex-col.md\:flex-row {
+    display: block !important;
+  }
+
+  /* Hide mobile-only view in print */
+  .md\:hidden {
+    display: none !important;
+  }
+
+  /* Ensure desktop table is visible in print */
+  .hidden.md\:block {
+    display: block !important;
+  }
+}
+
+

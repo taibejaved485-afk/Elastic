@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Download, Upload, Plus, Trash2, FileSpreadsheet, Package, AlertCircle,
   Search, Filter, ArrowUpDown, ArrowUp, ArrowDown, Layers, Activity, ClipboardList, RefreshCw, CheckCircle2, Palette, ChevronDown,
-  Box, Hash
+  Box, Hash, Printer
 } from "lucide-react";
 import { exportToCSV, parseCSV } from "../utils/csv";
 
@@ -171,6 +171,10 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
     triggerToast("Exported to CSV successfully!");
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -326,6 +330,16 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
     >
       <div className={readOnly ? "max-w-7xl mx-auto px-6 relative z-10" : "relative z-10"}>
         
+        {/* Print Only Header */}
+        <div className="hidden print:block border-b-2 border-slate-900 pb-4 mb-8">
+          <h1 className="text-2xl font-bold uppercase tracking-tight text-slate-900">AL-RAMZ TEXTILE</h1>
+          <p className="text-xs font-bold text-slate-600">Industrial Inventory & Logistics Report</p>
+          <div className="flex justify-between items-end mt-4">
+            <span className="text-[10px] font-mono text-slate-500">Document: INV-LOG-REPORT</span>
+            <span className="text-[10px] font-mono text-slate-500">Generated: {new Date().toLocaleString()}</span>
+          </div>
+        </div>
+
         {/* Title and Controls Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-6">
           <div>
@@ -398,6 +412,15 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                 >
                   <FileSpreadsheet className="w-3.5 h-3.5" />
                   <span>Export CSV</span>
+                </button>
+
+                <button 
+                  onClick={handlePrint}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl transition-all text-xs font-bold uppercase shadow-lg shadow-slate-900/20"
+                  title="Print Inventory Report"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>Print Report</span>
                 </button>
 
                 <button 
