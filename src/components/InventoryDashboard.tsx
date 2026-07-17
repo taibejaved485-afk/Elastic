@@ -26,6 +26,7 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [sortConfig, setSortConfig] = useState<{ key: keyof InventoryRecord; direction: 'asc' | 'desc' } | null>(null);
   const [sortBy, setSortBy] = useState<"name" | "qty-desc" | "qty-asc" | "updated">("updated");
+  const [lowStockThreshold, setLowStockThreshold] = useState(500);
   
   const [showToast, setShowToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
@@ -340,6 +341,23 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                 : "Manage elastic and textile materials. Add new cargo batches, adjust quality parameters, control stretch indices, and import/export CSV configurations."
               }
             </p>
+            
+            <div className="flex items-center gap-3 mt-4 bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 w-fit">
+              <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Alert Threshold:</span>
+              <div className="flex items-center gap-2">
+                <input 
+                  type="number" 
+                  value={lowStockThreshold}
+                  onChange={(e) => setLowStockThreshold(Number(e.target.value) || 0)}
+                  className="w-16 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg py-1 px-2 text-[12px] font-bold text-blue-600 outline-none text-center shadow-sm"
+                />
+                <span className="text-[10px] font-bold text-slate-400">m</span>
+              </div>
+              <div className="w-px h-4 bg-slate-200 dark:bg-slate-800 mx-1" />
+              <span className="text-[9px] font-medium text-slate-400 italic">
+                (Highlights items below this volume)
+              </span>
+            </div>
           </div>
 
           {/* Quick Actions Panel */}
@@ -647,29 +665,41 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                       {/* Live Quantity */}
                       <td className="px-4 py-4.5">
                         <div className="flex items-center gap-2">
-                          <Package className="w-3.5 h-3.5 text-blue-500" />
+                          <Package className={`w-3.5 h-3.5 ${Number(record.quantity) < lowStockThreshold ? "text-rose-500 animate-pulse" : "text-blue-500"}`} />
                           {readOnly ? (
                             <div className="flex flex-col">
-                              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 font-mono">
-                                {Number(record.quantity).toLocaleString()} <span className="text-[10px] text-slate-400 font-sans">m</span>
-                              </span>
+                              <div className="flex items-center gap-2">
+                                <span className={`text-xs font-bold font-mono ${Number(record.quantity) < lowStockThreshold ? "text-rose-600 dark:text-rose-400" : "text-slate-800 dark:text-slate-200"}`}>
+                                  {Number(record.quantity).toLocaleString()} <span className="text-[10px] text-slate-400 font-sans">m</span>
+                                </span>
+                                {Number(record.quantity) < lowStockThreshold && (
+                                  <span className="text-[8px] font-black bg-rose-500 text-white px-1 rounded flex items-center gap-0.5">
+                                    CRITICAL
+                                  </span>
+                                )}
+                              </div>
                               {/* Stock Level Mini Bar */}
                               <div className="w-20 h-1 bg-slate-100 dark:bg-slate-800 rounded-full mt-1 overflow-hidden">
                                 <div 
                                   className={`h-full rounded-full ${
-                                    record.status === "Low Stock" ? "bg-amber-500" : record.status === "Shipped" ? "bg-slate-300 dark:bg-slate-600" : "bg-blue-600"
+                                    Number(record.quantity) < lowStockThreshold ? "bg-rose-500" : record.status === "Low Stock" ? "bg-amber-500" : record.status === "Shipped" ? "bg-slate-300 dark:bg-slate-600" : "bg-blue-600"
                                   }`}
                                   style={{ width: `${Math.min(100, (Number(record.quantity) / 6000) * 100)}%` }}
                                 />
                               </div>
                             </div>
                           ) : (
-                            <input 
-                              type="number" 
-                              value={record.quantity} 
-                              onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
-                              className="bg-transparent border-none focus:ring-1 focus:ring-blue-500/30 rounded px-1.5 py-0.5 -mx-1.5 w-20 text-xs text-slate-900 dark:text-white font-mono font-bold"
-                            />
+                            <div className="flex flex-col gap-1">
+                              <input 
+                                type="number" 
+                                value={record.quantity} 
+                                onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
+                                className={`bg-transparent border-none focus:ring-1 focus:ring-blue-500/30 rounded px-1.5 py-0.5 -mx-1.5 w-20 text-xs font-mono font-bold ${Number(record.quantity) < lowStockThreshold ? "text-rose-600 dark:text-rose-400" : "text-slate-900 dark:text-white"}`}
+                              />
+                              {Number(record.quantity) < lowStockThreshold && (
+                                <span className="text-[8px] font-black text-rose-500 uppercase">Below Limit</span>
+                              )}
+                            </div>
                           )}
                         </div>
                       </td>
@@ -840,16 +870,25 @@ export default function InventoryDashboard({ readOnly = false }: { readOnly?: bo
                   <div>
                     <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase block tracking-wider mb-1">Stock Vol</span>
                     <div className="flex items-center gap-1.5">
-                      <Package className="w-3.5 h-3.5 text-blue-500" />
+                      <Package className={`w-3.5 h-3.5 ${Number(record.quantity) < lowStockThreshold ? "text-rose-500 animate-pulse" : "text-blue-500"}`} />
                       {readOnly ? (
-                        <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{Number(record.quantity).toLocaleString()} m</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className={`font-mono font-bold ${Number(record.quantity) < lowStockThreshold ? "text-rose-600 dark:text-rose-400" : "text-slate-800 dark:text-slate-200"}`}>
+                            {Number(record.quantity).toLocaleString()} m
+                          </span>
+                          {Number(record.quantity) < lowStockThreshold && (
+                            <span className="text-[7px] font-black bg-rose-600 text-white px-1 rounded">CRITICAL</span>
+                          )}
+                        </div>
                       ) : (
-                        <input 
-                          type="number" 
-                          value={record.quantity} 
-                          onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
-                          className="bg-transparent border-none focus:ring-1 focus:ring-blue-500/30 rounded px-1 -mx-1 w-20 font-mono font-bold text-slate-900 dark:text-white"
-                        />
+                        <div className="flex flex-col">
+                          <input 
+                            type="number" 
+                            value={record.quantity} 
+                            onChange={(e) => updateRecord(record.id, "quantity", e.target.value)}
+                            className={`bg-transparent border-none focus:ring-1 focus:ring-blue-500/30 rounded px-1 -mx-1 w-20 font-mono font-bold ${Number(record.quantity) < lowStockThreshold ? "text-rose-600 dark:text-rose-400" : "text-slate-900 dark:text-white"}`}
+                          />
+                        </div>
                       )}
                     </div>
                   </div>
