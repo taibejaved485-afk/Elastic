@@ -112,7 +112,7 @@ export default function About() {
         >
           <div className="aspect-square rounded-3xl overflow-hidden relative z-10 shadow-2xl">
             <img
-              src="https://i.pinimg.com/736x/3c/f2/ad/3cf2ad6c9aaf09cdfed2fa72a2acebf4.jpg"
+              src="/src/assets/images/textile_team_collaboration_1784526670833.jpg"
               alt="Professional team collaborating"
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"

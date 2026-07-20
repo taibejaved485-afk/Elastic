@@ -120,7 +120,7 @@ export default function Hero() {
       {/* Background Image with premium overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
         <img
-          src="https://i.pinimg.com/736x/ba/94/66/ba94660a1f738e96182a8ac3af213cb9.jpg"
+          src="/src/assets/images/textile_hero_background_1784526705159.jpg"
           alt="Alramz Premium Elastic Webbing Background"
           className="absolute inset-0 w-full h-full object-cover opacity-[0.78] filter brightness-[0.72] contrast-[1.05] scale-[1.03] origin-center transition-all duration-1000"
           referrerPolicy="no-referrer"
